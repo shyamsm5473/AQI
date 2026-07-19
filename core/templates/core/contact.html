@@ -1,0 +1,182 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Contact — IIIT Lucknow{% endblock %}
+
+{% block extra_css %}
+<style>
+  :root { --navy:#1a2540; --navy-deep:#0f1830; --teal:#4ed8e2; --teal-dark:#02575d; --amber:#f4c20d; --text-muted:#6b7686; --bg-soft:#f3f6fa; --border-soft:#e1e7ef; }
+  .contact-hero { position:relative; background:linear-gradient(125deg,var(--navy) 0%,var(--navy-deep) 55%,#0a2f33 100%); color:#fff; padding:78px 60px 90px; overflow:hidden; font-family:'Inter',sans-serif; }
+  .contact-hero::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,0.10) 1px,transparent 0); background-size:26px 26px; opacity:0.5; pointer-events:none; }
+  .contact-hero::after { content:''; position:absolute; right:-120px; top:-120px; width:360px; height:360px; border-radius:50%; background:radial-gradient(circle,rgba(78,216,226,0.18) 0%,transparent 70%); pointer-events:none; }
+  .contact-hero-inner { position:relative; z-index:2; max-width:640px; }
+  .contact-eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:0.78rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--teal); margin-bottom:18px; }
+  .contact-eyebrow::before { content:''; width:8px; height:8px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 4px rgba(78,216,226,0.18); }
+  .contact-hero h1 { font-family:'Sora',sans-serif; font-size:clamp(2.2rem,4vw,3.2rem); font-weight:800; line-height:1.1; margin:0 0 16px 0; letter-spacing:-0.5px; }
+  .contact-hero p { font-size:1.05rem; color:#c7d0de; line-height:1.6; margin:0 0 15px 0; max-width:480px; }
+  .quick-contact-row { display:flex; flex-wrap:wrap; gap:12px; }
+  .quick-chip { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); color:#fff; padding:10px 18px; border-radius:30px; font-size:0.88rem; font-weight:500; text-decoration:none; transition:background 0.2s ease,transform 0.2s ease,border-color 0.2s ease; }
+  .quick-chip:hover { background:rgba(78,216,226,0.14); border-color:var(--teal); transform:translateY(-2px); }
+  .quick-chip .chip-icon { font-size:1rem; }
+  .contact-wrapper { max-width:1080px; margin:-48px auto 60px; padding:0 20px; font-family:'Inter',sans-serif; position:relative; z-index:3; }
+  .contact-intro { text-align:center; margin-bottom:30px; }
+  .contact-intro .contact-eyebrow { color:var(--teal-dark); justify-content:center; }
+  .contact-intro .contact-eyebrow::before { background:var(--teal-dark); box-shadow:0 0 0 4px rgba(2,87,93,0.12); }
+  .contact-intro h2 { font-family:'Sora',sans-serif; font-size:1.9rem; font-weight:700; color:var(--navy); margin:0 0 8px 0; }
+  .contact-intro p { color:var(--text-muted); font-size:1rem; margin:0; }
+  .contact-box { display:grid; grid-template-columns:1.25fr 1fr; background:#ffffff; border-radius:20px; box-shadow:0 20px 45px rgba(15,24,48,0.16); overflow:hidden; position:relative; animation:riseIn 0.6s ease both; }
+  .contact-box::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--teal-dark),var(--teal),var(--amber)); z-index:4; }
+  @keyframes riseIn { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
+  @media(max-width:800px){.contact-box{grid-template-columns:1fr;}.contact-hero{padding:56px 28px 70px;}}
+  .contact-box-form { padding:46px 48px; }
+  .contact-box-form h3 { font-family:'Sora',sans-serif; font-size:1.2rem; color:var(--navy); margin:0 0 24px 0; }
+  .form-group { margin-bottom:20px; position:relative; }
+  .form-group label { display:block; font-weight:600; color:var(--navy); margin-bottom:7px; font-size:0.88rem; }
+  .input-icon-wrap { position:relative; }
+  .input-icon-wrap .field-icon { position:absolute; left:14px; top:50%; transform:translateY(-50%); font-size:0.95rem; opacity:0.55; pointer-events:none; }
+  .input-icon-wrap input { padding-left:40px; }
+  .form-group input,.form-group textarea { width:100%; padding:12px 14px; border:1.5px solid var(--border-soft); border-radius:10px; font-size:0.95rem; font-family:inherit; color:var(--navy); background:var(--bg-soft); box-sizing:border-box; transition:border-color 0.2s ease,box-shadow 0.2s ease,background 0.2s ease; }
+  .form-group input:focus,.form-group textarea:focus { outline:none; border-color:var(--teal-dark); background:#fff; box-shadow:0 0 0 4px rgba(2,87,93,0.10); }
+  .form-group textarea { min-height:130px; resize:vertical; padding-left:14px; }
+  .btn-submit { display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg,var(--teal-dark) 0%,#013e42 100%); color:white; padding:13px 28px; border:none; border-radius:10px; font-size:0.98rem; font-weight:600; cursor:pointer; box-shadow:0 8px 18px rgba(2,87,93,0.35); transition:transform 0.18s ease,box-shadow 0.18s ease; }
+  .btn-submit:hover { transform:translateY(-2px); box-shadow:0 12px 24px rgba(2,87,93,0.4); }
+  .btn-submit:active { transform:translateY(0); }
+  .btn-submit:disabled { opacity:0.6; cursor:not-allowed; }
+  .form-microcopy { display:block; margin-top:12px; font-size:0.8rem; color:var(--text-muted); }
+  .form-status { margin-top:16px; font-size:0.9rem; font-weight:600; display:none; padding:10px 14px; border-radius:8px; }
+  .form-status.success { color:#0f7a3a; background:rgba(27,158,75,0.10); display:block; }
+  .form-status.error { color:#b0261b; background:rgba(226,67,58,0.08); display:block; }
+  .contact-box-info { background:linear-gradient(165deg,var(--navy) 0%,var(--navy-deep) 100%); color:#ffffff; padding:46px 38px; display:flex; flex-direction:column; }
+  .contact-box-info h3 { font-family:'Sora',sans-serif; margin:0 0 20px 0; font-size:1.1rem; color:var(--teal); letter-spacing:0.3px; }
+  .contact-info-row { display:flex; align-items:flex-start; gap:14px; padding:12px 10px; margin:0 -10px 6px; border-radius:10px; transition:background 0.2s ease; }
+  .contact-info-row:hover { background:rgba(255,255,255,0.05); }
+  .contact-info-icon { flex-shrink:0; width:36px; height:36px; border-radius:50%; background:rgba(78,216,226,0.14); display:flex; align-items:center; justify-content:center; font-size:1rem; }
+  .contact-info-text { font-size:0.93rem; color:#c7d0de; line-height:1.5; padding-top:2px; }
+  .contact-info-text strong { color:#ffffff; display:block; margin-bottom:2px; font-size:0.95rem; }
+  .contact-info-text a { color:var(--teal); text-decoration:none; }
+  .contact-info-text a:hover { text-decoration:underline; }
+  .info-divider { border:0; height:1px; background:rgba(255,255,255,0.1); margin:16px 0; }
+  .mini-map-frame { margin-top:auto; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.12); box-shadow:0 10px 25px rgba(0,0,0,0.25); }
+  .mini-map-frame iframe { width:100%; height:150px; border:none; display:block; filter:saturate(0.9) brightness(0.95); }
+  .mini-map-caption { background:rgba(0,0,0,0.25); padding:9px 12px; font-size:0.78rem; color:#c7d0de; text-align:center; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="contact-hero" id="contact">
+  <div class="contact-hero-inner">
+    <span class="contact-eyebrow">We're listening</span>
+    <h1>Let's start a conversation.</h1>
+    <p>Questions about admissions, research collaboration, or the campus itself — send us a note and the right person at IIIT Lucknow will get back to you.</p>
+    <div class="quick-contact-row">
+      <a href="mailto:contact@iiitl.ac.in" class="quick-chip"><span class="chip-icon">✉️</span> contact@iiitl.ac.in</a>
+      <a href="tel:05222338100" class="quick-chip"><span class="chip-icon">📞</span> 0522-2338100</a>
+    </div>
+  </div>
+</section>
+<br><br><br><br><br>
+
+<div class="contact-wrapper">
+  <div class="contact-intro">
+    <span class="contact-eyebrow">Contact form</span>
+    <h2>Get in Touch</h2>
+    <p>Fill out the form below and our team will get back to you as soon as possible.</p>
+  </div>
+  <div class="contact-box">
+    <div class="contact-box-form">
+      <h3>Send us a message</h3>
+      <form id="contactForm" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="contactName">Name</label>
+          <div class="input-icon-wrap"><span class="field-icon">👤</span><input type="text" id="contactName" name="name" placeholder="Your full name" required></div>
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Email</label>
+          <div class="input-icon-wrap"><span class="field-icon">✉️</span><input type="email" id="contactEmail" name="email" placeholder="you@example.com" required></div>
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" name="message" placeholder="Write your message here..." required></textarea>
+        </div>
+        <button type="submit" id="contactSubmitBtn" class="btn-submit">Send Message →</button>
+        <span class="form-microcopy">We typically reply within 1–2 business days.</span>
+        <div class="form-status" id="formStatus"></div>
+      </form>
+    </div>
+    <div class="contact-box-info">
+      <h3>📍 Reach Us Directly</h3>
+      <div class="contact-info-row">
+        <span class="contact-info-icon">🏢</span>
+        <div class="contact-info-text"><strong>Address</strong>Indian Institute of Information Technology, Lucknow<br>Chak Ganjaria, C.G. City, Lucknow – 226002<br>Uttar Pradesh, India</div>
+      </div>
+      <div class="contact-info-row">
+        <span class="contact-info-icon">✉️</span>
+        <div class="contact-info-text"><strong>Email</strong><a href="mailto:contact@iiitl.ac.in">contact@iiitl.ac.in</a></div>
+      </div>
+      <div class="contact-info-row">
+        <span class="contact-info-icon">📞</span>
+        <div class="contact-info-text"><strong>Phone</strong>0522-2338100</div>
+      </div>
+      <hr class="info-divider">
+      <div class="mini-map-frame">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=81.0142%2C26.7908%2C81.0342%2C26.8108&amp;layer=mapnik&amp;marker=26.8008%2C81.0242" loading="lazy" allowfullscreen title="IIIT Lucknow campus location"></iframe>
+        <div class="mini-map-caption">📍 IIIT Lucknow Campus, Chak Ganjaria</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // ── CSRF cookie helper ──────────────────────────────────────────────
+  function getCsrfToken() {
+    const match = document.cookie.split(';').find(c => c.trim().startsWith('csrftoken='));
+    return match ? decodeURIComponent(match.split('=')[1]) : '';
+  }
+
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const name    = document.getElementById('contactName').value.trim();
+    const email   = document.getElementById('contactEmail').value.trim();
+    const message = document.getElementById('contactMessage').value.trim();
+    const status  = document.getElementById('formStatus');
+    const btn     = document.getElementById('contactSubmitBtn');
+    const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!name || !email || !message) {
+      status.textContent = 'Please fill in all fields before submitting.';
+      status.className = 'form-status error'; return;
+    }
+    if (!emailRx.test(email)) {
+      status.textContent = 'Please enter a valid email address.';
+      status.className = 'form-status error'; return;
+    }
+
+    btn.disabled = true; btn.textContent = 'Sending…';
+
+    try {
+      const res  = await fetch("{% url 'core:contact_submit' %}", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCsrfToken() },
+        body: JSON.stringify({ name, email, message })
+      });
+      const json = await res.json();
+      if (json.success) {
+        status.textContent = json.message;
+        status.className = 'form-status success';
+        this.reset();
+      } else {
+        status.textContent = json.error || 'Submission failed.';
+        status.className = 'form-status error';
+      }
+    } catch(err) {
+      status.textContent = 'Network error. Please try again.';
+      status.className = 'form-status error';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Send Message →';
+    }
+  });
+</script>
+{% endblock %}

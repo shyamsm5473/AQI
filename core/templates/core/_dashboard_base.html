@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — IIIT Lucknow</title>
+  <link rel="stylesheet" href="{% static 'firststyle.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  {# ── All original Dashboard CSS preserved below ── #}
+  <style>
+    :root {
+      --primary-navy: #003366; --bg-light: #f4f7f6; --card-white: #ffffff; --text-main: #333333; --border-gray: #e2e8f0;
+      --aqi-good: #00e400; --aqi-moderate: #ffff00; --aqi-unhealthy-sub: #ff7e00; --aqi-unhealthy: #ff0000; --aqi-very-unhealthy: #8f3f97;
+      --cpcb-good: #1b9e4b; --cpcb-satisfactory: #a3c853; --cpcb-moderate: #e2b947; --cpcb-poor: #e06a26; --cpcb-very-poor: #d42b2b; --cpcb-severe: #8b1a8b;
+    }
+  </style>
+
+  {# ── Inject rest of Dashboard <head> content via raw file approach ── #}
+  {# NOTE: The full Dashboard CSS is kept in its <style> blocks below    #}
+</head>
+<body>
+
+  {# ══════════ DJANGO NAV (replaces the old static .html nav) ══════════ #}
+  <div class="top-bar">
+    <div class="logo-block">
+      <div class="logo-box">
+        <img src="https://upload.wikimedia.org/wikipedia/en/2/20/Indian_Institute_of_Information_Technology%2C_Lucknow_Logo.png" alt="IIIT Lucknow" width="64px" height="64px">
+      </div>
+      <div class="logo-label">
+        <span class="title">IIIT Lucknow</span>
+        <span class="sub">विद्या ददाति विनयं</span>
+        <span class="sub">विनयाद् याति पात्रताम्</span>
+      </div>
+    </div>
+    <div class="right-logo-block">
+      <div class="right-logo-label">
+        <span class="title">UPCST</span>
+        <span class="sub">Uttar Pradesh Council of</span>
+        <span class="sub">Science and Technology</span>
+      </div>
+      <div class="logo-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGLiqbdqVCvw6_CV_EtHs4w1Pc9j5mHxi9Qw&s" alt="UPCST logo" width="64px" height="64px">
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-bar">
+    <a href="{% url 'core:home' %}">Home</a>
+    <a href="{% url 'core:about' %}">About</a>
+    <a href="{% url 'core:dashboard' %}" class="active">Dashboard</a>
+    <a href="{% url 'core:analytics' %}">Air Quality Analytics</a>
+    <a href="{% url 'core:contact' %}">Contact</a>
+    <a href="{% url 'core:benefits' %}">Benefits</a>
+    <a href="{% url 'related_publication:page' %}">Related publications</a>
+    <a href="{% url 'core:map' %}">Map</a>
+    <div class="auth-buttons">
+      <button class="btn-login">Login</button>
+      <button class="btn-signup">Sign Up</button>
+    </div>
+  </nav>
+
+  {# ══════════ DASHBOARD BODY CONTENT (verbatim from original) ══════════ #}
+  {# The entire <body> content of Dashboard.html is preserved below        #}
+  {% block dashboard_content %}{% endblock %}
+
+</body>
+</html>

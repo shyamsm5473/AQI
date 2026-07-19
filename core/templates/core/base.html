@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}IIIT Lucknow{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'firststyle.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- ═══════ BRANDING TOP BAR ═══════ -->
+  <div class="top-bar">
+    <div class="logo-block">
+      <div class="logo-box">
+        <img src="https://upload.wikimedia.org/wikipedia/en/2/20/Indian_Institute_of_Information_Technology%2C_Lucknow_Logo.png"
+             alt="IIIT Lucknow" width="64px" height="64px">
+      </div>
+      <div class="logo-label">
+        <span class="title">IIIT Lucknow</span>
+        <span class="sub">विद्या ददाति विनयं</span>
+        <span class="sub">विनयाद् याति पात्रताम्</span>
+      </div>
+    </div>
+    <div class="right-logo-block">
+      <div class="right-logo-label">
+        <span class="title">UPCST</span>
+        <span class="sub">Uttar Pradesh Council of</span>
+        <span class="sub">Science and Technology</span>
+      </div>
+      <div class="logo-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGLiqbdqVCvw6_CV_EtHs4w1Pc9j5mHxi9Qw&s"
+             alt="UPCST logo" width="64px" height="64px">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ NAVIGATION BAR ═══════ -->
+  <nav class="bottom-bar">
+    <a href="{% url 'core:home' %}"       {% if active_page == 'home'        %}class="active"{% endif %}>Home</a>
+    <a href="{% url 'core:about' %}"      {% if active_page == 'about'       %}class="active"{% endif %}>About</a>
+    <a href="{% url 'core:dashboard' %}"  {% if active_page == 'dashboard'   %}class="active"{% endif %}>Dashboard</a>
+    <a href="{% url 'core:analytics' %}"  {% if active_page == 'analytics'   %}class="active"{% endif %}>Air Quality Analytics</a>
+    <a href="{% url 'core:contact' %}"    {% if active_page == 'contact'     %}class="active"{% endif %}>Contact</a>
+    <a href="{% url 'core:benefits' %}"   {% if active_page == 'benefits'    %}class="active"{% endif %}>Benefits</a>
+    <a href="{% url 'related_publication:page' %}" {% if active_page == 'publications' %}class="active"{% endif %}>Related publications</a>
+    <a href="{% url 'core:map' %}"        {% if active_page == 'map'         %}class="active"{% endif %}>Map</a>
+    <div class="auth-buttons">
+      {% if user.is_authenticated %}
+        <span class="nav-user-greeting">👋 {{ user.first_name|default:user.username }}</span>
+        <form method="post" action="{% url 'core:logout' %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn-login">Logout</button>
+        </form>
+      {% else %}
+        <a href="{% url 'core:login' %}"><button class="btn-login">Login</button></a>
+        <a href="{% url 'core:signup' %}"><button class="btn-signup">Sign Up</button></a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <!-- ═══════ PAGE CONTENT ═══════ -->
+  {% block content %}{% endblock %}
+
+  <!-- ═══════ SITE FOOTER ═══════ -->
+  <footer class="site-footer">
+    <div class="footer-emails">
+      <div class="email-item">
+        <span class="email-label">DR. SOUMENDU CHAKRABORTY</span>
+        <a href="mailto:soumendu@iiitl.ac.in" class="email-link">soumendu@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Dr. Bindu Singh</span>
+        <a href="mailto:bindu@iiitl.ac.in" class="email-link">bindu@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Dr. Mainak Adhikari</span>
+        <a href="mailto:mainak@iiitl.ac.in" class="email-link">mainak@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Akansha Singh</span>
+        <a href="mailto:RCS24101@iiitl.ac.in" class="email-link">RCS24101@iiitl.ac.in</a>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <p class="footer-copy">© 2026 Indian Institute of Information Technology, Lucknow. All Rights Reserved.</p>
+    <p class="footer-support">Supported by <a href="https://upcst.gov.in" target="_blank">UP Council of Science and Technology (UPCST)</a></p>
+  </footer>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,434 @@
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  /* .......  */
+    
+}
+
+
+/* ── TOP BAR ── */
+.top-bar {
+  background: #1a3a5c;
+  padding: 14px 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-box {
+  width: 66px;
+  height: 66px;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden; /* Keeps the rounded corners working on images */
+}
+
+/* FIX: Changed from svg to img so your logos scale correctly inside the white box */
+.logo-box img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain; /* Ensures images don't get distorted */
+}
+
+.logo-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.logo-label .title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f0c040;
+  letter-spacing: 0.3px;
+}
+
+.logo-label .sub {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.65);
+  font-style: italic;
+}
+
+.right-logo-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.right-logo-label {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.right-logo-label .title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f0c040;
+}
+
+.right-logo-label .sub {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ── BOTTOM NAV BAR ── */
+.bottom-bar {
+  background: #6272c3;
+  padding: 0 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  min-height: 50px;
+  /* Merged your sticky settings down here */
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.bottom-bar a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: background 0.15s;
+  letter-spacing: 0.2px;   
+}
+
+.bottom-bar a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.bottom-bar a.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-bottom: 2px solid #f0c040;
+  border-radius: 0;
+}
+
+/* ── HERO SECTION ── */
+.hero {
+  padding: 80px 2rem 60px;
+  text-align: center;
+  background: #f8f8f8;
+}
+
+.hero h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 12px;
+}
+
+.hero p {
+  font-size: 16px;
+  color: #555;
+}
+
+.auth-buttons {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.btn-login {
+  background: transparent;
+  border: 1.5px solid #90caf9;
+  color: #90caf9;
+  padding: 6px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-login:hover {
+  background: #90caf9;
+  color: #1a237e;
+}.btn-signup {
+  background: #42a5f5;
+  border: none;
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-signup:hover {
+  background: #1e88e5;
+}
+/* ── Footer ── */
+.site-footer {
+  background-color: #0d1b2a;
+  text-align: center;
+  padding: 20px 24px;
+  border-top: 2px solid #c9a84c;
+}
+
+.footer-copy {
+  color: #cbd5e1;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.footer-support {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.footer-support a {
+  color: #c9a84c;
+  text-decoration: none;
+}
+
+.footer-support a:hover {
+  text-decoration: underline;
+}
+
+
+/* new idea */
+
+/* ── ELEKEN SECTION STYLE APPLIED VIA EXTERNAL SHEET ── */
+.eleken-container {
+  background-color: hsl(278, 95%, 92%);
+  color: #111;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.eleken-container * {
+  box-sizing: border-box;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #2505c7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.main-title {
+  font-size: 42px;
+  font-weight: 700;
+  max-width: 700px;
+  line-height: 1.2;
+  margin: 0 auto 60px auto;
+}
+
+/* Process Showcase Layout */
+.process-showcase {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  width: 100%;
+  margin-bottom: 80px;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.pain-points {
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pain-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.pain-icon {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e28743;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #f30000;
+  font-weight: bold;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pain-text {
+  font-size: 16px;
+  color: #444;
+  font-weight: 500;
+}
+
+.illustration-box {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.illustration-box svg {
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+}
+
+/* Grid Info Setup */
+.section-divider-text {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+
+.grid-four-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  width: 100%;
+  margin-bottom: 100px;
+  text-align: left;
+}
+
+.grid-item {
+  border-top: 1px solid #f10b0b;
+  padding-top: 20px;
+}
+
+.grid-number {
+  font-size: 28px;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 15px;
+}
+
+.grid-text {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Dashboard Statistics Blocks */
+.today-section {
+  max-width: 800px;
+  margin-bottom: 60px;
+}
+
+.today-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.today-desc {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.stats-dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 900px;
+  width: 100%;
+  border: 1px solid #2b00ff;
+  background-color: #cae0ef;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  padding: 40px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.stat-card:nth-child(odd) {
+  border-right: 1px solid #eee;
+}
+
+.stat-card:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.stat-number {
+  font-size: 64px;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #777;
+  font-weight: 500;
+}
+
+.cta-btn {
+  background-color: #111;
+  color: #fff;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.cta-btn:hover {
+  background-color: #333;
+}
+
+/* Media Queries for Grid Layout Scaling */
+@media (max-width: 768px) {
+  .stats-dashboard {
+    grid-template-columns: 1fr;
+  }
+  .stat-card:nth-child(odd) {
+    border-right: none;
+  }
+  .stat-card {
+    border-bottom: 1px solid #eee !important;
+  }
+  .stat-card:last-child {
+    border-bottom: none !important;
+  }
+  .main-title {
+    font-size: 32px;
+  }
+}
+
+
+/* \u2500 Auth nav greeting \u2500 */
+.nav-user-greeting { color: #4ed8e2; font-weight: 600; font-size: 0.9rem; margin-right: 8px; vertical-align: middle; }
