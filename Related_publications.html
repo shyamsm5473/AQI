@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications — IIIT Lucknow</title>
+  <link rel="stylesheet" href="firststyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- GLOBAL BASE STYLES ---------- */
+    body {
+      background-color: #e7f7f8; /* Updated to match About body color */
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ---------- BRANDING TOP BAR ---------- */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1a3a5c; /* Dark Navy Blue */
+      padding: 14px 2.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .logo-block, .right-logo-block {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .logo-box img {
+      background-color: #ffffff;
+      padding: 4px;
+      border-radius: 8px; /* Rounded logo square border */
+    }
+    .logo-label, .right-logo-label {
+      display: flex;
+      flex-direction: column;
+    }
+    .logo-label .title, .right-logo-label .title {
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #e2b43b; /* Golden Yellow Title */
+    }
+    .logo-label .sub, .right-logo-label .sub {
+     font-size: 11px;
+     color: rgba(255, 255, 255, 0.65);
+     font-style: italic; 
+    }
+    .right-logo-label { text-align: right; }
+
+    /* ---------- UPDATED NAVIGATION BAR ---------- */
+    .bottom-bar {
+      background: #6272c3; /* Purple/Blue base */
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1.2rem;          /* Wide item spacing matching the image */
+      min-height: 54px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
+    .bottom-bar a {
+      color: #fffdfd;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 14.5px;
+      font-weight: 500;     /* Clean, medium-weight typography */
+      padding: 15px 12px;
+      transition: background 0.15s, border-color 0.15s;
+      letter-spacing: 0.1px;   
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .bottom-bar a:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+    }
+
+    .bottom-bar a.active {
+      background: rgba(255, 255, 255, 0.15); /* Tint block */
+      border-bottom: 3px solid #f0c040;      /* Yellow base underline accent */
+      border-radius: 0;
+      font-weight: 600;
+    }
+
+    .auth-buttons {
+      margin-left: auto; /* Push completely to the right */
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    /* Hollow Login Button styling */
+    .btn-login {
+      background: transparent;
+      color: #a3c2f7;            
+      border: 1px solid #558df2; 
+      padding: 7px 18px;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-login:hover {
+      background: rgba(85, 141, 242, 0.15);
+      color: #ffffff;
+    }
+
+    /* Solid Pill Sign Up button styling */
+    .btn-signup {
+      background: #3fa5f6; /* Image matched bright sky blue */
+      color: #ffffff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-signup:hover {
+      background: #258edb;
+    }
+
+    /* ---------- PUBLICATIONS SECTION ---------- */
+    .pub-wrap {
+      max-width: 1100px;
+      margin: 60px auto 80px;
+      padding: 40px 30px;
+      background: linear-gradient(180deg, #9f8df0 0%, rgba(244, 248, 248, 0.6) 100%);
+      border: 1px solid rgba(31, 178, 247, 0.8);
+      border-radius: 24px;
+      box-shadow: 0 4px 20px rgba(26, 37, 64, 0.02);
+      box-sizing: border-box;
+    }
+
+    .pub-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .pub-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #02575d;
+      margin-bottom: 16px;
+      background: rgba(2, 87, 93, 0.06);
+      padding: 6px 16px;
+      border-radius: 30px;
+    }
+
+    .pub-eyebrow::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #01393d;
+      box-shadow: 0 0 0 4px rgba(2,87,93,0.2);
+    }
+
+    .pub-header h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #000;
+      margin: 0 0 12px 0;
+      letter-spacing: -0.5px;
+    }
+
+    .pub-header p {
+      color: #5a6472;
+      font-size: 1.02rem;
+      line-height: 1.7;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .field { margin-bottom: 14px; }
+    .field label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #02575d;
+      margin-bottom: 6px;
+    }
+
+    .field input, .field textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #cbd5e0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      background: #fff;
+    }
+    .field textarea { resize: vertical; min-height: 60px; }
+
+    .btn-primary {
+      width: 100%;
+      padding: 11px 16px;
+      border: none;
+      border-radius: 30px;
+      background: #02575d;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .btn-primary:hover { background: #01393d; }
+
+    .btn-secondary {
+      width: 100%;
+      padding: 9px 16px;
+      margin-top: 8px;
+      border: 1px solid #02575d;
+      border-radius: 30px;
+      background: transparent;
+      color: #02575d;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .status-msg {
+      text-align: center;
+      font-size: 0.85rem;
+      margin-top: 10px;
+      min-height: 18px;
+    }
+    .status-msg.error { color: #c0392b; }
+    .status-msg.success { color: #02575d; }
+
+    .add-form {
+      max-width: 750px;
+      margin: 0 auto 40px auto;
+      background: #e5f6fc;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 28px 32px;
+      box-shadow: 0 10px 30px rgba(15, 24, 48, 0.044);
+    }
+    .add-form h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.15rem;
+      color: #1a2540;
+      margin: 0 0 18px 0;
+    }
+
+    /* ---------- ACADEMIC PUBLICATIONS CARD LIST ---------- */
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .pub-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 22px 28px;
+      box-shadow: 0 4px 12px rgba(15, 24, 48, 0.02);
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .pub-citation {
+      color: #2d3748;
+      font-size: 0.98rem;
+      margin: 0 0 8px 0;
+    }
+    .pub-title-link {
+      font-weight: 700;
+      color: #1a2540;
+      text-decoration: none;
+    }
+    .pub-title-link:hover { text-decoration: underline; color: #02575d; }
+    
+    .pub-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.85rem;
+      align-items: center;
+      margin-top: 6px;
+    }
+    
+    .tag-publisher {
+      background: #edf2f7;
+      color: #4a5568;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.78rem;
+    }
+    
+    .tag-impact {
+      background: rgba(2, 87, 93, 0.1);
+      color: #02575d;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.78rem;
+    }
+
+    .pub-doi {
+      color: #718096;
+      text-decoration: none;
+    }
+    .pub-doi:hover { color: #02575d; text-decoration: underline; }
+
+    .empty-note { text-align: center; color: #5a6472; font-size: 0.95rem; padding: 30px; }
+
+    /* ---------- FLOATING CORNER WIDGET ---------- */
+    .corner-login { position: fixed; top: 140px; right: 24px; z-index: 999; }
+    .corner-login-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: #02575d;
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(2, 87, 93, 0.35);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .corner-login-box {
+      position: absolute; top: 58px; right: 0; width: 280px;
+      background: #e5f6fc; border: 1px solid #e2e8f0; border-radius: 16px;
+      padding: 20px 22px; box-shadow: 0 12px 30px rgba(15, 24, 48, 0.12); box-sizing: border-box;
+    }
+
+    /* ---------- SITE FOOTER ---------- */
+    .site-footer {
+      background-color: #1a2540;
+      color: #ffffff;
+      padding: 45px 20px;
+      text-align: center;
+      margin-top: 60px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .footer-emails {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .email-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 200px;
+    }
+
+    .email-label {
+      font-size: 0.75rem;
+      color: #a0aec0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .email-link {
+      color: #4ed8e2;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .email-link:hover {
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .footer-divider {
+      border: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      max-width: 900px;
+      margin: 0 auto 25px auto;
+    }
+
+    .footer-copy {
+      font-size: 0.9rem;
+      margin: 5px 0;
+      color: #cbd5e0;
+    }
+
+    .footer-support {
+      font-size: 0.9rem;
+      color: #a0aec0;
+      margin-top: 8px;
+    }
+
+    .footer-support a {
+      color: #4ed8e2;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-support a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="logo-block">
+      <div class="logo-box">
+        <img src="https://upload.wikimedia.org/wikipedia/en/2/20/Indian_Institute_of_Information_Technology%2C_Lucknow_Logo.png" alt="IIIT lucknow" width="60px" height="60px">
+      </div>
+      <div class="logo-label">
+        <span class="title">IIIT Lucknow</span>
+        <span class="sub">विद्या ददाति विनयं</span>
+        <span class="sub">विनयाद् याति पात्रताम्</span>
+      </div>
+    </div>
+
+    <div class="right-logo-block">
+      <div class="right-logo-label">
+        <span class="title">UPCST</span>
+        <span class="sub">Uttar Pradesh Council of</span>
+        <span class="sub">Science and Technology</span>
+      </div>
+      <div class="logo-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGLiqbdqVCvw6_CV_EtHs4w1Pc9j5mHxi9Qw&s" alt="UPCST logo" width="60px" height="60px">
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Menu Bar -->
+  <nav class="bottom-bar">
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="Dashboard.html">Dashboard</a>
+    <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
+    <a href="Contact.html">Contact</a>
+    <a href="Benefits.html">Benefits</a>
+    <a href="#" class="active">Related publications</a>
+    <a href="map.html">Map</a>
+
+    <div class="auth-buttons">
+      <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+      <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+    </div>
+  </nav>
+
+
+  <!-- Main Container -->
+  <div class="pub-wrap">
+    <div class="pub-header">
+      <div class="pub-eyebrow">Academic Records</div>
+      <h2>Publications</h2>
+      <p>Manage list collections of verified journal reviews and computational conference output parameters.</p>
+    </div>
+
+    <!-- Administrative Additions Card Form -->
+    <div id="addForm" class="add-form" style="display:none;">
+      <h3>Add Faculty Publication Entry</h3>
+      <div class="field">
+        <label>Authors list *</label>
+        <input type="text" id="pubAuthors" placeholder="e.g. Pulkit Dwivedi, Soumendu Chakraborty">
+      </div>
+      <div class="field">
+        <label>Paper Title *</label>
+        <input type="text" id="pubTitle" placeholder="e.g. FrTrGAN: Single image dehazing using the frequency component...">
+      </div>
+      <div class="field">
+        <label>Journal Name / Book Context *</label>
+        <input type="text" id="pubJournal" placeholder="e.g. Computer Vision and Image Understanding, Elsevier">
+      </div>
+      <div class="field">
+        <label>Publication Year *</label>
+        <input type="text" id="pubYear" placeholder="e.g. 2025">
+      </div>
+      <div class="field">
+        <label>DOI String / Link URL (optional)</label>
+        <input type="text" id="pubLink" placeholder="e.g. https://doi.org/10.1016/j.cviu.2025.104336">
+      </div>
+      <div class="field">
+        <label>Publisher Tag (e.g. IEEE, Elsevier, Springer)</label>
+        <input type="text" id="pubPublisher" placeholder="e.g. Elsevier">
+      </div>
+      <div class="field">
+        <label>Impact Factor Indicator Value (optional)</label>
+        <input type="text" id="pubImpact" placeholder="e.g. 4.7">
+      </div>
+      <button class="btn-primary" onclick="handleAddPublication()">Add Record Entry</button>
+      <div id="addStatus" class="status-msg"></div>
+    </div>
+
+    <!-- Target output display list frame -->
+    <div id="pubList" class="pub-list"></div>
+  </div>
+
+  <!-- Widget Controls Structure -->
+  <div id="cornerLogin" class="corner-login">
+    <button id="cornerLoginBtn" class="corner-login-btn" onclick="toggleLoginBox()">🔒</button>
+    <div id="loginBox" class="corner-login-box" style="display:none;">
+      <h3>Admin Login</h3>
+      <div class="field"><label>ID</label><input type="email" id="loginEmail" placeholder="admin@iiitl.ac.in"></div>
+      <div class="field"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••••"></div>
+      <button class="btn-primary" onclick="handleLoginSubmit()">Login</button>
+      <button class="btn-secondary" onclick="toggleLoginBox()">Close</button>
+      <div id="loginStatus" class="status-msg"></div>
+    </div>
+    <div id="adminBar" class="corner-login-box" style="display:none;">
+      <h3>Admin Status</h3>
+      <div id="adminEmailLabel" style="font-size:0.85rem; color:#5a6472; margin-bottom:14px; font-weight:600;"></div>
+      <button class="btn-secondary" style="border-color:#c0392b; color:#c0392b;" onclick="handleLogoutSubmit()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-emails">
+      <div class="email-item">
+        <span class="email-label">DR. SOUMENDU CHAKRABORTY</span>
+        <a href="mailto:soumendu@iiitl.ac.in" class="email-link">soumendu@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Dr. Bindu Singh</span>
+        <a href="mailto:bindu@iiitl.ac.in" class="email-link">bindu@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Dr. Mainak Adhikari</span>
+        <a href="mailto:mainak@iiitl.ac.in" class="email-link">mainak@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Akansha Singh</span>
+        <a href="mailto:RCS24101@iiitl.ac.in" class="email-link">RCS24101@iiitl.ac.in</a>
+      </div>
+    </div>
+
+    <hr class="footer-divider">
+
+    <p class="footer-copy">© 2026 Indian Institute of Information Technology, Lucknow. All Rights Reserved.</p>
+    <p class="footer-support">Supported by <a href="https://upcst.gov.in" target="_blank">UP Council of Science and Technology (UPCST)</a></p>
+  </footer>
+
+  <!-- ---------- JAVASCRIPT STATE ENGINE LAYER ---------- -->
+  <script>
+    const ADMIN_CREDENTIALS = { email: "admin@iiitl.ac.in", password: "Lucknow123" };
+
+    let localCacheStore = [
+      {
+        id: "real-1",
+        authors: "Pulkit Dwivedi, Soumendu Chakraborty",
+        title: "FrTrGAN: Single image dehazing using the frequency component of transmission maps in the generative adversarial network",
+        journal: "Computer Vision and Image Understanding, Elsevier",
+        year: "2025",
+        link: "https://doi.org/10.1016/j.cviu.2025.104336",
+        publisher: "Elsevier",
+        impact: ""
+      },
+      {
+        id: "real-2",
+        authors: "Pulkit Dwivedi, Soumendu Chakraborty",
+        title: "A comprehensive qualitative and quantitative survey on image dehazing based on deep neural networks",
+        journal: "Neurocomputing, Vol-610, 128582, Elsevier",
+        year: "2024",
+        link: "https://doi.org/10.1016/j.neucom.2024.128582",
+        publisher: "Elsevier",
+        impact: ""
+      },
+      {
+        id: "real-3",
+        authors: "Pulkit Dwivedi, Soumendu Chakraborty",
+        title: "Single image dehazing using extended local dark channel prior",
+        journal: "Image and Vision Computing, Volume 136, 104747, Elsevier",
+        year: "2023",
+        link: "https://doi.org/10.1016/j.imavis.2023.104747",
+        publisher: "Elsevier",
+        impact: "4.7"
+      }
+    ];
+
+    let adminActiveToken = false;
+
+    const loginBox = document.getElementById('loginBox');
+    const adminBar = document.getElementById('adminBar');
+    const addForm = document.getElementById('addForm');
+    const adminEmailLabel = document.getElementById('adminEmailLabel');
+    const loginStatus = document.getElementById('loginStatus');
+    const addStatus = document.getElementById('addStatus');
+    const pubList = document.getElementById('pubList');
+
+    window.toggleLoginBox = function () {
+      loginBox.style.display = (loginBox.style.display === "none") ? "block" : "none";
+    };
+
+    window.handleLoginSubmit = function () {
+      if (document.getElementById('loginEmail').value.trim() === ADMIN_CREDENTIALS.email && 
+          document.getElementById('loginPassword').value === ADMIN_CREDENTIALS.password) {
+        adminActiveToken = true;
+        loginBox.style.display = "none";
+        adminBar.style.display = "block";
+        addForm.style.display = "block";
+        adminEmailLabel.textContent = ADMIN_CREDENTIALS.email;
+        refreshUIDOMTree();
+      } else {
+        loginStatus.textContent = "Incorrect parameters assertion failure.";
+        loginStatus.className = "status-msg error";
+      }
+    };
+
+    window.handleLogoutSubmit = function () {
+      adminActiveToken = false;
+      adminBar.style.display = "none";
+      addForm.style.display = "none";
+      loginBox.style.display = "none";
+      refreshUIDOMTree();
+    };
+
+    window.handleAddPublication = function () {
+      if (!adminActiveToken) return;
+
+      const authors = document.getElementById('pubAuthors').value.trim();
+      const title = document.getElementById('pubTitle').value.trim();
+      const journal = document.getElementById('pubJournal').value.trim();
+      const year = document.getElementById('pubYear').value.trim();
+      const link = document.getElementById('pubLink').value.trim();
+      const publisher = document.getElementById('pubPublisher').value.trim();
+      const impact = document.getElementById('pubImpact').value.trim();
+
+      if (!authors || !title || !journal || !year) {
+        addStatus.textContent = "Please fill completely all mandatory parameters fields.";
+        addStatus.className = "status-msg error";
+        return;
+      }
+
+      localCacheStore.unshift({ id: "pub-" + Date.now(), authors, title, journal, year, link, publisher, impact });
+      
+      ["pubAuthors", "pubTitle", "pubJournal", "pubYear", "pubLink", "pubPublisher", "pubImpact"].forEach(id => {
+        document.getElementById(id).value = "";
+      });
+
+      addStatus.textContent = "Record entry committed successfully!";
+      addStatus.className = "status-msg success";
+      refreshUIDOMTree();
+    };
+
+    function refreshUIDOMTree() {
+      if (localCacheStore.length === 0) {
+        pubList.innerHTML = '<div class="empty-note">No public records found inside this engine tracker system.</div>';
+        return;
+      }
+      pubList.innerHTML = "";
+      localCacheStore.forEach((p) => {
+        const card = document.createElement('div');
+        card.className = 'pub-card';
+        card.id = 'card-' + p.id;
+        card.innerHTML = `
+          <div class="pub-citation">
+            ${escapeHtml(p.authors)}, 
+            ${p.link ? `<a class="pub-title-link" href="${escapeHtml(p.link)}" target="_blank">“${escapeHtml(p.title)}”</a>` : `<strong>“${escapeHtml(p.title)}”</strong>`}, 
+            <em>${escapeHtml(p.journal)}</em>, ${escapeHtml(p.year)}.
+          </div>
+          <div class="pub-meta-row">
+            ${p.publisher ? `<span class="tag-publisher">${escapeHtml(p.publisher)}</span>` : ""}
+            ${p.impact ? `<span class="tag-impact">Impact Factor: ${escapeHtml(p.impact)}</span>` : ""}
+            ${p.link ? `<a href="${escapeHtml(p.link)}" class="pub-doi" target="_blank">${escapeHtml(p.link.replace('https://', ''))}</a>` : ""}
+          </div>
+        `;
+        pubList.appendChild(card);
+      });
+    }
+
+    function escapeHtml(str) {
+      const d = document.createElement('div'); d.textContent = str || ""; return d.innerHTML;
+    }
+    function escapeAttr(str) { return (str || "").replace(/"/g, "&quot;"); }
+
+    refreshUIDOMTree();
+  </script>
+</body>
+</html>

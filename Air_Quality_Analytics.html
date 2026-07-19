@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IIIT LUCKNOW</title>
+  <link rel="stylesheet" href="firststyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* --- NEW MATCHING FOOTER STYLES --- */
+    .site-footer {
+      background-color: #1a2540; /* Dark unified corporate theme background */
+      color: #ffffff;
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: 40px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .footer-emails {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .email-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 180px;
+    }
+
+    .email-label {
+      font-size: 0.85rem;
+      color: #a0aec0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .email-link {
+      color: #4ed8e2;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .email-link:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .footer-divider {
+      border: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+    }
+
+    .footer-copy {
+      font-size: 0.9rem;
+      margin: 5px 0;
+      color: #cbd5e0;
+    }
+
+    .footer-support a {
+      color: #4ed8e2;
+      text-decoration: none;
+    }
+
+    .footer-support a:hover {
+      text-decoration: underline;
+    }
+
+    /* --- AQI DASHBOARD SECTION STYLES --- */
+    :root {
+      --text-secondary: #898781;
+    }
+
+    .aqi-dashboard {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .aqi-dashboard-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .aqi-dashboard-header h2 {
+      font-size: 1.8rem;
+      color: #1a2540;
+      margin-bottom: 8px;
+    }
+
+    .aqi-dashboard-header p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .aqi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .aqi-card {
+      background: #d3e5f5;
+      border: 1px solid #56adf5;
+      border-radius: 12px;
+      padding: 20px 22px 12px;
+      box-shadow: 0 2px 8px rgba(26, 37, 64, 0.06);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .aqi-card:hover {
+      box-shadow: 0 4px 16px rgba(26, 37, 64, 0.12);
+    }
+
+    .aqi-card h3 {
+      font-size: 1.05rem;
+      color: #1a2540;
+      margin: 0 0 4px 0;
+    }
+
+    .aqi-card .aqi-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .aqi-card-full {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 800px) {
+      .aqi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="logo-block">
+      <div class="logo-box">
+        <img src="https://upload.wikimedia.org/wikipedia/en/2/20/Indian_Institute_of_Information_Technology%2C_Lucknow_Logo.png" alt="IIIT lucknow" width="64px" height="64px">
+      </div>
+      <div class="logo-label">
+        <span class="title">IIIT Lucknow</span>
+        <span class="sub">विद्या ददाति विनयं</span>
+        <span class="sub">विनयाद् याति पात्रताम्</span>
+      </div>
+    </div>
+
+    <div class="right-logo-block">
+      <div class="right-logo-label">
+        <span class="title">UPCST</span>
+        <span class="sub">Uttar Pradesh Council of</span>
+        <span class="sub">Science and Technology</span>
+      </div>
+      <div class="logo-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGLiqbdqVCvw6_CV_EtHs4w1Pc9j5mHxi9Qw&s" alt="UPCST logo" width="64px" height="64px">
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-bar">
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="Dashboard.html">Dashboard</a>
+    <a href="#" class="active">Air Quality Analytics</a>
+    <a href="Contact.html">Contact</a>
+    <a href="Benefits.html">Benefits</a>
+     <a href="Related_publications.html">Related publications</a>
+    <a href="map.html">Map</a>
+
+    <div class="auth-buttons">
+      <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+      <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+    </div>
+  </nav>
+
+ 
+  <section class="aqi-dashboard">
+    <div class="aqi-dashboard-header">
+      <h2>Air Quality Findings</h2>
+      <p>224 AQI readings collected between Dec 30, 2025 and Mar 30, 2026 — explored below through category breakdown, peak vs. baseline trends, spike events, weekly exposure, and temperature correlation.</p>
+    </div>
+
+    <div class="aqi-grid">
+
+      <div class="aqi-card">
+        <h3>AQI Category Breakdown</h3>
+        <p class="aqi-card-desc">Distribution of all 224 readings across CPCB categories.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:8px;font-size:12px;color:var(--text-secondary)">
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#a3e635"></span>Satisfactory 20%</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#facc15"></span>Moderate 57%</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#fb923c"></span>Poor 20%</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#f87171"></span>Very Poor 4%</span>
+        </div>
+        <div style="position:relative;width:100%;height:280px">
+          <canvas id="pie" role="img" aria-label="Pie chart of 224 AQI readings by CPCB category: 44 Satisfactory, 128 Moderate, 44 Poor, 8 Very Poor, none in Good or Severe">Category breakdown of 224 readings: Satisfactory 44, Moderate 128, Poor 44, Very Poor 8.</canvas>
+        </div>
+      </div>
+
+      <div class="aqi-card">
+        <h3>Temperature vs. AQI</h3>
+        <p class="aqi-card-desc">Pearson r = -0.58 — AQI tends to fall as temperature rises (winter haze vs. spring dispersion).</p>
+        <div style="position:relative;width:100%;height:280px">
+          <canvas id="sc" role="img" aria-label="Scatter plot of temperature in celsius versus peak AQI across 224 readings, showing an inverse relationship with a Pearson correlation of negative 0.58">Scatter of temperature against AQI: cooler winter readings around 14 to 18 degrees cluster at higher AQI values up to 315, while warmer March readings around 28 to 30 degrees cluster at lower AQI values mostly under 200.</canvas>
+        </div>
+      </div>
+
+      <div class="aqi-card aqi-card-full">
+        <h3>Peak vs. Baseline AQI Over Time</h3>
+        <p class="aqi-card-desc">Peak and baseline AQI tracked closely from Dec 30, 2025 to Mar 30, 2026, alongside a 3-day rolling exposure trend.</p>
+        <div style="display:flex;gap:16px;margin-bottom:8px;font-size:12px;color:var(--text-secondary)">
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#e34948"></span>Peak AQI</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#2a78d6"></span>Baseline AQI</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:2px;background:#eda100;margin:4px 0"></span>3-day exposure trend</span>
+        </div>
+        <div style="position:relative;width:100%;height:320px">
+          <canvas id="tl" role="img" aria-label="Line chart of peak AQI, baseline AQI, and 3-day rolling exposure trend across 224 readings from Dec 30 2025 to Mar 30 2026">Peak AQI ranges from 53 to 315.7 across the dataset, generally tracking baseline AQI closely, with higher values in January and lower values in late February and March.</canvas>
+        </div>
+      </div>
+
+      <div class="aqi-card aqi-card-full">
+        <h3>Short-Term Spike & Drop Events</h3>
+        <p class="aqi-card-desc">30 events sorted by deviation from the local rolling mean — largest jump was +65.2 AQI on Jan 30, largest drop was -65.2 AQI on Feb 3.</p>
+        <div style="display:flex;gap:16px;margin-bottom:8px;font-size:12px;color:var(--text-secondary)">
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#e34948"></span>Spike up</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#2a78d6"></span>Sharp drop</span>
+        </div>
+        <div style="position:relative;width:100%;height:420px">
+          <canvas id="spk" role="img" aria-label="Horizontal bar chart of 30 short term AQI spike and drop events, sorted by deviation magnitude from the local 5-slot rolling mean, ranging from negative 65 to positive 65 AQI points">30 spike/drop events detected across the dataset. Largest: a jump to 258.7 AQI on Jan 30 18:00 (+65.2 vs local mean) and a drop to 95.7 on Feb 3 00:00 (-65.2).</canvas>
+        </div>
+      </div>
+
+      <div class="aqi-card aqi-card-full">
+        <h3>Weekly Exposure Hours by Category</h3>
+        <p class="aqi-card-desc">Hours per week spent in each AQI category — early January was dominated by Poor/Very Poor air, shifting to Satisfactory/Moderate by February–March.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:8px;font-size:12px;color:var(--text-secondary)">
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#a3e635"></span>Satisfactory</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#facc15"></span>Moderate</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#fb923c"></span>Poor</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#f87171"></span>Very Poor</span>
+        </div>
+        <div style="position:relative;width:100%;height:300px">
+          <canvas id="expBar" role="img" aria-label="Stacked bar chart of hours per week spent in each AQI category, from week of Dec 29 2025 to week of Mar 30 2026">Weekly exposure hours: early January weeks show more Poor/Very Poor hours; February and March weeks shift toward Satisfactory and Moderate.</canvas>
+        </div>
+      </div>
+
+      <div class="aqi-card aqi-card-full">
+        <h3>Consolidated AQI & Exposure Dataset Table</h3>
+        <p class="aqi-card-desc">Complete granular record of all 224 observations containing criteria pollutants, meteorological markers, and calculated rolling trends.</p>
+        <div style="overflow-x:auto; max-height:400px; border:1px solid #e1e0d9; border-radius:8px; margin-top:12px;">
+          <table style="width:100%; border-collapse:collapse; font-size:0.85rem; text-align:left; font-family:'Inter', sans-serif;">
+            <thead>
+              <tr style="background:#1a2540; color:#ffffff; position:sticky; top:0; z-index:1;">
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">Date</th>
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">Time</th>
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">Peak AQI</th>
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">Baseline AQI</th>
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">Avg Exposure</th>
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">Trend Direction</th>
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">CO (ppm)</th>
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">CO2 (ppm)</th>
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">O3 (ppm)</th>
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">NO2 (ppm)</th>
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">NO (ppm)</th>
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">Temp (°C)</th>
+                <th style="padding:10px; border-bottom:1px solid #e1e0d9;">Humidity (%)</th>
+              </tr>
+            </thead>
+            <tbody id="csvTableBody">
+              </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+  <div class="footer-emails">
+      <div class="email-item">
+        <span class="email-label">DR. SOUMENDU CHAKRABORTY</span>
+        <a href="mailto:soumendu@iiitl.ac.in" class="email-link">soumendu@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Dr. Mainak Adhikari</span>
+        <a href="mailto:mainak@iiitl.ac.in" class="email-link">mainak@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Dr. Bindu Singh</span>
+        <a href="mailto:bindu@iiitl.ac.in" class="email-link">bindu@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Akansha Singh</span>
+        <a href="mailto:RCS24101@iiitl.ac.in" class="email-link">RCS24101@iiitl.ac.in</a>
+      </div>
+    </div>
+
+    <hr class="footer-divider">
+
+    <p class="footer-copy">© 2026 Indian Institute of Information Technology, Lucknow. All Rights Reserved.</p>
+    <p class="footer-support">Supported by <a href="https://upcst.gov.in" target="_blank">UP Council of Science and Technology (UPCST)</a></p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script>
+    // --- Chart 1: Category Pie ---
+    new Chart(document.getElementById('pie'), {
+      type: 'pie',
+      data: {
+        labels: ['Satisfactory','Moderate','Poor','Very Poor'],
+        datasets: [{ data: [44,128,44,8], backgroundColor: ['#a3e635','#facc15','#fb923c','#f87171'], borderColor: '#fcfcfb', borderWidth: 2 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false },
+          tooltip: { callbacks: { label: (ctx) => ctx.label + ': ' + ctx.parsed + ' readings (' + (ctx.parsed/224*100).toFixed(0) + '%)' } } }
+      }
+    });
+
+    // --- Chart 2: Temp vs AQI Scatter ---
+    const PTS = [{"x":14.8,"y":119.2},{"x":14.2,"y":119.2},{"x":21.2,"y":119.2},{"x":18.1,"y":119.2},{"x":14.8,"y":108.0},{"x":13.8,"y":108.0},{"x":16.2,"y":108.0},{"x":17.0,"y":108.0},{"x":14.2,"y":116.1},{"x":13.2,"y":116.1},{"x":19.2,"y":116.1},{"x":18.7,"y":116.1},{"x":16.3,"y":192.5},{"x":15.4,"y":192.5},{"x":16.7,"y":192.5},{"x":15.9,"y":192.5},{"x":15.7,"y":119.2},{"x":15.3,"y":119.2},{"x":16.1,"y":119.2},{"x":16.5,"y":119.2},{"x":14.5,"y":275.0},{"x":14.3,"y":275.0},{"x":17.5,"y":275.0},{"x":17.1,"y":275.0},{"x":14.9,"y":158.9},{"x":14.7,"y":158.9},{"x":17.4,"y":158.9},{"x":16.9,"y":158.9},{"x":15.2,"y":242.4},{"x":14.4,"y":242.4},{"x":17.7,"y":242.4},{"x":17.0,"y":242.4},{"x":14.7,"y":246.5},{"x":14.0,"y":246.5},{"x":17.5,"y":246.5},{"x":16.9,"y":246.5},{"x":15.0,"y":211.8},{"x":14.3,"y":211.8},{"x":17.3,"y":211.8},{"x":16.8,"y":211.8},{"x":14.6,"y":209.8},{"x":14.6,"y":209.8},{"x":17.5,"y":209.8},{"x":16.8,"y":209.8},{"x":14.9,"y":225.1},{"x":14.4,"y":225.1},{"x":17.3,"y":225.1},{"x":16.7,"y":225.1},{"x":15.1,"y":215.9},{"x":13.7,"y":215.9},{"x":17.3,"y":215.9},{"x":16.7,"y":215.9},{"x":14.8,"y":304.5},{"x":14.3,"y":304.5},{"x":17.6,"y":304.5},{"x":16.9,"y":304.5},{"x":15.0,"y":296.4},{"x":14.2,"y":296.4},{"x":17.6,"y":296.4},{"x":17.1,"y":296.4},{"x":14.5,"y":315.7},{"x":14.5,"y":315.7},{"x":17.5,"y":315.7},{"x":17.0,"y":315.7},{"x":15.0,"y":203.7},{"x":13.9,"y":203.7},{"x":17.6,"y":203.7},{"x":17.1,"y":203.7},{"x":14.7,"y":179.3},{"x":14.6,"y":179.3},{"x":17.6,"y":179.3},{"x":16.9,"y":179.3},{"x":14.8,"y":175.2},{"x":14.5,"y":175.2},{"x":17.7,"y":175.2},{"x":16.9,"y":175.2},{"x":15.0,"y":255.6},{"x":14.6,"y":255.6},{"x":17.7,"y":255.6},{"x":16.8,"y":255.6},{"x":15.1,"y":190.5},{"x":14.5,"y":190.5},{"x":17.1,"y":190.5},{"x":17.1,"y":190.5},{"x":14.8,"y":258.7},{"x":14.6,"y":258.7},{"x":17.6,"y":258.7},{"x":16.8,"y":258.7},{"x":14.8,"y":95.7},{"x":14.7,"y":95.7},{"x":17.4,"y":95.7},{"x":16.7,"y":95.7},{"x":14.7,"y":68.2},{"x":14.3,"y":68.2},{"x":17.1,"y":68.2},{"x":16.6,"y":68.2},{"x":14.9,"y":90.6},{"x":13.9,"y":90.6},{"x":17.5,"y":90.6},{"x":17.1,"y":90.6},{"x":14.8,"y":138.5},{"x":14.3,"y":138.5},{"x":17.8,"y":138.5},{"x":17.0,"y":138.5},{"x":29.1,"y":148.7},{"x":29.5,"y":148.7},{"x":29.4,"y":148.7},{"x":28.8,"y":148.7},{"x":29.0,"y":140.6},{"x":29.3,"y":140.6},{"x":29.6,"y":140.6},{"x":29.0,"y":140.6},{"x":28.9,"y":102.9},{"x":29.3,"y":102.9},{"x":29.7,"y":102.9},{"x":28.9,"y":102.9},{"x":29.2,"y":153.8},{"x":29.6,"y":153.8},{"x":29.4,"y":153.8},{"x":28.9,"y":153.8},{"x":29.2,"y":53.0},{"x":29.5,"y":53.0},{"x":29.7,"y":53.0},{"x":29.1,"y":53.0},{"x":28.9,"y":69.3},{"x":29.5,"y":69.3},{"x":29.5,"y":69.3},{"x":28.9,"y":69.3},{"x":28.9,"y":101.8},{"x":29.2,"y":101.8},{"x":28.3,"y":101.8},{"x":28.2,"y":101.8},{"x":26.5,"y":97.8},{"x":27.6,"y":97.8},{"x":29.6,"y":97.8},{"x":28.5,"y":97.8},{"x":27.6,"y":74.3},{"x":28.7,"y":74.3},{"x":30.0,"y":74.3},{"x":30.0,"y":74.3},{"x":29.5,"y":118.1},{"x":29.2,"y":118.1},{"x":29.9,"y":118.1},{"x":29.1,"y":118.1},{"x":28.8,"y":153.8},{"x":29.6,"y":153.8},{"x":29.3,"y":153.8},{"x":28.3,"y":153.8},{"x":30.1,"y":100.8},{"x":30.2,"y":100.8},{"x":29.1,"y":100.8},{"x":30.0,"y":100.8},{"x":30.9,"y":114.1},{"x":30.3,"y":114.1},{"x":30.0,"y":114.1},{"x":30.1,"y":114.1},{"x":29.3,"y":111.0},{"x":29.5,"y":111.0},{"x":29.3,"y":111.0},{"x":29.3,"y":111.0},{"x":29.0,"y":87.6},{"x":29.2,"y":87.6},{"x":29.3,"y":87.6},{"x":28.9,"y":87.6},{"x":28.8,"y":118.1},{"x":29.2,"y":118.1},{"x":29.5,"y":118.1},{"x":29.0,"y":118.1},{"x":29.0,"y":116.1},{"x":29.3,"y":116.1},{"x":29.6,"y":116.1},{"x":28.6,"y":116.1},{"x":29.0,"y":118.1},{"x":29.3,"y":118.1},{"x":29.6,"y":118.1},{"x":28.8,"y":118.1},{"x":29.1,"y":128.3},{"x":29.4,"y":128.3},{"x":29.8,"y":128.3},{"x":28.9,"y":128.3},{"x":29.0,"y":138.5},{"x":29.0,"y":138.5},{"x":29.5,"y":138.5},{"x":28.9,"y":138.5},{"x":29.2,"y":94.7},{"x":29.2,"y":94.7},{"x":29.4,"y":94.7},{"x":29.0,"y":94.7},{"x":28.9,"y":98.8},{"x":29.2,"y":98.8},{"x":29.4,"y":98.8},{"x":28.9,"y":98.8},{"x":29.0,"y":129.3},{"x":29.4,"y":129.3},{"x":29.4,"y":129.3},{"x":28.8,"y":129.3},{"x":28.9,"y":160.9},{"x":29.4,"y":160.9},{"x":29.6,"y":160.9},{"x":28.9,"y":160.9},{"x":29.1,"y":192.5},{"x":29.4,"y":192.5},{"x":29.5,"y":192.5},{"x":29.1,"y":192.5},{"x":29.0,"y":93.7},{"x":29.6,"y":93.7},{"x":29.4,"y":93.7},{"x":29.1,"y":93.7},{"x":29.0,"y":121.2},{"x":29.3,"y":121.2},{"x":29.8,"y":121.2},{"x":29.0,"y":121.2},{"x":29.4,"y":129.3},{"x":29.5,"y":129.3},{"x":29.7,"y":129.3},{"x":29.1,"y":129.3},{"x":29.0,"y":133.4},{"x":29.5,"y":133.4},{"x":29.6,"y":133.4},{"x":29.2,"y":133.4},{"x":28.9,"y":144.6},{"x":29.2,"y":144.6},{"x":29.4,"y":144.6},{"x":29.0,"y":144.6}];
+    new Chart(document.getElementById('sc'), {
+      type: 'scatter',
+      data: { datasets: [{ label:'Reading', data: PTS, backgroundColor: 'rgba(55,138,221,0.55)', pointRadius: 4, pointHoverRadius: 6 }] },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { title: { display: true, text: 'Temperature (°C)', color: '#898781' }, ticks: { color: '#898781' }, grid: { color: '#e1e0d9' } },
+          y: { title: { display: true, text: 'Peak AQI', color: '#898781' }, ticks: { color: '#898781' }, grid: { color: '#e1e0d9' } }
+        }
+      }
+    });
+
+    // --- Chart 3: Peak vs Baseline Timeline ---
+    const D = {"labels": ["2025-12-30 00:00","2025-12-30 06:00","2025-12-30 12:00","2025-12-30 18:00","2025-12-31 00:00","2025-12-31 06:00","2025-12-31 12:00","2025-12-31 18:00","2026-01-01 00:00","2026-01-01 06:00","2026-01-01 12:00","2026-01-01 18:00","2026-01-02 00:00","2026-01-02 06:00","2026-01-02 12:00","2026-01-02 18:00","2026-01-03 00:00","2026-01-03 06:00","2026-01-03 12:00","2026-01-03 18:00","2026-01-04 00:00","2026-01-04 06:00","2026-01-04 12:00","2026-01-04 18:00","2026-01-05 00:00","2026-01-05 06:00","2026-01-05 12:00","2026-01-05 18:00","2026-01-06 00:00","2026-01-06 06:00","2026-01-06 12:00","2026-01-06 18:00","2026-01-07 00:00","2026-01-07 06:00","2026-01-07 12:00","2026-01-07 18:00","2026-01-08 00:00","2026-01-08 06:00","2026-01-08 12:00","2026-01-08 18:00","2026-01-09 00:00","2026-01-09 06:00","2026-01-09 12:00","2026-01-09 18:00","2026-01-10 00:00","2026-01-10 06:00","2026-01-10 12:00","2026-01-10 18:00","2026-01-11 00:00","2026-01-11 06:00","2026-01-11 12:00","2026-01-11 18:00","2026-01-12 00:00","2026-01-12 06:00","2026-01-12 12:00","2026-01-12 18:00","2026-01-13 00:00","2026-01-13 06:00","2026-01-13 12:00","2026-01-13 18:00","2026-01-14 00:00","2026-01-14 06:00","2026-01-14 12:00","2026-01-14 18:00","2026-01-15 00:00","2026-01-15 06:00","2026-01-15 12:00","2026-01-15 18:00","2026-01-16 00:00","2026-01-16 06:00","2026-01-16 12:00","2026-01-16 18:00","2026-01-20 00:00","2026-01-20 06:00","2026-01-20 12:00","2026-01-20 18:00","2026-01-23 00:00","2026-01-23 06:00","2026-01-23 12:00","2026-01-23 18:00","2026-01-26 00:00","2026-01-26 06:00","2026-01-26 12:00","2026-01-26 18:00","2026-01-30 00:00","2026-01-30 06:00","2026-01-30 12:00","2026-01-30 18:00","2026-02-03 00:00","2026-02-03 06:00","2026-02-03 12:00","2026-02-03 18:00","2026-02-06 00:00","2026-02-06 06:00","2026-02-06 12:00","2026-02-06 18:00","2026-02-09 00:00","2026-02-09 06:00","2026-02-09 12:00","2026-02-09 18:00","2026-02-13 00:00","2026-02-13 06:00","2026-02-13 12:00","2026-02-13 18:00","2026-02-17 00:00","2026-02-17 06:00","2026-02-17 12:00","2026-02-17 18:00","2026-02-20 00:00","2026-02-20 06:00","2026-02-20 12:00","2026-02-20 18:00","2026-02-23 00:00","2026-02-23 06:00","2026-02-23 12:00","2026-02-23 18:00","2026-02-27 00:00","2026-02-27 06:00","2026-02-27 12:00","2026-02-27 18:00","2026-03-03 00:00","2026-03-03 06:00","2026-03-03 12:00","2026-03-03 18:00","2026-03-06 00:00","2026-03-06 06:00","2026-03-06 12:00","2026-03-06 18:00","2026-03-07 00:00","2026-03-07 06:00","2026-03-07 12:00","2026-03-07 18:00","2026-03-08 00:00","2026-03-08 06:00","2026-03-08 12:00","2026-03-08 18:00","2026-03-09 00:00","2026-03-09 06:00","2026-03-09 12:00","2026-03-09 18:00","2026-03-10 00:00","2026-03-10 06:00","2026-03-10 12:00","2026-03-10 18:00","2026-03-11 00:00","2026-03-11 06:00","2026-03-11 12:00","2026-03-11 18:00","2026-03-12 00:00","2026-03-12 06:00","2026-03-12 12:00","2026-03-12 18:00","2026-03-13 00:00","2026-03-13 06:00","2026-03-13 12:00","2026-03-13 18:00","2026-03-14 00:00","2026-03-14 06:00","2026-03-14 12:00","2026-03-14 18:00","2026-03-15 00:00","2026-03-15 06:00","2026-03-15 12:00","2026-03-15 18:00","2026-03-16 00:00","2026-03-16 06:00","2026-03-16 12:00","2026-03-16 18:00","2026-03-17 00:00","2026-03-17 06:00","2026-03-17 12:00","2026-03-17 18:00","2026-03-18 00:00","2026-03-18 06:00","2026-03-18 12:00","2026-03-18 18:00","2026-03-19 00:00","2026-03-19 06:00","2026-03-19 12:00","2026-03-19 18:00","2026-03-20 00:00","2026-03-20 06:00","2026-03-20 12:00","2026-03-20 18:00","2026-03-21 00:00","2026-03-21 06:00","2026-03-21 12:00","2026-03-21 18:00","2026-03-22 00:00","2026-03-22 06:00","2026-03-22 12:00","2026-03-22 18:00","2026-03-23 00:00","2026-03-23 06:00","2026-03-23 12:00","2026-03-23 18:00","2026-03-24 00:00","2026-03-24 06:00","2026-03-24 12:00","2026-03-24 18:00","2026-03-25 00:00","2026-03-25 06:00","2026-03-25 12:00","2026-03-25 18:00","2026-03-26 00:00","2026-03-26 06:00","2026-03-26 12:00","2026-03-26 18:00","2026-03-27 00:00","2026-03-27 06:00","2026-03-27 12:00","2026-03-27 18:00","2026-03-28 00:00","2026-03-28 06:00","2026-03-28 12:00","2026-03-28 18:00","2026-03-29 00:00","2026-03-29 06:00","2026-03-29 12:00","2026-03-29 18:00","2026-03-30 00:00","2026-03-30 06:00","2026-03-30 12:00","2026-03-30 18:00"], "peak": [119.2,119.2,119.2,119.2,108.0,108.0,108.0,108.0,116.1,116.1,116.1,116.1,192.5,192.5,192.5,192.5,119.2,119.2,119.2,119.2,275.0,275.0,275.0,275.0,158.9,158.9,158.9,158.9,242.4,242.4,242.4,242.4,246.5,246.5,246.5,246.5,211.8,211.8,211.8,211.8,209.8,209.8,209.8,209.8,225.1,225.1,225.1,225.1,215.9,215.9,215.9,215.9,304.5,304.5,304.5,304.5,296.4,296.4,296.4,296.4,315.7,315.7,315.7,315.7,203.7,203.7,203.7,203.7,179.3,179.3,179.3,179.3,175.2,175.2,175.2,175.2,255.6,255.6,255.6,255.6,190.5,190.5,190.5,190.5,258.7,258.7,258.7,258.7,95.7,95.7,95.7,95.7,68.2,68.2,68.2,68.2,90.6,90.6,90.6,90.6,138.5,138.5,138.5,138.5,148.7,148.7,148.7,148.7,140.6,140.6,140.6,140.6,102.9,102.9,102.9,102.9,153.8,153.8,153.8,153.8,53.0,53.0,53.0,53.0,69.3,69.3,69.3,69.3,101.8,101.8,101.8,101.8,97.8,97.8,97.8,97.8,74.3,74.3,74.3,74.3,118.1,118.1,118.1,118.1,153.8,153.8,153.8,153.8,100.8,100.8,100.8,100.8,114.1,114.1,114.1,114.1,111.0,111.0,111.0,111.0,87.6,87.6,87.6,87.6,118.1,118.1,118.1,118.1,116.1,116.1,116.1,116.1,118.1,118.1,118.1,118.1,128.3,128.3,128.3,128.3,138.5,138.5,138.5,138.5,94.7,94.7,94.7,94.7,98.8,98.8,98.8,98.8,129.3,129.3,129.3,129.3,160.9,160.9,160.9,160.9,192.5,192.5,192.5,192.5,93.7,93.7,93.7,93.7,121.2,121.2,121.2,121.2,129.3,129.3,129.3,129.3,133.4,133.4,133.4,133.4,144.6,144.6,144.6,144.6], "baseline": [116.3,116.3,116.3,116.3,105.4,105.4,105.4,105.4,113.3,113.3,113.3,113.3,187.9,187.9,187.9,187.9,116.3,116.3,116.3,116.3,268.4,268.4,268.4,268.4,155.1,155.1,155.1,155.1,236.6,236.6,236.6,236.6,240.5,240.5,240.5,240.5,206.7,206.7,206.7,206.7,204.8,204.8,204.8,204.8,219.7,219.7,219.7,219.7,210.7,210.7,210.7,210.7,297.2,297.2,297.2,297.2,289.2,289.2,289.2,289.2,308.1,308.1,308.1,308.1,198.8,198.8,198.8,198.8,174.9,174.9,174.9,174.9,171.0,171.0,171.0,171.0,249.5,249.5,249.5,249.5,185.9,185.9,185.9,185.9,252.5,252.5,252.5,252.5,93.4,93.4,93.4,93.4,66.6,66.6,66.6,66.6,88.5,88.5,88.5,88.5,135.2,135.2,135.2,135.2,145.1,145.1,145.1,145.1,137.2,137.2,137.2,137.2,100.4,100.4,100.4,100.4,150.1,150.1,150.1,150.1,51.7,51.7,51.7,51.7,67.6,67.6,67.6,67.6,99.4,99.4,99.4,99.4,95.4,95.4,95.4,95.4,72.6,72.6,72.6,72.6,115.3,115.3,115.3,115.3,150.1,150.1,150.1,150.1,98.4,98.4,98.4,98.4,111.3,111.3,111.3,111.3,108.3,108.3,108.3,108.3,85.5,85.5,85.5,85.5,115.3,115.3,115.3,115.3,113.3,113.3,113.3,113.3,115.3,115.3,115.3,115.3,125.2,125.2,125.2,125.2,135.2,135.2,135.2,135.2,92.4,92.4,92.4,92.4,96.4,96.4,96.4,96.4,126.2,126.2,126.2,126.2,157.0,157.0,157.0,157.0,187.9,187.9,187.9,187.9,91.4,91.4,91.4,91.4,118.3,118.3,118.3,118.3,126.2,126.2,126.2,126.2,130.2,130.2,130.2,130.2,141.1,141.1,141.1,141.1], "trend": [117.0,117.0,117.0,117.0,111.5,111.5,111.5,111.5,112.3,112.3,112.3,112.3,136.3,136.3,136.3,136.3,140.0,140.0,140.0,140.0,192.0,192.0,192.0,192.0,181.0,181.0,181.0,181.0,221.3,221.3,221.3,221.3,212.0,212.0,212.0,212.0,229.3,229.3,229.3,229.3,218.7,218.7,218.7,218.7,211.7,211.7,211.7,211.7,213.0,213.0,213.0,213.0,244.0,244.0,244.0,244.0,267.3,267.3,267.3,267.3,300.0,300.0,300.0,300.0,267.0,267.0,267.0,267.0,176.0,176.0,176.0,176.0,174.0,174.0,174.0,174.0,199.7,199.7,199.7,199.7,203.3,203.3,203.3,203.3,230.7,230.7,230.7,230.7,178.3,178.3,178.3,178.3,138.3,138.3,138.3,138.3,83.3,83.3,83.3,83.3,97.3,97.3,97.3,97.3,123.7,123.7,123.7,123.7,140.0,140.0,140.0,140.0,128.3,128.3,128.3,128.3,130.0,130.0,130.0,130.0,101.3,101.3,101.3,101.3,90.3,90.3,90.3,90.3,100.0,100.0,100.0,100.0,98.0,98.0,98.0,98.0,89.7,89.7,89.7,89.7,95.0,95.0,95.0,95.0,113.3,113.3,113.3,113.3,122.0,122.0,122.0,122.0,120.7,120.7,120.7,120.7,106.7,106.7,106.7,106.7,102.3,102.3,102.3,102.3,103.7,103.7,103.7,103.7,105.3,105.3,105.3,105.3,115.3,115.3,115.3,115.3,118.7,118.7,118.7,118.7,126.0,126.0,126.0,126.0,118.3,118.3,118.3,118.3,108.7,108.7,108.7,108.7,105.7,105.7,105.7,105.7,127.3,127.3,127.3,127.3,158.0,158.0,158.0,158.0,146.3,146.3,146.3,146.3,133.3,133.3,133.3,133.3,112.7,112.7,112.7,112.7,125.7,125.7,125.7,125.7,133.3,133.3,133.3,133.3]};
+    new Chart(document.getElementById('tl'), {
+      type: 'line',
+      data: { labels: D.labels, datasets: [
+        {label:'Peak AQI', data:D.peak, borderColor:'#e34948', backgroundColor:'rgba(227,73,72,0.08)', pointRadius:0, borderWidth:1.6, fill:'-1'},
+        {label:'Baseline AQI', data:D.baseline, borderColor:'#2a78d6', pointRadius:0, borderWidth:1.4, fill:false},
+        {label:'Trend', data:D.trend, borderColor:'#eda100', pointRadius:0, borderWidth:1.6, borderDash:[4,3], fill:false}
+      ]},
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        interaction:{mode:'index', intersect:false},
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{ticks:{maxTicksLimit:12, autoSkip:true, color:'#898781'}, grid:{display:false}},
+          y:{title:{display:true,text:'AQI', color:'#898781'}, ticks:{color:'#898781'}, grid:{color:'#e1e0d9'}}
+        }
+      }
+    });
+
+    // --- Chart 4: Spike/Drop Events ---
+    const SP = [{"label":"2026-01-30 18:00","peak":258.7,"deviation":65.2},{"label":"2026-02-03 00:00","peak":95.7,"deviation":-65.2},{"label":"2026-01-03 18:00","peak":119.2,"deviation":-62.3},{"label":"2026-01-04 00:00","peak":275.0,"deviation":62.3},{"label":"2026-01-04 18:00","peak":275.0,"deviation":46.4},{"label":"2026-01-05 00:00","peak":158.9,"deviation":-46.4},{"label":"2026-01-14 18:00","peak":315.7,"deviation":44.8},{"label":"2026-01-15 00:00","peak":203.7,"deviation":-44.8},{"label":"2026-02-27 18:00","peak":153.8,"deviation":40.3},{"label":"2026-03-03 00:00","peak":53.0,"deviation":-40.3},{"label":"2026-03-25 18:00","peak":192.5,"deviation":39.5},{"label":"2026-03-26 00:00","peak":93.7,"deviation":-39.5},{"label":"2026-01-11 18:00","peak":215.9,"deviation":-35.4},{"label":"2026-01-12 00:00","peak":304.5,"deviation":35.4},{"label":"2026-01-05 18:00","peak":158.9,"deviation":-33.4},{"label":"2026-01-06 00:00","peak":242.4,"deviation":33.4},{"label":"2026-01-30 12:00","peak":258.7,"deviation":32.6},{"label":"2026-02-03 06:00","peak":95.7,"deviation":-32.6},{"label":"2026-01-20 18:00","peak":175.2,"deviation":-32.2},{"label":"2026-01-23 00:00","peak":255.6,"deviation":32.2},{"label":"2026-01-03 12:00","peak":119.2,"deviation":-31.2},{"label":"2026-01-04 06:00","peak":275.0,"deviation":31.2},{"label":"2026-01-01 18:00","peak":116.1,"deviation":-30.6},{"label":"2026-01-02 00:00","peak":192.5,"deviation":30.6},{"label":"2026-01-02 18:00","peak":192.5,"deviation":29.3},{"label":"2026-01-03 00:00","peak":119.2,"deviation":-29.3},{"label":"2026-01-26 18:00","peak":190.5,"deviation":-27.3},{"label":"2026-01-30 00:00","peak":258.7,"deviation":27.3},{"label":"2026-01-23 18:00","peak":255.6,"deviation":26.0},{"label":"2026-01-26 00:00","peak":190.5,"deviation":-26.0}];
+    new Chart(document.getElementById('spk'), {
+      type: 'bar',
+      data: {
+        labels: SP.map(s=>s.label),
+        datasets: [{ data: SP.map(s=>s.deviation), backgroundColor: SP.map(s=>s.deviation>0 ? '#e34948' : '#2a78d6') }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { title: { display: true, text: 'Deviation from local rolling mean (AQI)', color: '#898781' }, ticks: { color: '#898781' }, grid: { color: '#e1e0d9' } },
+          y: { ticks: { color: '#898781', font: { size: 9 } }, grid: { display: false } }
+        }
+      }
+    });
+
+    // --- Chart 5: Weekly Exposure Hours ---
+    const W = [
+    {"week":"2025-12-29","Satisfactory":0,"Moderate":120,"Poor":24,"Very Poor":0},
+    {"week":"2026-01-05","Satisfactory":0,"Moderate":24,"Poor":144,"Very Poor":0},
+    {"week":"2026-01-12","Satisfactory":0,"Moderate":24,"Poor":48,"Very Poor":48},
+    {"week":"2026-01-19","Satisfactory":0,"Moderate":24,"Poor":24,"Very Poor":0},
+    {"week":"2026-01-26","Satisfactory":0,"Moderate":24,"Poor":24,"Very Poor":0},
+    {"week":"2026-02-02","Satisfactory":48,"Moderate":0,"Poor":0,"Very Poor":0},
+    {"week":"2026-02-09","Satisfactory":24,"Moderate":24,"Poor":0,"Very Poor":0},
+    {"week":"2026-02-16","Satisfactory":0,"Moderate":48,"Poor":0,"Very Poor":0},
+    {"week":"2026-02-23","Satisfactory":0,"Moderate":48,"Poor":0,"Very Poor":0},
+    {"week":"2026-03-02","Satisfactory":72,"Moderate":24,"Poor":0,"Very Poor":0},
+    {"week":"2026-03-09","Satisfactory":48,"Moderate":120,"Poor":0,"Very Poor":0},
+    {"week":"2026-03-16","Satisfactory":48,"Moderate":120,"Poor":0,"Very Poor":0},
+    {"week":"2026-03-23","Satisfactory":24,"Moderate":144,"Poor":0,"Very Poor":0},
+    {"week":"2026-03-30","Satisfactory":0,"Moderate":24,"Poor":0,"Very Poor":0}
+    ];
+    new Chart(document.getElementById('expBar'), {
+      type: 'bar',
+      data: {
+        labels: W.map(w=>w.week),
+        datasets: [
+          {label:'Satisfactory', data:W.map(w=>w.Satisfactory), backgroundColor:'#a3e635', stack:'s'},
+          {label:'Moderate', data:W.map(w=>w.Moderate), backgroundColor:'#facc15', stack:'s'},
+          {label:'Poor', data:W.map(w=>w.Poor), backgroundColor:'#fb923c', stack:'s'},
+          {label:'Very Poor', data:W.map(w=>w['Very Poor']), backgroundColor:'#f87171', stack:'s'}
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { stacked: true, ticks: { color: '#898781', maxRotation: 45, minRotation: 45 }, grid: { display: false } },
+          y: { stacked: true, title: { display: true, text: 'Hours', color: '#898781' }, ticks: { color: '#898781' }, grid: { color: '#e1e0d9' } }
+        }
+      }
+    });
+
+    // --- Dynamic Population of the Consolidated CSV Table ---
+    const CSV_DATA = [["12/30/2025", "0:00", 119.2, 116.3, 117.0, "STABLE", 6.79, 266.1, 0.0167, 0.0127, 0.0076, 14.8, 79.7], ["12/30/2025", "6:00", 119.2, 116.3, 117.0, "STABLE", 3.63, 250.7, 0.0149, 0.0108, 0.0065, 14.2, 81.3], ["12/30/2025", "12:00", 119.2, 116.3, 117.0, "STABLE", 60.0, 472.3, 0.0308, 0.0692, 0.0415, 21.2, 60.1], ["12/30/2025", "18:00", 119.2, 116.3, 117.0, "STABLE", 7.07, 450.3, 0.0269, 0.0503, 0.0302, 18.1, 70.9], ["12/31/2025", "0:00", 108.0, 105.4, 111.5, "FALLING", 6.75, 448.5, 0.0229, 0.0386, 0.0231, 14.8, 79.3], ["12/31/2025", "6:00", 108.0, 105.4, 111.5, "FALLING", 4.9, 436.1, 0.0227, 0.0324, 0.0194, 13.8, 84.6], ["12/31/2025", "12:00", 108.0, 105.4, 111.5, "FALLING", 5.72, 449.0, 0.0264, 0.0348, 0.0209, 16.2, 77.8], ["12/31/2025", "18:00", 108.0, 105.4, 111.5, "FALLING", 5.88, 454.8, 0.0283, 0.0334, 0.02, 17.0, 76.8], ["1/1/2026", "0:00", 116.1, 113.3, 112.3, "STABLE", 4.67, 425.6, 0.0239, 0.0246, 0.0147, 14.2, 78.5], ["1/1/2026", "6:00", 116.1, 113.3, 112.3, "STABLE", 4.0, 422.1, 0.023, 0.0202, 0.0121, 13.2, 77.7], ["1/1/2026", "12:00", 116.1, 113.3, 112.3, "STABLE", 6.26, 459.2, 0.0328, 0.0315, 0.0189, 19.2, 65.5], ["1/1/2026", "18:00", 116.1, 113.3, 112.3, "STABLE", 5.71, 480.8, 0.036, 0.0276, 0.0166, 18.7, 71.7], ["1/2/2026", "0:00", 192.5, 187.9, 136.3, "RISING", 5.43, 494.9, 0.0345, 0.0215, 0.0129, 16.3, 78.6], ["1/2/2026", "6:00", 192.5, 187.9, 136.3, "RISING", 6.48, 478.8, 0.0327, 0.0187, 0.0112, 15.4, 81.9], ["1/2/2026", "12:00", 192.5, 187.9, 136.3, "RISING", 6.67, 483.9, 0.0354, 0.0189, 0.0114, 16.7, 79.1], ["1/2/2026", "18:00", 192.5, 187.9, 136.3, "RISING", 5.48, 483.4, 0.0352, 0.0141, 0.0084, 15.9, 87.0], ["1/3/2026", "0:00", 119.2, 116.3, 140.0, "STABLE", 6.82, 477.6, 0.0351, 0.0116, 0.0069, 15.7, 86.9], ["1/3/2026", "6:00", 119.2, 116.3, 140.0, "STABLE", 4.91, 471.8, 0.0352, 0.0096, 0.0057, 15.3, 82.7], ["1/3/2026", "12:00", 119.2, 116.3, 140.0, "STABLE", 7.72, 474.1, 0.0367, 0.0104, 0.0062, 16.1, 77.0], ["1/3/2026", "18:00", 119.2, 116.3, 140.0, "STABLE", 5.56, 483.0, 0.0385, 0.0108, 0.0065, 16.5, 74.9], ["1/4/2026", "0:00", 275.0, 268.4, 192.0, "RISING", 6.51, 478.5, 0.0356, 0.0082, 0.0049, 14.5, 76.6], ["1/4/2026", "6:00", 275.0, 268.4, 192.0, "RISING", 7.42, 586.1, 0.0374, 0.0255, 0.0153, 14.3, 81.5], ["1/4/2026", "12:00", 275.0, 268.4, 192.0, "RISING", 15.12, 619.0, 0.0423, 0.0466, 0.028, 17.5, 74.1], ["1/4/2026", "18:00", 275.0, 268.4, 192.0, "RISING", 5.63, 617.5, 0.0416, 0.0326, 0.0196, 17.1, 79.1], ["1/5/2026", "0:00", 158.9, 155.1, 181.0, "FALLING", 4.39, 356.4, 0.0204, 0.0164, 0.0099, 14.9, 79.9], ["1/5/2026", "6:00", 158.9, 155.1, 181.0, "FALLING", 3.99, 336.0, 0.0213, 0.0155, 0.0093, 14.7, 80.8], ["1/5/2026", "12:00", 158.9, 155.1, 181.0, "FALLING", 5.85, 354.8, 0.0255, 0.0276, 0.0165, 17.4, 73.9], ["1/5/2026", "18:00", 158.9, 155.1, 181.0, "FALLING", 3.92, 360.2, 0.024, 0.0193, 0.0116, 16.9, 77.1], ["1/6/2026", "0:00", 242.4, 236.6, 221.3, "RISING", 6.34, 534.4, 0.0344, 0.0238, 0.0143, 15.2, 80.2], ["1/6/2026", "6:00", 242.4, 236.6, 221.3, "RISING", 6.55, 521.6, 0.0313, 0.0229, 0.0137, 14.4, 83.0], ["1/6/2026", "12:00", 242.4, 236.6, 221.3, "RISING", 11.23, 544.6, 0.0379, 0.0395, 0.0237, 17.7, 74.0], ["1/6/2026", "18:00", 242.4, 236.6, 221.3, "RISING", 7.49, 542.6, 0.0387, 0.0281, 0.0168, 17.0, 79.8], ["1/7/2026", "0:00", 246.5, 240.5, 212.0, "FALLING", 4.79, 547.0, 0.0344, 0.026, 0.0156, 14.7, 79.8], ["1/7/2026", "6:00", 246.5, 240.5, 212.0, "FALLING", 7.53, 526.7, 0.0336, 0.0253, 0.0152, 14.0, 81.3], ["1/7/2026", "12:00", 246.5, 240.5, 212.0, "FALLING", 12.1, 555.0, 0.0376, 0.0399, 0.0239, 17.5, 73.7], ["1/7/2026", "18:00", 246.5, 240.5, 212.0, "FALLING", 6.28, 555.2, 0.0377, 0.0311, 0.0187, 16.9, 77.6], ["1/8/2026", "0:00", 211.8, 206.7, 229.3, "RISING", 8.73, 466.7, 0.0308, 0.021, 0.0126, 15.0, 81.6], ["1/8/2026", "6:00", 211.8, 206.7, 229.3, "RISING", 5.06, 453.8, 0.0279, 0.0188, 0.0113, 14.3, 81.5], ["1/8/2026", "12:00", 211.8, 206.7, 229.3, "RISING", 10.97, 477.6, 0.0331, 0.0385, 0.0231, 17.3, 75.6], ["1/8/2026", "18:00", 211.8, 206.7, 229.3, "RISING", 6.68, 474.0, 0.0319, 0.0273, 0.0164, 16.8, 78.8], ["1/9/2026", "0:00", 209.8, 204.8, 218.7, "FALLING", 6.87, 460.9, 0.0298, 0.0205, 0.0123, 14.6, 80.3], ["1/9/2026", "6:00", 209.8, 204.8, 218.7, "FALLING", 5.7, 448.2, 0.0285, 0.0205, 0.0123, 14.6, 82.1], ["1/9/2026", "12:00", 209.8, 204.8, 218.7, "FALLING", 7.66, 467.8, 0.0331, 0.0364, 0.0218, 17.5, 76.6], ["1/9/2026", "18:00", 209.8, 204.8, 218.7, "FALLING", 6.62, 475.3, 0.0331, 0.0271, 0.0162, 16.8, 78.9], ["1/10/2026", "0:00", 225.1, 219.7, 211.7, "FALLING", 8.03, 493.5, 0.0315, 0.0231, 0.0139, 14.9, 79.2], ["1/10/2026", "6:00", 225.1, 219.7, 211.7, "FALLING", 4.31, 486.4, 0.0297, 0.0215, 0.0129, 14.4, 80.5], ["1/10/2026", "12:00", 225.1, 219.7, 211.7, "FALLING", 15.2, 506.6, 0.0335, 0.0386, 0.0232, 17.3, 74.0], ["1/10/2026", "18:00", 225.1, 219.7, 211.7, "FALLING", 4.04, 505.8, 0.0351, 0.0294, 0.0176, 16.7, 77.8], ["1/11/2026", "0:00", 215.9, 210.7, 213.0, "STABLE", 10.51, 480.9, 0.0296, 0.0199, 0.0119, 15.1, 79.6], ["1/11/2026", "6:00", 215.9, 210.7, 213.0, "STABLE", 6.27, 466.7, 0.0285, 0.0203, 0.0122, 13.7, 80.4], ["1/11/2026", "12:00", 215.9, 210.7, 213.0, "STABLE", 9.85, 480.2, 0.0352, 0.0346, 0.0207, 17.3, 73.6], ["1/11/2026", "18:00", 215.9, 210.7, 213.0, "STABLE", 8.15, 481.1, 0.0344, 0.027, 0.0162, 16.7, 78.5], ["1/12/2026", "0:00", 304.5, 297.2, 244.0, "RISING", 12.11, 670.1, 0.0452, 0.026, 0.0156, 14.8, 80.6], ["1/12/2026", "6:00", 304.5, 297.2, 244.0, "RISING", 8.26, 653.1, 0.0412, 0.028, 0.0168, 14.3, 81.9], ["1/12/2026", "12:00", 304.5, 297.2, 244.0, "RISING", 15.42, 680.5, 0.0485, 0.0525, 0.0315, 17.6, 74.0], ["1/12/2026", "18:00", 304.5, 297.2, 244.0, "RISING", 5.88, 682.8, 0.0479, 0.0391, 0.0235, 16.9, 78.3], ["1/13/2026", "0:00", 296.4, 289.2, 267.3, "RISING", 10.68, 658.1, 0.0434, 0.0284, 0.017, 15.0, 80.0], ["1/13/2026", "6:00", 296.4, 289.2, 267.3, "RISING", 8.46, 636.9, 0.0404, 0.029, 0.0174, 14.2, 82.9], ["1/13/2026", "12:00", 296.4, 289.2, 267.3, "RISING", 12.62, 660.5, 0.0475, 0.0519, 0.0311, 17.6, 74.1], ["1/13/2026", "18:00", 296.4, 289.2, 267.3, "RISING", 7.63, 663.3, 0.0461, 0.036, 0.0216, 17.1, 78.2], ["1/14/2026", "0:00", 315.7, 308.1, 300.0, "RISING", 9.83, 696.9, 0.0448, 0.0305, 0.0183, 14.5, 79.1], ["1/14/2026", "6:00", 315.7, 308.1, 300.0, "RISING", 6.62, 678.3, 0.0432, 0.0322, 0.0193, 14.5, 81.2], ["1/14/2026", "12:00", 315.7, 308.1, 300.0, "RISING", 15.28, 704.5, 0.0496, 0.0534, 0.032, 17.5, 73.0], ["1/14/2026", "18:00", 315.7, 308.1, 300.0, "RISING", 8.92, 714.1, 0.049, 0.0401, 0.0241, 17.0, 78.0], ["1/15/2026", "0:00", 203.7, 198.8, 267.0, "FALLING", 8.99, 453.3, 0.0309, 0.018, 0.0108, 15.0, 80.4], ["1/15/2026", "6:00", 203.7, 198.8, 267.0, "FALLING", 9.64, 435.5, 0.0271, 0.0181, 0.0108, 13.9, 80.9], ["1/15/2026", "12:00", 203.7, 198.8, 267.0, "FALLING", 8.43, 456.8, 0.0323, 0.0375, 0.0225, 17.6, 73.2], ["1/15/2026", "18:00", 203.7, 198.8, 267.0, "FALLING", 3.36, 459.1, 0.0307, 0.0281, 0.0169, 17.1, 78.0], ["1/16/2026", "0:00", 179.3, 174.9, 176.0, "STABLE", 7.19, 588.9, 0.0382, 0.0234, 0.014, 14.7, 79.6], ["1/16/2026", "6:00", 179.3, 174.9, 176.0, "STABLE", 8.55, 573.2, 0.035, 0.023, 0.0138, 14.6, 82.3], ["1/16/2026", "12:00", 179.3, 174.9, 176.0, "STABLE", 13.22, 593.5, 0.0426, 0.0445, 0.0267, 17.6, 74.6], ["1/16/2026", "18:00", 179.3, 174.9, 176.0, "STABLE", 8.29, 597.5, 0.0418, 0.0319, 0.0191, 16.9, 77.6], ["1/20/2026", "0:00", 175.2, 171.0, 174.0, "STABLE", 8.56, 578.6, 0.0358, 0.0266, 0.016, 14.8, 79.1], ["1/20/2026", "6:00", 175.2, 171.0, 174.0, "STABLE", 6.56, 558.6, 0.0361, 0.0226, 0.0135, 14.5, 81.2], ["1/20/2026", "12:00", 175.2, 171.0, 174.0, "STABLE", 9.51, 578.3, 0.0412, 0.0451, 0.0271, 17.7, 73.8], ["1/20/2026", "18:00", 175.2, 171.0, 174.0, "STABLE", 7.56, 583.9, 0.0413, 0.0308, 0.0185, 16.9, 78.4], ["1/23/2026", "0:00", 255.6, 249.5, 199.7, "RISING", 9.98, 843.6, 0.0531, 0.0354, 0.0212, 15.0, 80.3], ["1/23/2026", "6:00", 255.6, 249.5, 199.7, "RISING", 10.67, 816.6, 0.0524, 0.0373, 0.0224, 14.6, 80.5], ["1/23/2026", "12:00", 255.6, 249.5, 199.7, "RISING", 16.77, 844.1, 0.0599, 0.0616, 0.037, 17.7, 74.7], ["1/23/2026", "18:00", 255.6, 249.5, 199.7, "RISING", 7.16, 850.1, 0.0584, 0.0486, 0.0291, 16.8, 77.9], ["1/26/2026", "0:00", 190.5, 185.9, 203.3, "STABLE", 9.79, 621.2, 0.0412, 0.0273, 0.0164, 15.1, 80.0], ["1/26/2026", "6:00", 190.5, 185.9, 203.3, "STABLE", 3.65, 605.6, 0.039, 0.0264, 0.0158, 14.5, 82.4], ["1/26/2026", "12:00", 190.5, 185.9, 203.3, "STABLE", 17.82, 632.9, 0.0459, 0.0447, 0.0268, 17.1, 74.0], ["1/26/2026", "18:00", 190.5, 185.9, 203.3, "STABLE", 6.25, 636.5, 0.0443, 0.0348, 0.0209, 17.1, 78.2], ["1/30/2026", "0:00", 258.7, 252.5, 230.7, "RISING", 9.86, 848.5, 0.0561, 0.0375, 0.0225, 14.8, 80.1], ["1/30/2026", "6:00", 258.7, 252.5, 230.7, "RISING", 10.67, 822.2, 0.0519, 0.0389, 0.0233, 14.6, 81.0], ["1/30/2026", "12:00", 258.7, 252.5, 230.7, "RISING", 17.0, 859.4, 0.059, 0.0671, 0.0403, 17.6, 73.5], ["1/30/2026", "18:00", 258.7, 252.5, 230.7, "RISING", 6.34, 860.2, 0.06, 0.0486, 0.0291, 16.8, 78.4], ["2/3/2026", "0:00", 95.7, 93.4, 178.3, "FALLING", 4.94, 315.0, 0.0193, 0.0117, 0.007, 14.8, 79.8], ["2/3/2026", "6:00", 95.7, 93.4, 178.3, "FALLING", 3.58, 303.1, 0.0198, 0.0161, 0.0097, 14.7, 82.4], ["2/3/2026", "12:00", 95.7, 93.4, 178.3, "FALLING", 6.74, 320.8, 0.022, 0.0255, 0.0153, 17.4, 73.1], ["2/3/2026", "18:00", 95.7, 93.4, 178.3, "FALLING", 1.97, 321.0, 0.0222, 0.0179, 0.0107, 16.7, 78.2], ["2/6/2026", "0:00", 68.2, 66.6, 138.3, "FALLING", 0.0, 224.3, 0.0156, 0.0078, 0.0047, 14.7, 79.9], ["2/6/2026", "6:00", 68.2, 66.6, 138.3, "FALLING", 0.0, 213.0, 0.0134, 0.0094, 0.0056, 14.3, 82.1], ["2/6/2026", "12:00", 68.2, 66.6, 138.3, "FALLING", 3.98, 228.3, 0.0171, 0.0199, 0.0119, 17.1, 73.0], ["2/6/2026", "18:00", 68.2, 66.6, 138.3, "FALLING", 4.25, 223.8, 0.0149, 0.0105, 0.0063, 16.6, 77.1], ["2/9/2026", "0:00", 90.6, 88.5, 83.3, "FALLING", 2.83, 299.3, 0.0192, 0.0099, 0.006, 14.9, 78.3], ["2/9/2026", "6:00", 90.6, 88.5, 83.3, "FALLING", 1.58, 290.9, 0.0187, 0.0151, 0.0091, 13.9, 81.2], ["2/9/2026", "12:00", 90.6, 88.5, 83.3, "FALLING", 7.42, 301.1, 0.0217, 0.0211, 0.0127, 17.5, 73.7], ["2/9/2026", "18:00", 90.6, 88.5, 83.3, "FALLING", 0.92, 301.0, 0.0208, 0.0157, 0.0094, 17.1, 78.1], ["2/13/2026", "0:00", 138.5, 135.2, 97.3, "RISING", 4.39, 456.6, 0.0287, 0.0198, 0.0119, 14.8, 79.5], ["2/13/2026", "6:00", 138.5, 135.2, 97.3, "RISING", 4.78, 447.2, 0.0293, 0.0182, 0.0109, 14.3, 80.6], ["2/13/2026", "12:00", 138.5, 135.2, 97.3, "RISING", 9.32, 466.0, 0.0329, 0.037, 0.0222, 17.8, 72.9], ["2/13/2026", "18:00", 138.5, 135.2, 97.3, "RISING", 4.67, 462.9, 0.0328, 0.0255, 0.0153, 17.0, 78.8], ["2/17/2026", "0:00", 148.7, 145.1, 123.7, "RISING", 24.01, 424.1, 0.0009, 0.0106, 0.0064, 29.1, 63.2], ["2/17/2026", "6:00", 148.7, 145.1, 123.7, "RISING", 26.41, 425.4, 0.0008, 0.0108, 0.0065, 29.5, 64.1], ["2/17/2026", "12:00", 148.7, 145.1, 123.7, "RISING", 23.85, 424.9, 0.0008, 0.0107, 0.0064, 29.4, 63.4], ["2/17/2026", "18:00", 148.7, 145.1, 123.7, "RISING", 27.49, 424.3, 0.0008, 0.0114, 0.0069, 28.8, 66.2], ["2/20/2026", "0:00", 140.6, 137.2, 140.0, "RISING", 22.67, 401.2, 0.0009, 0.0108, 0.0065, 29.0, 63.8], ["2/20/2026", "6:00", 140.6, 137.2, 140.0, "RISING", 25.04, 400.7, 0.0008, 0.0098, 0.0059, 29.3, 64.3], ["2/20/2026", "12:00", 140.6, 137.2, 140.0, "RISING", 21.99, 401.6, 0.0008, 0.0091, 0.0055, 29.6, 61.7], ["2/20/2026", "18:00", 140.6, 137.2, 140.0, "RISING", 26.6, 401.5, 0.0009, 0.0105, 0.0063, 29.0, 67.0], ["2/23/2026", "0:00", 102.9, 100.4, 128.3, "FALLING", 16.9, 294.1, 0.0006, 0.0081, 0.0049, 28.9, 64.9], ["2/23/2026", "6:00", 102.9, 100.4, 128.3, "FALLING", 16.05, 294.1, 0.0006, 0.0069, 0.0041, 29.3, 64.6], ["2/23/2026", "12:00", 102.9, 100.4, 128.3, "FALLING", 15.69, 292.5, 0.0006, 0.007, 0.0042, 29.7, 63.3], ["2/23/2026", "18:00", 102.9, 100.4, 128.3, "FALLING", 16.57, 293.4, 0.0007, 0.0072, 0.0043, 28.9, 68.2], ["2/27/2026", "0:00", 153.8, 150.1, 130.0, "STABLE", 26.05, 438.7, 0.0009, 0.0115, 0.0069, 29.2, 62.8], ["2/27/2026", "6:00", 153.8, 150.1, 130.0, "STABLE", 23.7, 439.8, 0.0009, 0.0113, 0.0068, 29.6, 63.5], ["2/27/2026", "12:00", 153.8, 150.1, 130.0, "STABLE", 24.57, 438.7, 0.0009, 0.0109, 0.0065, 29.4, 61.5], ["2/27/2026", "18:00", 153.8, 150.1, 130.0, "STABLE", 27.43, 438.3, 0.001, 0.0113, 0.0068, 28.9, 66.6], ["3/3/2026", "0:00", 53.0, 51.7, 101.3, "FALLING", 11.29, 151.0, 0.0003, 0.0041, 0.0025, 29.2, 64.9], ["3/3/2026", "6:00", 53.0, 51.7, 101.3, "FALLING", 9.79, 151.0, 0.0003, 0.0036, 0.0021, 29.5, 64.4], ["3/3/2026", "12:00", 53.0, 51.7, 101.3, "FALLING", 9.49, 150.8, 0.0002, 0.0034, 0.0021, 29.7, 62.7], ["3/3/2026", "18:00", 53.0, 51.7, 101.3, "FALLING", 9.5, 150.3, 0.0003, 0.003, 0.0018, 29.1, 67.3], ["3/6/2026", "0:00", 69.3, 67.6, 90.3, "FALLING", 13.95, 197.9, 0.0003, 0.005, 0.003, 28.9, 63.3], ["3/6/2026", "6:00", 69.3, 67.6, 90.3, "FALLING", 9.38, 196.8, 0.0003, 0.0049, 0.0029, 29.5, 64.0], ["3/6/2026", "12:00", 69.3, 67.6, 90.3, "FALLING", 13.39, 196.4, 0.0003, 0.0049, 0.0029, 29.5, 61.9], ["3/6/2026", "18:00", 69.3, 67.6, 90.3, "FALLING", 13.98, 198.3, 0.0005, 0.0051, 0.003, 28.9, 67.8], ["3/7/2026", "0:00", 101.8, 99.4, 100.0, "STABLE", 20.07, 342.8, 0.0007, 0.0092, 0.0055, 28.9, 63.7], ["3/7/2026", "6:00", 101.8, 99.4, 100.0, "STABLE", 21.37, 343.6, 0.0007, 0.0084, 0.005, 29.2, 65.2], ["3/7/2026", "12:00", 101.8, 99.4, 100.0, "STABLE", 10.06, 401.0, 0.001, 0.022, 0.0132, 28.3, 68.9], ["3/7/2026", "18:00", 101.8, 99.4, 100.0, "STABLE", 10.58, 401.7, 0.001, 0.0175, 0.0105, 28.2, 65.9], ["3/8/2026", "0:00", 97.8, 95.4, 98.0, "STABLE", 12.6, 401.5, 0.001, 0.0111, 0.0067, 26.5, 72.4], ["3/8/2026", "6:00", 97.8, 95.4, 98.0, "STABLE", 14.9, 401.4, 0.001, 0.0105, 0.0063, 27.6, 70.6], ["3/8/2026", "12:00", 97.8, 95.4, 98.0, "STABLE", 18.16, 403.6, 0.001, 0.0107, 0.0064, 29.6, 62.7], ["3/8/2026", "18:00", 97.8, 95.4, 98.0, "STABLE", 33.95, 405.8, 0.001, 0.0101, 0.0061, 28.5, 71.5], ["3/9/2026", "0:00", 74.3, 72.6, 89.7, "FALLING", 28.84, 403.6, 0.001, 0.0093, 0.0056, 27.6, 72.1], ["3/9/2026", "6:00", 74.3, 72.6, 89.7, "FALLING", 23.39, 402.7, 0.001, 0.0099, 0.0059, 28.7, 70.0], ["3/9/2026", "12:00", 74.3, 72.6, 89.7, "FALLING", 9.67, 400.8, 0.001, 0.012, 0.0072, 30.0, 62.1], ["3/9/2026", "18:00", 74.3, 72.6, 89.7, "FALLING", 20.64, 402.2, 0.001, 0.0111, 0.0067, 30.0, 72.3], ["3/10/2026", "0:00", 118.1, 115.3, 95.0, "RISING", 18.07, 401.7, 0.001, 0.0102, 0.0061, 29.5, 72.3], ["3/10/2026", "6:00", 118.1, 115.3, 95.0, "RISING", 21.65, 402.0, 0.0009, 0.0113, 0.0068, 29.2, 73.9], ["3/10/2026", "12:00", 118.1, 115.3, 95.0, "RISING", 22.28, 402.6, 0.0009, 0.011, 0.0066, 29.9, 76.4], ["3/10/2026", "18:00", 118.1, 115.3, 95.0, "RISING", 21.01, 402.1, 0.0008, 0.0096, 0.0057, 29.1, 77.5], ["3/11/2026", "0:00", 153.8, 150.1, 113.3, "RISING", 20.89, 402.2, 0.0006, 0.013, 0.0078, 28.8, 73.7], ["3/11/2026", "6:00", 153.8, 150.1, 113.3, "RISING", 21.64, 402.0, 0.0007, 0.0103, 0.0062, 29.6, 61.0], ["3/11/2026", "12:00", 153.8, 150.1, 113.3, "RISING", 43.2, 406.7, 0.0006, 0.0095, 0.0057, 29.3, 66.8], ["3/11/2026", "18:00", 153.8, 150.1, 113.3, "RISING", 21.29, 401.9, 0.0006, 0.0084, 0.005, 28.3, 56.1], ["3/12/2026", "0:00", 100.8, 98.4, 122.0, "RISING", 19.98, 401.7, 0.0007, 0.0088, 0.0053, 30.1, 51.1], ["3/12/2026", "6:00", 100.8, 98.4, 122.0, "RISING", 20.68, 402.2, 0.0007, 0.0102, 0.0061, 30.2, 55.5], ["3/12/2026", "12:00", 100.8, 98.4, 122.0, "RISING", 17.08, 401.7, 0.0007, 0.0097, 0.0058, 29.1, 54.7], ["3/12/2026", "18:00", 100.8, 98.4, 122.0, "RISING", 27.51, 403.8, 0.0008, 0.0095, 0.0057, 30.0, 57.2], ["3/13/2026", "0:00", 114.1, 111.3, 120.7, "STABLE", 49.72, 412.3, 0.0006, 0.0074, 0.0045, 30.9, 50.7], ["3/13/2026", "6:00", 114.1, 111.3, 120.7, "STABLE", 54.38, 416.4, 0.0005, 0.007, 0.0042, 30.3, 54.9], ["3/13/2026", "12:00", 114.1, 111.3, 120.7, "STABLE", 34.38, 406.6, 0.0004, 0.007, 0.0042, 30.0, 52.7], ["3/13/2026", "18:00", 114.1, 111.3, 120.7, "STABLE", 47.68, 413.7, 0.0005, 0.0077, 0.0046, 30.1, 53.0], ["3/14/2026", "0:00", 111.0, 108.3, 106.7, "FALLING", 21.56, 373.2, 0.0008, 0.0095, 0.0057, 29.3, 63.6], ["3/14/2026", "6:00", 111.0, 108.3, 106.7, "FALLING", 21.86, 374.4, 0.0007, 0.0094, 0.0056, 29.5, 64.3], ["3/14/2026", "12:00", 111.0, 108.3, 106.7, "FALLING", 19.4, 373.1, 0.0007, 0.0084, 0.005, 29.3, 63.6], ["3/14/2026", "18:00", 111.0, 108.3, 106.7, "FALLING", 25.82, 373.9, 0.0008, 0.0098, 0.0059, 29.3, 67.9], ["3/15/2026", "0:00", 87.6, 85.5, 102.3, "FALLING", 16.08, 294.3, 0.0007, 0.008, 0.0048, 29.0, 65.0], ["3/15/2026", "6:00", 87.6, 85.5, 102.3, "FALLING", 18.17, 294.8, 0.0007, 0.0076, 0.0046, 29.2, 63.2], ["3/15/2026", "12:00", 87.6, 85.5, 102.3, "FALLING", 14.54, 293.9, 0.0006, 0.0077, 0.0046, 29.3, 62.7], ["3/15/2026", "18:00", 87.6, 85.5, 102.3, "FALLING", 17.28, 294.8, 0.0006, 0.0074, 0.0045, 28.9, 65.8], ["3/16/2026", "0:00", 118.1, 115.3, 103.7, "STABLE", 24.1, 397.1, 0.0008, 0.0106, 0.0064, 28.8, 64.2], ["3/16/2026", "6:00", 118.1, 115.3, 103.7, "STABLE", 23.6, 398.5, 0.0007, 0.0095, 0.0057, 29.2, 63.6], ["3/16/2026", "12:00", 118.1, 115.3, 103.7, "STABLE", 22.13, 396.8, 0.0008, 0.0091, 0.0055, 29.5, 61.0], ["3/16/2026", "18:00", 118.1, 115.3, 103.7, "STABLE", 23.94, 397.9, 0.0008, 0.0102, 0.0061, 29.0, 66.2], ["3/17/2026", "0:00", 116.1, 113.3, 105.3, "STABLE", 24.03, 390.6, 0.0008, 0.0101, 0.0061, 29.0, 63.4], ["3/17/2026", "6:00", 116.1, 113.3, 105.3, "STABLE", 26.23, 391.4, 0.0008, 0.0098, 0.0059, 29.3, 63.1], ["3/17/2026", "12:00", 116.1, 113.3, 105.3, "STABLE", 22.17, 390.1, 0.0007, 0.01, 0.006, 29.6, 61.9], ["3/17/2026", "18:00", 116.1, 113.3, 105.3, "STABLE", 26.61, 390.8, 0.0007, 0.0099, 0.0059, 28.6, 66.4], ["3/18/2026", "0:00", 118.1, 115.3, 115.3, "RISING", 23.93, 398.0, 0.0008, 0.0108, 0.0065, 29.0, 62.9], ["3/18/2026", "6:00", 118.1, 115.3, 115.3, "RISING", 25.85, 399.4, 0.0008, 0.0101, 0.0061, 29.3, 62.4], ["3/18/2026", "12:00", 118.1, 115.3, 115.3, "RISING", 23.25, 396.9, 0.0007, 0.0095, 0.0057, 29.6, 62.3], ["3/18/2026", "18:00", 118.1, 115.3, 115.3, "RISING", 26.81, 397.7, 0.0008, 0.0101, 0.0, 28.8, 66.9], ["3/19/2026", "0:00", 128.3, 125.2, 118.7, "STABLE", 24.55, 431.2, 0.0008, 0.0118, 0.0071, 29.1, 63.6], ["3/19/2026", "6:00", 128.3, 125.2, 118.7, "STABLE", 27.62, 431.9, 0.001, 0.011, 0.0066, 29.4, 64.4], ["3/19/2026", "12:00", 128.3, 125.2, 118.7, "STABLE", 24.77, 431.6, 0.0008, 0.0106, 0.0064, 29.8, 63.7], ["3/19/2026", "18:00", 128.3, 125.2, 118.7, "STABLE", 30.02, 431.9, 0.0009, 0.0113, 0.0068, 28.9, 68.0], ["3/20/2026", "0:00", 138.5, 135.2, 126.0, "RISING", 28.74, 466.2, 0.0009, 0.0119, 0.0071, 29.0, 65.2], ["3/20/2026", "6:00", 138.5, 135.2, 126.0, "RISING", 28.59, 466.1, 0.0009, 0.0117, 0.007, 29.0, 63.4], ["3/20/2026", "12:00", 138.5, 135.2, 126.0, "RISING", 25.23, 466.2, 0.001, 0.0116, 0.007, 29.5, 61.0], ["3/20/2026", "18:00", 138.5, 135.2, 126.0, "RISING", 33.39, 466.6, 0.001, 0.0121, 0.0073, 28.9, 66.6], ["3/21/2026", "0:00", 94.7, 92.4, 118.3, "FALLING", 18.22, 319.5, 0.0006, 0.0078, 0.0047, 29.2, 61.4], ["3/21/2026", "6:00", 94.7, 92.4, 118.3, "FALLING", 19.13, 319.1, 0.0006, 0.0078, 0.0047, 29.2, 65.4], ["3/21/2026", "12:00", 94.7, 92.4, 118.3, "FALLING", 18.8, 319.2, 0.0006, 0.0074, 0.0044, 29.4, 62.7], ["3/21/2026", "18:00", 94.7, 92.4, 118.3, "FALLING", 18.02, 319.4, 0.0007, 0.0082, 0.0049, 29.0, 67.3], ["3/22/2026", "0:00", 98.8, 96.4, 108.7, "FALLING", 19.93, 331.9, 0.0007, 0.0087, 0.0052, 28.9, 64.7], ["3/22/2026", "6:00", 98.8, 96.4, 108.7, "FALLING", 19.41, 332.3, 0.0006, 0.0086, 0.0052, 29.2, 65.4], ["3/22/2026", "12:00", 98.8, 96.4, 108.7, "FALLING", 14.84, 333.2, 0.0006, 0.008, 0.0048, 29.4, 62.7], ["3/22/2026", "18:00", 98.8, 96.4, 108.7, "FALLING", 20.72, 333.4, 0.0007, 0.0087, 0.0052, 28.9, 66.8], ["3/23/2026", "0:00", 129.3, 126.2, 105.7, "STABLE", 25.68, 435.4, 0.0009, 0.0113, 0.0068, 29.0, 62.6], ["3/23/2026", "6:00", 129.3, 126.2, 105.7, "STABLE", 27.72, 435.0, 0.0009, 0.0112, 0.0067, 29.4, 64.7], ["3/23/2026", "12:00", 129.3, 126.2, 105.7, "STABLE", 26.5, 435.4, 0.0007, 0.0102, 0.0061, 29.4, 62.3], ["3/23/2026", "18:00", 129.3, 126.2, 105.7, "STABLE", 28.24, 435.2, 0.0009, 0.0112, 0.0067, 28.8, 65.4], ["3/24/2026", "0:00", 160.9, 157.0, 127.3, "RISING", 32.6, 541.5, 0.0111, 0.0145, 0.0087, 28.9, 64.1], ["3/24/2026", "6:00", 160.9, 157.0, 127.3, "RISING", 37.6, 542.1, 0.0111, 0.0136, 0.0081, 29.4, 65.9], ["3/24/2026", "12:00", 160.9, 157.0, 127.3, "RISING", 28.68, 541.9, 0.001, 0.013, 0.0078, 29.6, 63.7], ["3/24/2026", "18:00", 160.9, 157.0, 127.3, "RISING", 35.02, 541.0, 0.0111, 0.0141, 0.0085, 28.9, 67.9], ["3/25/2026", "0:00", 192.5, 187.9, 158.0, "RISING", 39.54, 647.8, 0.0114, 0.0166, 0.01, 29.1, 64.4], ["3/25/2026", "6:00", 192.5, 187.9, 158.0, "RISING", 40.8, 647.9, 0.0112, 0.0167, 0.01, 29.4, 64.9], ["3/25/2026", "12:00", 192.5, 187.9, 158.0, "RISING", 35.69, 647.0, 0.0112, 0.0156, 0.0094, 29.5, 62.3], ["3/25/2026", "18:00", 192.5, 187.9, 158.0, "RISING", 40.23, 647.9, 0.0114, 0.0168, 0.0101, 29.1, 66.4], ["3/26/2026", "0:00", 93.7, 91.4, 146.3, "FALLING", 18.89, 315.6, 0.0007, 0.0087, 0.0052, 29.0, 65.4], ["3/26/2026", "6:00", 93.7, 91.4, 146.3, "FALLING", 23.09, 315.4, 0.0006, 0.0085, 0.0051, 29.6, 63.4], ["3/26/2026", "12:00", 93.7, 91.4, 146.3, "FALLING", 16.55, 314.7, 0.0005, 0.0074, 0.0045, 29.4, 61.8], ["3/26/2026", "18:00", 93.7, 91.4, 146.3, "FALLING", 19.71, 315.5, 0.0007, 0.008, 0.0048, 29.1, 66.9], ["3/27/2026", "0:00", 121.2, 118.3, 133.3, "FALLING", 24.46, 409.0, 0.0008, 0.0107, 0.0064, 29.0, 63.4], ["3/27/2026", "6:00", 121.2, 118.3, 133.3, "FALLING", 24.36, 408.9, 0.0009, 0.0102, 0.0061, 29.3, 64.5], ["3/27/2026", "12:00", 121.2, 118.3, 133.3, "FALLING", 21.51, 407.7, 0.0008, 0.0095, 0.0057, 29.8, 64.5], ["3/27/2026", "18:00", 121.2, 118.3, 133.3, "FALLING", 24.73, 407.8, 0.0009, 0.0108, 0.0065, 29.0, 69.3], ["3/28/2026", "0:00", 129.3, 126.2, 112.7, "FALLING", 24.84, 435.2, 0.0009, 0.0118, 0.0071, 29.4, 63.7], ["3/28/2026", "6:00", 129.3, 126.2, 112.7, "FALLING", 26.31, 436.3, 0.0009, 0.0116, 0.0069, 29.5, 63.9], ["3/28/2026", "12:00", 129.3, 126.2, 112.7, "FALLING", 24.82, 435.3, 0.0008, 0.0107, 0.0064, 29.7, 64.1], ["3/28/2026", "18:00", 129.3, 126.2, 112.7, "FALLING", 29.59, 435.7, 0.0009, 0.0114, 0.0068, 29.1, 66.6], ["3/29/2026", "0:00", 133.4, 130.2, 125.7, "RISING", 24.45, 449.2, 0.001, 0.0125, 0.0075, 29.0, 64.4], ["3/29/2026", "6:00", 133.4, 130.2, 125.7, "RISING", 28.44, 450.3, 0.0009, 0.0115, 0.0069, 29.5, 64.4], ["3/29/2026", "12:00", 133.4, 130.2, 125.7, "RISING", 24.07, 448.5, 0.0009, 0.0106, 0.0064, 29.6, 62.1], ["3/29/2026", "18:00", 133.4, 130.2, 125.7, "RISING", 30.28, 448.3, 0.0009, 0.0119, 0.0071, 29.2, 67.4], ["3/30/2026", "0:00", 144.6, 141.1, 133.3, "RISING", 27.14, 487.0, 0.001, 0.0126, 0.0076, 28.9, 65.0], ["3/30/2026", "6:00", 144.6, 141.1, 133.3, "RISING", 31.34, 487.3, 0.001, 0.012, 0.0072, 29.2, 63.4], ["3/30/2026", "12:00", 144.6, 141.1, 133.3, "RISING", 26.7, 486.4, 0.0009, 0.0118, 0.0071, 29.4, 64.3], ["3/30/2026", "18:00", 144.6, 141.1, 133.3, "RISING", 30.6, 487.6, 0.001, 0.0128, 0.0077, 29.0, 67.8]];
+    const tbody = document.getElementById('csvTableBody');
+    CSV_DATA.forEach((row, index) => {
+      const tr = document.createElement('tr');
+      tr.style.backgroundColor = index % 2 === 0 ? '#f9f9f8' : '#ffffff';
+      
+      row.forEach((cell, cellIdx) => {
+        const td = document.createElement('td');
+        td.style.padding = '8px 10px';
+        td.style.borderBottom = '1px solid #e1e0d9';
+        
+        if (typeof cell === 'number') {
+          if (cellIdx === 8 || cellIdx === 9 || cellIdx === 10) {
+            td.textContent = cell.toFixed(4);
+          } else if (cellIdx === 6) {
+            td.textContent = cell.toFixed(2);
+          } else {
+            td.textContent = cell.toFixed(1);
+          }
+        } else {
+          td.textContent = cell;
+        }
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+  </script>
+
+</body>
+</html>

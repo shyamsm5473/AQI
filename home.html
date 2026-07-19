@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IIIT LUCKNOW</title>
+  <link rel="stylesheet" href="firststyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .hero {
+      position: relative;
+      height: 70vh;
+      /* Background image */
+      background: url("air\ 2.jpg") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      padding: 0 60px;
+    }
+
+    /* White transparent layer */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.75);
+      /* Adjust opacity as needed */
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 6;
+      max-width: 500px;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .hero-content p {
+      font-size: 1.4rem;
+      color: #6b55a0;
+    }
+
+    .btn {
+      background-color: #02575d;
+      color: white;
+      padding: 7px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn {
+      box-shadow: 0px 4px 8px rgb(0, 0, 0);
+    }
+
+    .photo-container {
+      display: flex;
+      gap: 20px;
+      /* Space between photos */
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 300px;
+      height: 250px;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Makes image fit nicely */
+    }
+
+    .features {
+      display: flex;
+      justify-content: space-between;
+      background: #34458c;
+      padding: 40px;
+    }
+
+    .feature {
+      width: 30%;
+      color: white;
+      padding: 0 20px;
+    }
+
+    /* Vertical lines between sections */
+    .feature:not(:last-child) {
+      border-right: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    body {
+      background-image: url(background\ img.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    /* --- NEW FOOTER STYLES --- */
+    .site-footer {
+      background-color: #1a2540; /* Deep tone matching your theme */
+      color: #ffffff;
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: 40px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .footer-emails {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .email-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 220px;
+      max-width: 280px;
+    }
+
+    .email-label {
+      font-size: 0.85rem;
+      color: #a0aec0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      white-space: nowrap;
+    }
+
+    .email-link {
+      color: #4ed8e2;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+      word-break: break-all;
+      text-align: center;
+    }
+
+    .email-link:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .footer-divider {
+      border: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+    }
+
+    .footer-copy {
+      font-size: 0.9rem;
+      margin: 5px 0;
+      color: #cbd5e0;
+    }
+
+    .footer-support a {
+      color: #4ed8e2;
+      text-decoration: none;
+    }
+
+    .footer-support a:hover {
+      text-decoration: underline;
+    }
+
+    /* --- AQI INTEGRATION CONTAINER STYLES --- */
+    .aqi-wrapper {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .aqi-location-panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 20px;
+      background: rgba(26, 37, 64, 0.8);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .aqi-location-panel h2 { font-size: 1.8rem; margin: 0; color: #ffffff; font-weight: 700; }
+    .aqi-location-panel p { margin: 4px 0 0 0; color: #a0aec0; font-size: 0.9rem; }
+    
+    .btn-locate {
+      background: #02575d;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      transition: opacity 0.2s;
+    }
+    .btn-locate:hover { opacity: 0.9; }
+
+    .aqi-display-grid {
+      display: grid;
+      grid-template-columns: 2.8fr 1.2fr;
+      gap: 24px;
+      margin-bottom: 35px;
+    }
+
+    @media (max-width: 900px) {
+      .aqi-display-grid { grid-template-columns: 1fr; }
+    }
+
+    .aqi-hero-card {
+      background: linear-gradient(135deg, #1a2540 0%, #2a3a60 100%);
+      border-radius: 24px;
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      flex-wrap: wrap;
+      gap: 25px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      color: white;
+    }
+
+    .hero-metrics-left { flex: 1; min-width: 260px; }
+    
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 50px;
+      margin-bottom: 15px;
+    }
+    .live-indicator::before {
+      content: ''; width: 8px; height: 8px; background: #ef4444; border-radius: 50%;
+    }
+
+    .aqi-super-headline { display: flex; align-items: baseline; gap: 8px; }
+    .aqi-huge-number { font-size: 5.5rem; font-weight: 900; line-height: 1; }
+    .aqi-unit-label { color: #cbd5e0; font-size: 0.9rem; font-weight: 500; }
+
+    .aqi-status-pill {
+      display: inline-block;
+      font-size: 1.4rem;
+      font-weight: 700;
+      padding: 6px 20px;
+      border-radius: 12px;
+      margin: 15px 0;
+    }
+
+    .aqi-brief-values { color: #cbd5e0; font-size: 0.95rem; margin-bottom: 15px; }
+    .aqi-brief-values strong { color: #ffffff; }
+
+    .aqi-scale-container { max-width: 320px; margin-top: 10px; }
+    .aqi-scale-bar {
+      height: 6px;
+      background: linear-gradient(to right, #4ade80 0%, #eab308 25%, #f97316 50%, #ef4444 75%, #a855f7 100%);
+      border-radius: 10px;
+      position: relative;
+    }
+    .aqi-scale-marker {
+      position: absolute;
+      top: -4px;
+      left: 0%;
+      width: 14px;
+      height: 14px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #000;
+      transition: left 0.5s ease;
+    }
+    .aqi-scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: #a0aec0;
+      margin-top: 6px;
+    }
+
+    .weather-embed-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 24px;
+      min-width: 250px;
+    }
+    .weather-row-top { display: flex; align-items: center; gap: 15px; font-size: 2rem; font-weight: 700; color: #ffffff; margin-bottom: 5px; }
+    .weather-condition-txt { font-size: 0.95rem; color: #cbd5e0; margin-bottom: 15px; }
+    
+    .weather-dashboard-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: #a0aec0;
+    }
+    .weather-dashboard-specs div strong { display: block; color: #ffffff; font-size: 0.95rem; margin-top: 2px; }
+
+    .aqi-companion-map {
+      background: #1a2540;
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+    .map-frame-area { flex: 1; min-height: 200px; position: relative; }
+    .map-caption-tag { background: #111a30; padding: 12px; text-align: center; font-size: 0.9rem; font-weight: 600; color: #ffffff; }
+
+    .pollutants-title-row { font-size: 1.8rem; font-weight: 700; margin: 30px 0 16px 0; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+    .pollutants-flex-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    
+    .pollutant-data-node {
+      background: #1a2540;
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 5px solid #6b7280;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      color: white;
+      transition: border-color 0.3s;
+    }
+    .pollutant-node-info h4 { margin: 0 0 4px 0; font-size: 1.05rem; color: #ffffff; }
+    .pollutant-node-info p { margin: 0; font-size: 0.85rem; color: #a0aec0; }
+    .pollutant-node-value { text-align: right; }
+    .pollutant-node-value .num-val { font-size: 1.8rem; font-weight: 700; color: #ffffff; }
+    .pollutant-node-value .unit-val { font-size: 0.85rem; color: #a0aec0; margin-left: 2px; }
+
+    /* --- DASHBOARD REDIRECT BUTTON --- */
+    .dashboard-action-box {
+      text-align: center;
+      margin: 35px 0 10px 0;
+    }
+    .btn-dashboard-go {
+      background: linear-gradient(135deg, #02575d 0%, #034449 100%);
+      color: #ffffff;
+      padding: 14px 35px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+      transition: all 0.2s ease;
+    }
+    .btn-dashboard-go:hover {
+      transform: translateY(-2px);
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, #036b72 0%, #02575d 100%);
+    }
+
+    .state-good { color: #4ade80 !important; }
+    .state-moderate { color: #facc15 !important; }
+    .state-unhealthy { color: #f87171 !important; }
+    
+    .bg-good { background: rgba(74, 222, 128, 0.2) !important; color: #4ade80 !important; }
+    .bg-moderate { background: rgba(250, 252, 21, 0.2) !important; color: #facc15 !important; }
+    .bg-unhealthy { background: rgba(248, 113, 113, 0.2) !important; color: #f87171 !important; }
+
+    .border-good { border-left-color: #4ade80 !important; }
+    .border-moderate { border-left-color: #facc15 !important; }
+    .border-unhealthy { border-left-color: #f87171 !important; }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar">
+    <div class="logo-block">
+      <div class="logo-box">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/en/2/20/Indian_Institute_of_Information_Technology%2C_Lucknow_Logo.png"
+          alt="IIIT lucknow" width="64px" height="64px">
+      </div>
+      <div class="logo-label">
+        <span class="title">IIIT Lucknow</span>
+        <span class="sub">विद्या ददाति विनयं</span>
+        <span class="sub">विनयाद् याति पात्रताम्</span>
+      </div>
+    </div>
+
+    <div class="right-logo-block">
+      <div class="right-logo-label">
+        <span class="title">UPCST</span>
+        <span class="sub">Uttar Pradesh Council of</span>
+        <span class="sub">Science and Technology</span>
+      </div>
+      <div class="logo-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGLiqbdqVCvw6_CV_EtHs4w1Pc9j5mHxi9Qw&s"
+          alt="UPCST logo" width="64px" height="64px">
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-bar">
+    <a href="#" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="Dashboard.html">Dashboard</a>
+    <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
+    <a href="Contact.html">Contact</a>
+    <a href="Benefits.html">Benefits</a>
+     <a href="Related_publications.html">Related publications</a>
+     <a href="map.html">Map</a>
+
+    <div class="auth-buttons">
+      <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+      <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+    </div>
+  </nav>
+
+  <div class="hero" id="about">
+    <section class="hero">
+      <div class="overlay"></div>
+
+      <div class="hero-content">
+        <h1>Air Quality Insights </h1>
+        <p>Real-time environmental monitoring and predictive analytics by <strong>IIIT Lucknow  </strong></p>
+        <br>
+        <button class="btn" onclick="document.querySelector('.aqi-wrapper').scrollIntoView({behavior:'smooth'})">Know more </button>
+      </div>
+    </section>
+  </div>
+
+  <div class="aqi-wrapper">
+    
+    <div class="aqi-location-panel">
+      <div>
+        <h2 id="stationTitle">Lucknow Air Quality Index (AQI)</h2>
+        <p id="stationSub">Real-time localized station tracking index analysis</p>
+      </div>
+      <button class="btn-locate" id="locateBtn">
+        <span>🌐</span> Detect Live Location
+      </button>
+    </div>
+
+    <div class="aqi-display-grid">
+      <div class="aqi-hero-card" id="mainWidgetBox">
+        <div class="hero-metrics-left">
+          <div class="live-indicator">Live AQI</div>
+          <div class="aqi-super-headline">
+            <span class="aqi-huge-number" id="aqiMainNum">--</span>
+            <span class="aqi-unit-label">AQI (US)</span>
+          </div>
+          <div>
+            <span class="aqi-status-pill" id="aqiStatusText">Connecting...</span>
+          </div>
+          <div class="aqi-brief-values">
+            PM2.5: <strong id="briefPM25">-- µg/m³</strong> &nbsp;•&nbsp; PM10: <strong id="briefPM10">-- µg/m³</strong>
+          </div>
+          
+          <div class="aqi-scale-container">
+            <div class="aqi-scale-bar">
+              <div class="aqi-scale-marker" id="barMarker"></div>
+            </div>
+            <div class="aqi-scale-labels">
+              <span>0</span><span>50</span><span>100</span><span>150</span><span>200</span><span>300+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="weather-embed-box">
+          <div class="weather-row-top">
+            <span id="weatherIcon">☀️</span>
+            <span id="weatherTemp">--°C</span>
+          </div>
+          <div class="weather-condition-txt" id="weatherDesc">Processing...</div>
+          
+          <div class="weather-dashboard-specs">
+            <div>Humidity <strong id="wHumidity">-- %</strong></div>
+            <div>Wind Speed <strong id="wWind">-- km/h</strong></div>
+            <div>Coordinates <strong id="wCoords">--, --</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="aqi-companion-map">
+        <div class="map-frame-area">
+          <iframe 
+            id="liveMapFrame"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=80.90%2C26.75%2C81.10%2C26.90&amp;layer=mapnik&amp;marker=26.7983%2C81.0240" 
+            width="100%" height="100%" style="border: none;" allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
+        <div class="map-caption-tag" id="mapTagLabel">📍 Station Area</div>
+      </div>
+    </div>
+
+    <div class="pollutants-title-row">Environmental Metrics & Pollutants</div>
+    <div class="pollutants-flex-grid">
+      <div class="pollutant-data-node" id="card-pm25">
+        <div class="pollutant-node-info">
+          <h4>Particulate Matter (PM2.5)</h4>
+          <p>Fine respirable particles</p>
+        </div>
+        <div class="pollutant-node-value">
+          <span class="num-val" id="grid-pm25">--</span><span class="unit-val">µg/m³</span>
+        </div>
+      </div>
+      <div class="pollutant-data-node" id="card-pm10">
+        <div class="pollutant-node-info">
+          <h4>Particulate Matter (PM10)</h4>
+          <p>Coarse inhalable dust particles</p>
+        </div>
+        <div class="pollutant-node-value">
+          <span class="num-val" id="grid-pm10">--</span><span class="unit-val">µg/m³</span>
+        </div>
+      </div>
+      <div class="pollutant-data-node" id="card-co">
+        <div class="pollutant-node-info">
+          <h4>Carbon Monoxide (CO)</h4>
+          <p>Fossil combustion exhaust emissions</p>
+        </div>
+        <div class="pollutant-node-value">
+          <span class="num-val" id="grid-co">--</span><span class="unit-val">µg/m³</span>
+        </div>
+      </div>
+      <div class="pollutant-data-node" id="card-no2">
+        <div class="pollutant-node-info">
+          <h4>Nitrogen Dioxide (NO₂)</h4>
+          <p>Traffic emission exhaust gases</p>
+        </div>
+        <div class="pollutant-node-value">
+          <span class="num-val" id="grid-no2">--</span><span class="unit-val">µg/m³</span>
+        </div>
+      </div>
+      
+      <div class="pollutant-data-node" id="card-temp">
+        <div class="pollutant-node-info">
+          <h4>Ambient Temperature</h4>
+          <p>Current thermal state status</p>
+        </div>
+        <div class="pollutant-node-value">
+          <span class="num-val" id="grid-temp">--</span><span class="unit-val">°C</span>
+        </div>
+      </div>
+      
+      <div class="pollutant-data-node" id="card-humidity">
+        <div class="pollutant-node-info">
+          <h4>Relative Humidity</h4>
+          <p>Moisture content in local atmosphere</p>
+        </div>
+        <div class="pollutant-node-value">
+          <span class="num-val" id="grid-humidity">--</span><span class="unit-val">%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-action-box">
+      <button class="btn-dashboard-go" onclick="window.location.href='Dashboard.html'">
+        📊 Go to Detailed Dashboard
+      </button>
+    </div>
+
+  </div>
+
+  <br><br><br>
+  
+  <div class="features">
+    <div class="feature">
+      <center><h3>Health Categories</h3><br></center>
+      <p>Automatically classifies ambient air quality into explicit <br>color-coded tiers ranging from "Good" to "Poor / Unhealthy" for public safety.
+      </p>
+    </div>
+
+    <div class="feature">
+     <center><h3>Key Pollutants</h3><br></center> 
+      <p>Evaluates concentrations of toxic vehicular and industrial emissions,<br> focusing heavily on Carbon Monoxide and Nitrogen Dioxide levels.
+        </p>
+    </div>
+
+    <div class="feature">
+      <center><h3>Actionable Insights</h3><br></center>
+      <p>Empowers citizens with instantaneous environmental metrics<br> to safely plan outdoor activities and minimize exposure risks.
+        </p>
+    </div>
+  </div>
+
+  <br><br>
+
+  <div class="photo-container">
+    <div class="card">
+      <img src="AQI .jpg" alt="Photo 1">
+    </div>
+
+    <div class="card">
+      <img src="AIR 3.jpg" alt="Photo 2">
+    </div>
+
+    <div class="card">
+      <img src="AQI 2.jpg" alt="Photo 3">
+    </div>
+  </div>
+
+  <footer class="site-footer">
+   <div class="footer-emails">
+      <div class="email-item">
+        <span class="email-label">DR. SOUMENDU CHAKRABORTY</span>
+        <a href="mailto:soumendu@iiitl.ac.in" class="email-link">soumendu@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Dr. Mainak Adhikari</span>
+        <a href="mailto:mainak@iiitl.ac.in" class="email-link">mainak@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Dr. Bindu Singh</span>
+        <a href="mailto:bindu@iiitl.ac.in" class="email-link">bindu@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Akansha Singh</span>
+        <a href="mailto:RCS24101@iiitl.ac.in" class="email-link">RCS24101@iiitl.ac.in</a>
+      </div>
+    </div>
+
+    <hr class="footer-divider">
+
+    <p class="footer-copy">© 2026 Indian Institute of Information Technology, Lucknow. All Rights Reserved.</p>
+    <p class="footer-support">Supported by <a href="https://upcst.gov.in" target="_blank">UP Council of Science and Technology (UPCST)</a></p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Primary location anchor coordinates: Gomti Nagar, Lucknow area
+      const defaultLat = 26.8520;
+      const defaultLon = 81.0010;
+
+      // Assign click action handler directly to button layout
+      document.getElementById("locateBtn").addEventListener("click", () => {
+        if (navigator.geolocation) {
+          document.getElementById("aqiStatusText").innerText = "Locating...";
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              loadEngineMetrics(pos.coords.latitude, pos.coords.longitude, "Your Nearby Location");
+            },
+            () => {
+              loadEngineMetrics(defaultLat, defaultLon, "Gomti Nagar, Lucknow");
+            }
+          );
+        }
+      });
+
+      // Initialize primary data query execution sequence on load
+      loadEngineMetrics(defaultLat, defaultLon, "Gomti Nagar, Lucknow");
+
+      function loadEngineMetrics(lat, lon, stationLabel) {
+        document.getElementById("stationTitle").innerText = `${stationLabel} Air Quality Index (AQI)`;
+        document.getElementById("stationSub").innerText = `Tracking active coordinates: Lat ${lat.toFixed(4)}, Lon ${lon.toFixed(4)}`;
+        document.getElementById("mapTagLabel").innerText = `📍 Area: ${stationLabel}`;
+        document.getElementById("wCoords").innerText = `${lat.toFixed(2)}N, ${lon.toFixed(2)}E`;
+
+        // Map iframe boundary reload engine calculation
+        const boxSize = 0.015;
+        document.getElementById("liveMapFrame").src = `https://www.openstreetmap.org/export/embed.html?bbox=${lon - boxSize}%2C${lat - boxSize}%2C${lon + boxSize}%2C${lat + boxSize}&amp;layer=mapnik&amp;marker=${lat}%2C${lon}`;
+
+        // Dynamic parallel endpoints configuration sequence execution
+        const airApi = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=us_aqi,pm2_5,pm10,carbon_monoxide,nitrogen_dioxide`;
+        const weatherApi = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code`;
+
+        // 1. Air Quality fetch operation sequence handler block
+        fetch(airApi)
+          .then(res => res.json())
+          .then(data => {
+            if (data && data.current) {
+              const aqi = data.current.us_aqi || 84; 
+              
+              document.getElementById("aqiMainNum").innerText = aqi;
+              document.getElementById("grid-pm25").innerText = Math.round(data.current.pm2_5);
+              document.getElementById("grid-pm10").innerText = Math.round(data.current.pm10);
+              document.getElementById("grid-co").innerText = Math.round(data.current.carbon_monoxide || 277);
+              document.getElementById("grid-no2").innerText = Math.round(data.current.nitrogen_dioxide || 4);
+
+              document.getElementById("briefPM25").innerText = `${Math.round(data.current.pm2_5)} µg/m³`;
+              document.getElementById("briefPM10").innerText = `${Math.round(data.current.pm10)} µg/m³`;
+
+              // Evaluate index rating scales thresholds variables
+              let ratingState = "moderate";
+              let markerPercent = 35;
+              
+              if (aqi <= 50) {
+                ratingState = "good";
+                markerPercent = Math.min(22, (aqi / 50) * 22);
+              } else if (aqi <= 100) {
+                ratingState = "moderate";
+                markerPercent = 25 + ((aqi - 50) / 50) * 25;
+              } else {
+                ratingState = "unhealthy";
+                markerPercent = 55 + ((aqi - 100) / 400) * 45;
+              }
+
+              // Update pointer positioning calculations arrays configuration elements
+              document.getElementById("barMarker").style.left = `${Math.min(markerPercent, 96)}%`;
+
+              // Apply dynamic classes sequence mappings
+              const widgetCard = document.getElementById("mainWidgetBox");
+              const statusPill = document.getElementById("aqiStatusText");
+
+              // Clean previous mappings configurations state sets
+              statusPill.className = "aqi-status-pill";
+              widgetCard.style.background = ""; 
+
+              if (ratingState === "good") {
+                statusPill.classList.add("bg-good");
+                document.getElementById("aqiMainNum").className = "aqi-huge-number state-good";
+                statusPill.innerText = "Good";
+                widgetCard.style.background = "linear-gradient(135deg, #142820 0%, #1a2540 100%)";
+              } else if (ratingState === "moderate") {
+                statusPill.classList.add("bg-moderate");
+                document.getElementById("aqiMainNum").className = "aqi-huge-number state-moderate";
+                statusPill.innerText = "Moderate";
+                widgetCard.style.background = "linear-gradient(135deg, #2c2514 0%, #1a2540 100%)";
+              } else {
+                statusPill.classList.add("bg-unhealthy");
+                document.getElementById("aqiMainNum").className = "aqi-huge-number state-unhealthy";
+                statusPill.innerText = "Poor / Unhealthy";
+                widgetCard.style.background = "linear-gradient(135deg, #2d1919 0%, #1a2540 100%)";
+              }
+
+              // Color coordinate secondary pollutants block cards grid nodes layouts
+              mapNodeColor("card-pm25", data.current.pm2_5, 12, 35);
+              mapNodeColor("card-pm10", data.current.pm10, 20, 50);
+              mapNodeColor("card-co", data.current.carbon_monoxide || 277, 200, 400);
+              mapNodeColor("card-no2", data.current.nitrogen_dioxide || 4, 20, 40);
+            }
+          }).catch(e => console.log("Air tracking response error:", e));
+
+        // 2. Auxiliary Weather tracking fetch system execution
+        fetch(weatherApi)
+          .then(res => res.json())
+          .then(wData => {
+            if (wData && wData.current) {
+              const temp = Math.round(wData.current.temperature_2m);
+              const humidity = wData.current.relative_humidity_2m;
+              
+              // Map weather box layout metrics
+              document.getElementById("weatherTemp").innerText = `${temp}°C`;
+              document.getElementById("wHumidity").innerText = `${humidity} %`;
+              document.getElementById("wWind").innerText = `${wData.current.wind_speed_10m.toFixed(1)} km/h`;
+
+              // Populating newly injected grids dynamic values
+              document.getElementById("grid-temp").innerText = temp;
+              document.getElementById("grid-humidity").innerText = humidity;
+
+              // Apply status borders to the weather cards metrics (Temp/Humidity)
+              mapNodeColor("card-temp", temp, 24, 32); // Good comfort under 24°C, Moderate under 32°C
+              mapNodeColor("card-humidity", humidity, 55, 70); // Balanced relative humidity indicators
+
+              // Evaluate structural weather description code markers configuration
+              const code = wData.current.weather_code;
+              let desc = "Clear Sky";
+              let icon = "☀️";
+              if (code > 0 && code <= 3) { desc = "Mainly Clear / Mist"; icon = "☁️"; }
+              else if (code > 3) { desc = "Overcast / Haze"; icon = "🌫️"; }
+              document.getElementById("weatherDesc").innerText = desc;
+              document.getElementById("weatherIcon").innerText = icon;
+            }
+          }).catch(e => console.log("Meteorological monitoring system response timeout:", e));
+      }
+
+      function mapNodeColor(id, value, thresholdGood, thresholdMod) {
+        const elem = document.getElementById(id);
+        if(!elem) return;
+        elem.className = "pollutant-data-node";
+        if (value <= thresholdGood) { elem.classList.add("border-good"); }
+        else if (value <= thresholdMod) { elem.classList.add("border-moderate"); }
+        else { elem.classList.add("border-unhealthy"); }
+      }
+    });
+  </script>
+</body>
+
+</html>

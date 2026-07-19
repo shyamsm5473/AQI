@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IIIT LUCKNOW</title>
+  <link rel="stylesheet" href="firststyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Clean Dashboard UI variables for easy customization */
+    :root {
+      --primary-navy: #003366;
+      --bg-light: #f4f7f6;
+      --card-white: #ffffff;
+      --text-main: #333333;
+      --border-gray: #e2e8f0;
+
+      /* AQI Standard Colors */
+      --aqi-good: #00e400;
+      --aqi-moderate: #ffff00;
+      --aqi-unhealthy-sub: #ff7e00;
+      --aqi-unhealthy: #ff0000;
+      --aqi-very-unhealthy: #8f3f97;
+
+      /* CPCB National AQI category colors (India) */
+      --cpcb-good: #1b9e4b;
+      --cpcb-satisfactory: #a3c853;
+      --cpcb-moderate: #f4c20d;
+      --cpcb-poor: #f2811d;
+      --cpcb-very-poor: #e2433a;
+      --cpcb-severe: #7e0023;
+      --accent-teal: #4ed8e2;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    /* Core Layout Wrapper */
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 25px;
+      max-width: 1400px;
+      width: 95%;
+      margin: 30px auto;
+      flex: 1;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      background-color: var(--card-white);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-gray);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 8px;
+    }
+
+    .sidebar-menu a {
+      display: block;
+      padding: 12px 16px;
+      color: var(--text-main);
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .sidebar-menu a:hover, .sidebar-menu a.active-tab {
+      background-color: var(--primary-navy);
+      color: white;
+    }
+
+    /* Main Content Area */
+    .main-workspace {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    /* Project Info Header Card */
+    .aqi-hero-card {
+      background: linear-gradient(135deg, var(--primary-navy) 0%, #001f40 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .aqi-hero-card h1 {
+      margin: 0 0 10px 0;
+      font-size: 26px;
+      letter-spacing: 0.5px;
+    }
+
+    .aqi-hero-card p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 950px) {
+      .dashboard-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+
+    .panel {
+      background-color: var(--card-white);
+      border-radius: 10px;
+      border: 1px solid var(--border-gray);
+      padding: 22px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+      scroll-margin-top: 20px;
+    }
+
+    .panel h2 {
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-size: 18px;
+      color: var(--primary-navy);
+      border-bottom: 2px solid #f0f4f8;
+      padding-bottom: 12px;
+    }
+
+    /* Chart Container Styling */
+    .chart-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .chart-box img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .canvas-box {
+      position: relative;
+      height: 300px;
+    }
+
+    /* --- CONTROL BAR (station selector + live status) --- */
+    .control-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .control-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .control-left label {
+      font-weight: 600;
+      color: var(--primary-navy);
+      font-size: 14px;
+    }
+
+    .station-select {
+      padding: 10px 14px;
+      border: 1px solid var(--border-gray);
+      border-radius: 6px;
+      font-size: 14px;
+      color: var(--text-main);
+      background: #fff;
+      cursor: pointer;
+      min-width: 220px;
+    }
+
+    .station-select:focus-visible {
+      outline: 2px solid var(--primary-navy);
+      outline-offset: 2px;
+    }
+
+    .refresh-btn {
+      padding: 9px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--primary-navy);
+      background: #fff;
+      color: var(--primary-navy);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .refresh-btn:hover { background: var(--primary-navy); color: #fff; }
+    .refresh-btn:focus-visible { outline: 2px solid var(--primary-navy); outline-offset: 2px; }
+
+    /* Solid call-to-action variant (used for the Excel download button) */
+    .solid-btn {
+      padding: 9px 18px;
+      border-radius: 6px;
+      border: 1px solid var(--primary-navy);
+      background: var(--primary-navy);
+      color: #fff;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background-color 0.15s ease, opacity 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .solid-btn:hover { background: #001f40; }
+    .solid-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .solid-btn:focus-visible { outline: 2px solid var(--primary-navy); outline-offset: 2px; }
+
+    .live-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #5a6472;
+      flex-wrap: wrap;
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #1b9e4b;
+      flex-shrink: 0;
+      animation: livePulse 2s infinite;
+    }
+
+    @keyframes livePulse {
+      0%   { box-shadow: 0 0 0 0 rgba(27,158,75,0.55); }
+      70%  { box-shadow: 0 0 0 7px rgba(27,158,75,0); }
+      100% { box-shadow: 0 0 0 0 rgba(27,158,75,0); }
+    }
+
+    .last-updated { font-weight: 600; color: var(--text-main); }
+
+    /* --- GAUGE PANEL --- */
+    .gauge-panel-body {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+
+    .gauge-wrap {
+      position: relative;
+      width: 320px;
+      max-width: 100%;
+    }
+
+    .gauge-wrap svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .gauge-readout {
+      position: absolute;
+      left: 50%;
+      bottom: 4px;
+      transform: translateX(-50%);
+      text-align: center;
+      width: 100%;
+    }
+
+    .gauge-readout .aqi-num {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--primary-navy);
+    }
+
+    .gauge-readout .aqi-cat {
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 4px;
+      letter-spacing: 0.3px;
+    }
+
+    .gauge-readout .aqi-dom {
+      font-size: 12px;
+      color: #6b7686;
+      margin-top: 2px;
+    }
+
+    .gauge-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      min-width: 210px;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-main);
+    }
+
+    .legend-chip {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .legend-range {
+      color: #8b95a3;
+      font-size: 12px;
+      margin-left: auto;
+    }
+
+    /* --- READINGS TABLE --- */
+    .table-wrap { overflow-x: auto; }
+
+    table.readings-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    table.readings-table th,
+    table.readings-table td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-gray);
+      white-space: nowrap;
+    }
+
+    table.readings-table thead th {
+      background: var(--primary-navy);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    table.readings-table tbody tr:nth-child(even) { background: #f8fafc; }
+    table.readings-table tbody tr:hover { background: #eef3f8; }
+
+    .pollutant-cell { font-variant-numeric: tabular-nums; }
+
+    .cat-pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* --- CUSTOM RANGE CONTROLS (line chart panel) --- */
+    .range-controls {
+      display: flex;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .range-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .range-field label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--primary-navy);
+    }
+
+    .range-field input[type="date"],
+    .range-field select {
+      padding: 9px 12px;
+      border: 1px solid var(--border-gray);
+      border-radius: 6px;
+      font-size: 13.5px;
+      color: var(--text-main);
+      background: #fff;
+      min-width: 160px;
+    }
+
+    .range-field input[type="date"]:focus-visible,
+    .range-field select:focus-visible {
+      outline: 2px solid var(--primary-navy);
+      outline-offset: 2px;
+    }
+
+    .range-status {
+      font-size: 12.5px;
+      color: #8b95a3;
+      margin-top: 10px;
+    }
+
+    .range-status.is-error { color: var(--cpcb-very-poor); font-weight: 600; }
+
+    /* --- DOWNLOAD BAR --- */
+    .download-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .download-bar p {
+      margin: 0;
+      font-size: 13.5px;
+      color: #5a6472;
+      max-width: 560px;
+      line-height: 1.5;
+    }
+
+    /* --- FOOTER STYLES --- */
+    .site-footer {
+      background-color: #1a2540;
+      color: #ffffff;
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: 40px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .footer-emails {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .email-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 220px;
+      max-width: 280px;
+    }
+
+    .email-label {
+      font-size: 0.85rem;
+      color: #a0aec0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      white-space: nowrap;
+    }
+
+    .email-link {
+      color: #4ed8e2;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+      word-break: break-all;
+      text-align: center;
+    }
+
+    .email-link:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .footer-divider {
+      border: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+    }
+
+    .footer-copy {
+      font-size: 0.9rem;
+      margin: 5px 0;
+      color: #cbd5e0;
+    }
+
+    .footer-support a {
+      color: #4ed8e2;
+      text-decoration: none;
+    }
+
+    .footer-support a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="logo-block">
+      <div class="logo-box">
+        <img src="https://upload.wikimedia.org/wikipedia/en/2/20/Indian_Institute_of_Information_Technology%2C_Lucknow_Logo.png" alt="IIIT lucknow" width="64px" height="64px">
+      </div>
+      <div class="logo-label">
+        <span class="title">IIIT Lucknow</span>
+        <span class="sub">विद्या ददाति विनयं</span>
+        <span class="sub">विनयाद् याति पात्रताम्</span>
+      </div>
+    </div>
+
+    <div class="right-logo-block">
+      <div class="right-logo-label">
+        <span class="title">UPCST</span>
+        <span class="sub">Uttar Pradesh Council of</span>
+        <span class="sub">Science and Technology</span>
+      </div>
+      <div class="logo-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGLiqbdqVCvw6_CV_EtHs4w1Pc9j5mHxi9Qw&s" alt="UPCST logo" width="64px" height="64px">
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-bar">
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="#" class="active">Dashboard</a>
+    <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
+    <a href="Contact.html">Contact</a>
+    <a href="Benefits.html">Benefits</a>
+     <a href="Related_publications.html">Related publications</a>
+    <a href="map.html">Map</a>
+
+    <div class="auth-buttons">
+      <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+      <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li><a href="#gauge-panel" class="active-tab">Live AQI Gauge</a></li>
+        <li><a href="#trend-panel">24-Hour Trend</a></li>
+        <li><a href="#monthly-panel">Monthly Average AQI</a></li>
+        <li><a href="#custom-range-panel">Custom Pollutant Range</a></li>
+        <li><a href="#readings-panel">Recent Readings</a></li>
+        <li><a href="#download-panel">Download Data</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-workspace">
+
+      <div class="aqi-hero-card">
+        <h1>Welcome to Dashboard</h1>
+        <p>This platform displays real-time atmospheric data metrics gathered via IoT monitoring arrays deployed by <strong>IIIT LUCKNOW</strong>. This research initiative is proudly supported by the UPCST to assess and combat urban air pollution patterns.</p>
+      </div>
+
+      <!-- Station selector + live status -->
+      <div class="panel control-bar">
+        <div class="control-left">
+          <label for="stationSelect">Monitoring Station</label>
+          <select id="stationSelect" class="station-select" aria-label="Select monitoring station"></select>
+          <button class="refresh-btn" id="locateBtn" type="button" style="display: inline-flex; align-items: center; gap: 6px;">🌐 Detect Live Location</button>
+        </div>
+        <div class="live-status">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span>Auto-refreshing every 60s &middot; Last updated: <span class="last-updated" id="lastUpdated">--:--:--</span></span>
+          <button class="refresh-btn" id="refreshBtn" type="button">Refresh now</button>
+        </div>
+      </div>
+
+      <!-- Live AQI Gauge -->
+      <div class="panel" id="gauge-panel">
+        <h2>Live AQI Gauge &mdash; <span id="gaugeStationName"></span></h2>
+        <div class="gauge-panel-body">
+          <div class="gauge-wrap">
+            <svg id="aqiGaugeSvg" viewBox="0 0 320 200" role="img" aria-label="AQI gauge"></svg>
+            <div class="gauge-readout">
+              <div class="aqi-num" id="aqiValue">&ndash;&ndash;</div>
+              <div class="aqi-cat" id="aqiCategory">Loading&hellip;</div>
+              <div class="aqi-dom" id="aqiDominant"></div>
+            </div>
+          </div>
+          <div class="gauge-legend" id="gaugeLegend" aria-label="AQI category legend"></div>
+        </div>
+      </div>
+
+      <!-- 24-hour trend line chart -->
+      <div class="panel" id="trend-panel">
+        <h2>PM2.5 &amp; PM10 &mdash; Last 24 Hours</h2>
+        <div class="canvas-box" style="height:320px;">
+          <canvas id="trendLineChart" aria-label="PM2.5 and PM10 trend over the last 24 hours" role="img"></canvas>
+        </div>
+      </div>
+
+      <!-- Monthly average AQI bar chart -->
+      <div class="panel" id="monthly-panel">
+        <h2>Monthly Average AQI &mdash; <span id="monthlyStationName"></span></h2>
+        <div class="canvas-box" style="height:320px;">
+          <canvas id="monthlyBarChart" aria-label="Average AQI per month" role="img"></canvas>
+        </div>
+        <p class="range-status" id="monthlyStatus">Loading monthly history&hellip;</p>
+      </div>
+
+      <!-- Custom date range pollutant line chart -->
+      <div class="panel" id="custom-range-panel">
+        <h2>Custom Date Range &mdash; Pollutant Trend</h2>
+        <div class="range-controls">
+          <div class="range-field">
+            <label for="rangePollutant">Pollutant</label>
+            <select id="rangePollutant">
+              <option value="pm2_5">PM2.5 (&micro;g/m&sup3;)</option>
+              <option value="pm10">PM10 (&micro;g/m&sup3;)</option>
+              <option value="carbon_monoxide">CO (mg/m&sup3;)</option>
+              <option value="ozone">Ozone (&micro;g/m&sup3;)</option>
+              <option value="nitrogen_dioxide">NO&#8322; (&micro;g/m&sup3;)</option>
+            </select>
+          </div>
+          <div class="range-field">
+            <label for="rangeStartDate">Start date</label>
+            <input type="date" id="rangeStartDate">
+          </div>
+          <div class="range-field">
+            <label for="rangeEndDate">End date</label>
+            <input type="date" id="rangeEndDate">
+          </div>
+          <button class="refresh-btn" id="rangeLoadBtn" type="button">Load trend</button>
+        </div>
+        <div class="canvas-box" style="height:320px;">
+          <canvas id="customRangeLineChart" aria-label="Selected pollutant over a custom date range" role="img"></canvas>
+        </div>
+        <p class="range-status" id="rangeStatus">Pick a date range and click &ldquo;Load trend&rdquo;.</p>
+      </div>
+
+      <!-- Last 10 readings table -->
+      <div class="panel" id="readings-panel">
+        <h2>Last 10 Readings &mdash; <span id="tableStationName"></span></h2>
+        <div class="table-wrap">
+          <table class="readings-table">
+            <thead>
+              <tr>
+                <th scope="col">Time</th>
+                <th scope="col">PM2.5 (&micro;g/m&sup3;)</th>
+                <th scope="col">PM10 (&micro;g/m&sup3;)</th>
+                <th scope="col">CO (mg/m&sup3;)</th>
+                <th scope="col">Ozone (&micro;g/m&sup3;)</th>
+                <th scope="col">NO&#8322; (&micro;g/m&sup3;)</th>
+                <th scope="col">AQI</th>
+              </tr>
+            </thead>
+            <tbody id="readingsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Download as Excel -->
+      <div class="panel download-bar" id="download-panel">
+        <p>Download everything currently shown on this dashboard &mdash; recent readings, monthly average AQI, and the custom pollutant range &mdash; as a single Excel workbook.</p>
+        <button class="solid-btn" id="downloadExcelBtn" type="button">&#11015; Download as Excel</button>
+      </div>
+
+    </main>
+  </div>
+
+  <footer class="site-footer">
+   <div class="footer-emails">
+      <div class="email-item">
+        <span class="email-label">DR. SOUMENDU CHAKRABORTY</span>
+        <a href="mailto:soumendu@iiitl.ac.in" class="email-link">soumendu@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Dr. Mainak Adhikari</span>
+        <a href="mailto:mainak@iiitl.ac.in" class="email-link">mainak@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Dr. Bindu Singh</span>
+        <a href="mailto:bindu@iiitl.ac.in" class="email-link">bindu@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Akansha Singh</span>
+        <a href="mailto:RCS24101@iiitl.ac.in" class="email-link">RCS24101@iiitl.ac.in</a>
+      </div>
+    </div>
+
+    <hr class="footer-divider">
+
+    <p class="footer-copy">© 2026 Indian Institute of Information Technology, Lucknow. All Rights Reserved.</p>
+    <p class="footer-support">Supported by <a href="https://upcst.gov.in" target="_blank">UP Council of Science and Technology (UPCST)</a></p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script>
+  (function () {
+    /* =====================================================================
+       CPCB (India) National AQI categories + sub-index breakpoint tables.
+       We compute PM2.5 and PM10 sub-indices from REAL measurements and take
+       the higher one as the headline AQI ("dominant pollutant"), which is
+       almost always how the headline AQI is decided for North Indian cities.
+    ===================================================================== */
+    const AQI_CATEGORIES = [
+      { name: 'Good',         min: 0,   max: 50,  color: 'var(--cpcb-good)',        hex: '#1b9e4b' },
+      { name: 'Satisfactory', min: 51,  max: 100, color: 'var(--cpcb-satisfactory)', hex: '#a3c853' },
+      { name: 'Moderate',     min: 101, max: 200, color: 'var(--cpcb-moderate)',     hex: '#f4c20d' },
+      { name: 'Poor',         min: 201, max: 300, color: 'var(--cpcb-poor)',         hex: '#f2811d' },
+      { name: 'Very Poor',    min: 301, max: 400, color: 'var(--cpcb-very-poor)',    hex: '#e2433a' },
+      { name: 'Severe',       min: 401, max: 500, color: 'var(--cpcb-severe)',       hex: '#7e0023' },
+    ];
+
+    // [concLow, concHigh, indexLow, indexHigh] — CPCB 24-hr breakpoints (µg/m³)
+    const PM25_BREAKPOINTS = [
+      [0, 30, 0, 50], [31, 60, 51, 100], [61, 90, 101, 200],
+      [91, 120, 201, 300], [121, 250, 301, 400], [251, 380, 401, 500],
+    ];
+    const PM10_BREAKPOINTS = [
+      [0, 50, 0, 50], [51, 100, 51, 100], [101, 250, 101, 200],
+      [251, 350, 201, 300], [351, 430, 301, 400], [431, 500, 401, 500],
+    ];
+
+    function calcSubIndex(conc, table) {
+      const c = Math.max(0, conc);
+      for (const [cLo, cHi, iLo, iHi] of table) {
+        if (c <= cHi) return ((iHi - iLo) / (cHi - cLo)) * (c - cLo) + iLo;
+      }
+      return 500; // beyond the table ceiling -> cap at Severe
+    }
+
+    function categoryFor(aqi) {
+      return AQI_CATEGORIES.find(c => aqi >= c.min && aqi <= c.max) || AQI_CATEGORIES[AQI_CATEGORIES.length - 1];
+    }
+
+    function aqiFromPm(pm25, pm10) {
+      const subPM25 = calcSubIndex(pm25, PM25_BREAKPOINTS);
+      const subPM10 = calcSubIndex(pm10, PM10_BREAKPOINTS);
+      return Math.round(Math.max(subPM25, subPM10));
+    }
+
+    /* =====================================================================
+       LIVE monitoring stations — Updated baseline station listing.
+    ===================================================================== */
+    const STATIONS = [
+      { id: 'iiitl',  name: 'IIIT Lucknow Campus', lat: 26.8008, lon: 81.0242 }
+    ];
+
+    const POLLUTANT_LABELS = { pm25: 'PM2.5', pm10: 'PM10', co: 'CO', o3: 'Ozone', no2: 'NO2' };
+
+    // Pollutant dropdown -> { open-meteo hourly field, display label + unit, converter }
+    const RANGE_POLLUTANTS = {
+      pm2_5:             { field: 'pm2_5',             label: 'PM2.5 (µg/m³)', convert: v => v },
+      pm10:              { field: 'pm10',               label: 'PM10 (µg/m³)',  convert: v => v },
+      carbon_monoxide:   { field: 'carbon_monoxide',     label: 'CO (mg/m³)',    convert: v => v / 1000 }, // Open-Meteo reports CO in µg/m³
+      ozone:             { field: 'ozone',               label: 'Ozone (µg/m³)', convert: v => v },
+      nitrogen_dioxide:  { field: 'nitrogen_dioxide',    label: 'NO₂ (µg/m³)',   convert: v => v },
+    };
+
+    function buildReading(time, pm25, pm10, co, o3, no2) {
+      const aqi = aqiFromPm(pm25, pm10);
+      const subPM25 = calcSubIndex(pm25, PM25_BREAKPOINTS);
+      const subPM10 = calcSubIndex(pm10, PM10_BREAKPOINTS);
+      const dominant = subPM25 >= subPM10 ? 'pm25' : 'pm10';
+      return { time, pm25, pm10, co, o3, no2, aqi, dominant };
+    }
+
+    /* ------------------------- Open-Meteo fetch layer ------------------------- */
+    function buildAirQualityUrl(station) {
+      return 'https://air-quality-api.open-meteo.com/v1/air-quality' +
+        `?latitude=${station.lat}&longitude=${station.lon}` +
+        '&hourly=pm2_5,pm10,carbon_monoxide,nitrogen_dioxide,ozone' +
+        '&current=pm2_5,pm10,carbon_monoxide,nitrogen_dioxide,ozone' +
+        '&past_days=1&forecast_days=1&timezone=auto';
+    }
+
+    function buildHistoricalUrl(station, startDate, endDate, fields) {
+      return 'https://air-quality-api.open-meteo.com/v1/air-quality' +
+        `?latitude=${station.lat}&longitude=${station.lon}` +
+        `&hourly=${fields}` +
+        `&start_date=${startDate}&end_date=${endDate}&timezone=auto`;
+    }
+
+    function processStationData(data) {
+      const h = data.hourly || {};
+      const times = h.time || [];
+      const pm25s = h.pm2_5 || [];
+      const pm10s = h.pm10 || [];
+      const cos   = h.carbon_monoxide || [];
+      const o3s   = h.ozone || [];
+      const no2s  = h.nitrogen_dioxide || [];
+
+      const now = new Date();
+      const points = [];
+
+      for (let i = 0; i < times.length; i++) {
+        const t = new Date(times[i]);
+        if (t > now) continue;
+        const vals = [pm25s[i], pm10s[i], cos[i], o3s[i], no2s[i]];
+        if (vals.some(v => v === null || v === undefined)) continue;
+        points.push(buildReading(t, pm25s[i], pm10s[i], cos[i] / 1000, o3s[i], no2s[i]));
+      }
+
+      const hourly = points.slice(-24).map(p => ({ time: p.time, pm25: p.pm25, pm10: p.pm10 }));
+      const recent = points.slice(-10).reverse();
+
+      const cur = data.current;
+      if (cur && cur.pm2_5 != null && cur.time) {
+        const curTime = new Date(cur.time);
+        const curReading = buildReading(
+          curTime, cur.pm2_5, cur.pm10, (cur.carbon_monoxide || 0) / 1000, cur.ozone, cur.nitrogen_dioxide
+        );
+        if (!recent.length || curTime.getTime() !== recent[0].time.getTime()) {
+          recent.unshift(curReading);
+          if (recent.length > 10) recent.pop();
+        } else {
+          recent[0] = curReading;
+        }
+      }
+
+      return { hourly, recent, error: false };
+    }
+
+    const state = {};
+    STATIONS.forEach(s => { state[s.id] = { hourly: [], recent: [], error: false }; });
+    let currentStationId = STATIONS[0].id;
+
+    const monthlyState = { rows: [], stationName: '', loading: false, error: false };
+    const rangeState = { rows: [], pollutantLabel: '', stationName: '', startDate: '', endDate: '', loading: false, error: false };
+
+    async function loadStation(station) {
+      try {
+        const res = await fetch(buildAirQualityUrl(station));
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        state[station.id] = processStationData(data);
+      } catch (err) {
+        console.log('Live AQI fetch failed for', station.name, err);
+        state[station.id] = { ...(state[station.id] || { hourly: [], recent: [] }), error: true };
+      }
+    }
+
+    function loadAllStations() {
+      return Promise.all(STATIONS.map(loadStation));
+    }
+
+    /* ---------------------------- DOM refs ---------------------------- */
+    const stationSelect       = document.getElementById('stationSelect');
+    const locateBtn           = document.getElementById('locateBtn');
+    const refreshBtn          = document.getElementById('refreshBtn');
+    const lastUpdatedEl       = document.getElementById('lastUpdated');
+    const gaugeSvg            = document.getElementById('aqiGaugeSvg');
+    const aqiValueEl          = document.getElementById('aqiValue');
+    const aqiCategoryEl       = document.getElementById('aqiCategory');
+    const aqiDominantEl       = document.getElementById('aqiDominant');
+    const gaugeLegendEl       = document.getElementById('gaugeLegend');
+    const gaugeStationNameEl  = document.getElementById('gaugeStationName');
+    const tableStationNameEl  = document.getElementById('tableStationName');
+    const tableBody           = document.getElementById('readingsTableBody');
+
+    const monthlyStationNameEl = document.getElementById('monthlyStationName');
+    const monthlyStatusEl      = document.getElementById('monthlyStatus');
+    const rangePollutantSelect = document.getElementById('rangePollutant');
+    const rangeStartInput      = document.getElementById('rangeStartDate');
+    const rangeEndInput        = document.getElementById('rangeEndDate');
+    const rangeLoadBtn         = document.getElementById('rangeLoadBtn');
+    const rangeStatusEl        = document.getElementById('rangeStatus');
+    const downloadExcelBtn     = document.getElementById('downloadExcelBtn');
+
+    function rebuildStationDropdownOptions() {
+      stationSelect.innerHTML = '';
+      STATIONS.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = s.name;
+        stationSelect.appendChild(opt);
+      });
+      stationSelect.value = currentStationId;
+    }
+    rebuildStationDropdownOptions();
+
+    /* ------------------------- SVG semicircle gauge ------------------------- */
+    const GAUGE_CX = 160, GAUGE_CY = 175, GAUGE_R = 130, GAUGE_STROKE = 26;
+
+    function polarToCartesian(cx, cy, r, angleDeg) {
+      const rad = angleDeg * Math.PI / 180;
+      return { x: cx + r * Math.cos(rad), y: cy - r * Math.sin(rad) };
+    }
+
+    function valueToAngle(v) {
+      const clamped = Math.max(0, Math.min(500, v));
+      return 180 - (clamped / 500) * 180;
+    }
+
+    function arcPath(cx, cy, r, startAngle, endAngle) {
+      const start = polarToCartesian(cx, cy, r, startAngle);
+      const end = polarToCartesian(cx, cy, r, endAngle);
+      return `M ${start.x} ${start.y} A ${r} ${r} 0 0 1 ${end.x} ${end.y}`;
+    }
+
+    function buildGaugeStatic() {
+      gaugeSvg.innerHTML = '';
+      const ns = 'http://www.w3.org/2000/svg';
+
+      AQI_CATEGORIES.forEach(cat => {
+        const path = document.createElementNS(ns, 'path');
+        path.setAttribute('d', arcPath(GAUGE_CX, GAUGE_CY, GAUGE_R, valueToAngle(cat.min), valueToAngle(cat.max)));
+        path.setAttribute('stroke', cat.hex);
+        path.setAttribute('stroke-width', GAUGE_STROKE);
+        path.setAttribute('fill', 'none');
+        gaugeSvg.appendChild(path);
+      });
+
+      [0, 100, 200, 300, 400, 500].forEach(v => {
+        const p = polarToCartesian(GAUGE_CX, GAUGE_CY, GAUGE_R + 18, valueToAngle(v));
+        const text = document.createElementNS(ns, 'text');
+        text.setAttribute('x', p.x);
+        text.setAttribute('y', p.y);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('font-size', '11');
+        text.setAttribute('fill', '#6b7686');
+        text.textContent = v;
+        gaugeSvg.appendChild(text);
+      });
+
+      const needle = document.createElementNS(ns, 'line');
+      needle.setAttribute('id', 'aqiNeedle');
+      needle.setAttribute('x1', GAUGE_CX);
+      needle.setAttribute('y1', GAUGE_CY);
+      needle.setAttribute('x2', GAUGE_CX);
+      needle.setAttribute('y2', GAUGE_CY - GAUGE_R + GAUGE_STROKE);
+      needle.setAttribute('stroke', '#1a2540');
+      needle.setAttribute('stroke-width', 4);
+      needle.setAttribute('stroke-linecap', 'round');
+      gaugeSvg.appendChild(needle);
+
+      const pivot = document.createElementNS(ns, 'circle');
+      pivot.setAttribute('cx', GAUGE_CX);
+      pivot.setAttribute('cy', GAUGE_CY);
+      pivot.setAttribute('r', 7);
+      pivot.setAttribute('fill', '#1a2540');
+      gaugeSvg.appendChild(pivot);
+    }
+
+    function updateGauge(aqi) {
+      const angle = valueToAngle(aqi);
+      const tip = polarToCartesian(GAUGE_CX, GAUGE_CY, GAUGE_R - GAUGE_STROKE / 2 - 6, angle);
+      const needle = document.getElementById('aqiNeedle');
+      if (needle) {
+        needle.setAttribute('x2', tip.x);
+        needle.setAttribute('y2', tip.y);
+      }
+    }
+
+    function buildLegend() {
+      gaugeLegendEl.innerHTML = '';
+      AQI_CATEGORIES.forEach(cat => {
+        const row = document.createElement('div');
+        row.className = 'legend-row';
+        row.innerHTML =
+          '<span class="legend-chip" style="background:' + cat.hex + '"></span>' +
+          '<span>' + cat.name + '</span>' +
+          '<span class="legend-range">' + cat.min + '&ndash;' + cat.max + '</span>';
+        gaugeLegendEl.appendChild(row);
+      });
+    }
+
+    buildGaugeStatic();
+    buildLegend();
+
+    /* ---------------------------- Chart.js setup ---------------------------- */
+    const lineChart = new Chart(document.getElementById('trendLineChart').getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [
+          { label: 'PM2.5 (µg/m³)', data: [], borderColor: '#e2433a', backgroundColor: 'rgba(226,67,58,0.08)', tension: 0.35, pointRadius: 0, borderWidth: 2 },
+          { label: 'PM10 (µg/m³)',  data: [], borderColor: '#f4c20d', backgroundColor: 'rgba(244,194,13,0.08)', tension: 0.35, pointRadius: 0, borderWidth: 2 },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true, title: { display: true, text: 'µg/m³' } } },
+        plugins: { legend: { position: 'bottom' } },
+      },
+    });
+
+    const monthlyBarChart = new Chart(document.getElementById('monthlyBarChart').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{ label: 'Average AQI', data: [], backgroundColor: [], borderRadius: 4, maxBarThickness: 46 }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true, title: { display: true, text: 'Average AQI' } } },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const cat = categoryFor(ctx.parsed.y);
+                return ' Avg AQI ' + ctx.parsed.y + ' (' + cat.name + ')';
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const customRangeLineChart = new Chart(document.getElementById('customRangeLineChart').getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{ label: '', data: [], borderColor: '#003366', backgroundColor: 'rgba(0,51,102,0.08)', tension: 0.3, pointRadius: 0, borderWidth: 2 }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true, title: { display: true, text: '' } }, x: { ticks: { maxTicksLimit: 14 } } },
+        plugins: { legend: { display: false } },
+      },
+    });
+
+    /* ------------------------------ Render ------------------------------ */
+    function fmtTime(d) {
+      return d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+    function fmtHour(d) {
+      return d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+    }
+    function fmtDateTime(d) {
+      return d.toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    }
+    function pad2(n) { return String(n).padStart(2, '0'); }
+    function isoDate(d) { return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+
+    function render() {
+      const station = STATIONS.find(s => s.id === currentStationId);
+      const data = state[currentStationId] || { hourly: [], recent: [] };
+
+      gaugeStationNameEl.textContent = station.name;
+      tableStationNameEl.textContent = station.name;
+      monthlyStationNameEl.textContent = station.name;
+
+      if (!data.recent || data.recent.length === 0) {
+        aqiValueEl.textContent = '\u2013\u2013';
+        aqiCategoryEl.textContent = data.error ? 'Live data unavailable' : 'Loading\u2026';
+        aqiCategoryEl.style.color = '';
+        aqiDominantEl.textContent = '';
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#8b95a3;">' +
+          (data.error ? 'Could not reach the air-quality API. It will retry on the next refresh.' : 'Fetching live readings\u2026') +
+          '</td></tr>';
+        lineChart.data.labels = [];
+        lineChart.data.datasets[0].data = [];
+        lineChart.data.datasets[1].data = [];
+        lineChart.update();
+        lastUpdatedEl.textContent = fmtTime(new Date());
+        return;
+      }
+
+      const latest = data.recent[0];
+
+      updateGauge(latest.aqi);
+      aqiValueEl.textContent = latest.aqi;
+      const cat = categoryFor(latest.aqi);
+      aqiCategoryEl.textContent = cat.name;
+      aqiCategoryEl.style.color = cat.hex;
+      aqiDominantEl.textContent = 'Dominant pollutant: ' + POLLUTANT_LABELS[latest.dominant];
+
+      lineChart.data.labels = data.hourly.map(h => fmtHour(h.time));
+      lineChart.data.datasets[0].data = data.hourly.map(h => Math.round(h.pm25 * 10) / 10);
+      lineChart.data.datasets[1].data = data.hourly.map(h => Math.round(h.pm10 * 10) / 10);
+      lineChart.update();
+
+      tableBody.innerHTML = '';
+      data.recent.forEach(r => {
+        const rowCat = categoryFor(r.aqi);
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td>' + fmtTime(r.time) + '</td>' +
+          '<td class="pollutant-cell">' + r.pm25.toFixed(1) + '</td>' +
+          '<td class="pollutant-cell">' + r.pm10.toFixed(1) + '</td>' +
+          '<td class="pollutant-cell">' + r.co.toFixed(2) + '</td>' +
+          '<td class="pollutant-cell">' + r.o3.toFixed(1) + '</td>' +
+          '<td class="pollutant-cell">' + r.no2.toFixed(1) + '</td>' +
+          '<td><span class="cat-pill" style="background:' + rowCat.hex + '">' + r.aqi + '</span></td>';
+        tableBody.appendChild(tr);
+      });
+
+      lastUpdatedEl.textContent = fmtTime(new Date());
+    }
+
+    /* ----------------------- Monthly average AQI (bar chart) ----------------------- */
+    async function loadMonthlyAverages(station) {
+      monthlyState.loading = true;
+      monthlyState.error = false;
+      monthlyStatusEl.textContent = 'Loading monthly history for ' + station.name + '\u2026';
+      monthlyStatusEl.classList.remove('is-error');
+
+      const end = new Date();
+      const start = new Date();
+      start.setMonth(start.getMonth() - 6);
+
+      try {
+        const url = buildHistoricalUrl(station, isoDate(start), isoDate(end), 'pm2_5,pm10');
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        const h = data.hourly || {};
+        const times = h.time || [];
+        const pm25s = h.pm2_5 || [];
+        const pm10s = h.pm10 || [];
+
+        const now = new Date();
+        const monthBuckets = new Map();
+        const monthOrder = [];
+
+        for (let i = 0; i < times.length; i++) {
+          const t = new Date(times[i]);
+          if (t > now) continue;
+          if (pm25s[i] == null || pm10s[i] == null) continue;
+          const aqi = aqiFromPm(pm25s[i], pm10s[i]);
+          const key = t.getFullYear() + '-' + pad2(t.getMonth() + 1);
+          if (!monthBuckets.has(key)) {
+            monthBuckets.set(key, { sum: 0, count: 0, label: t.toLocaleDateString('en-IN', { month: 'short', year: 'numeric' }) });
+            monthOrder.push(key);
+          }
+          const bucket = monthBuckets.get(key);
+          bucket.sum += aqi;
+          bucket.count += 1;
+        }
+
+        const rows = monthOrder.map(key => {
+          const b = monthBuckets.get(key);
+          return { month: b.label, avgAqi: Math.round(b.sum / b.count) };
+        });
+
+        monthlyState.rows = rows;
+        monthlyState.stationName = station.name;
+        monthlyState.loading = false;
+
+        monthlyBarChart.data.labels = rows.map(r => r.month);
+        monthlyBarChart.data.datasets[0].data = rows.map(r => r.avgAqi);
+        monthlyBarChart.data.datasets[0].backgroundColor = rows.map(r => categoryFor(r.avgAqi).hex);
+        monthlyBarChart.update();
+
+        monthlyStatusEl.textContent = rows.length
+          ? 'Showing ' + rows.length + ' month(s) of history for ' + station.name + '.'
+          : 'No historical data available yet for ' + station.name + '.';
+      } catch (err) {
+        console.log('Monthly AQI fetch failed for', station.name, err);
+        monthlyState.error = true;
+        monthlyState.loading = false;
+        monthlyStatusEl.textContent = 'Could not load monthly history. Please try refreshing.';
+        monthlyStatusEl.classList.add('is-error');
+      }
+    }
+
+    /* ----------------------- Custom date range pollutant (line chart) ----------------------- */
+    async function loadCustomRange() {
+      const station = STATIONS.find(s => s.id === currentStationId);
+      const pollutantKey = rangePollutantSelect.value;
+      const pollutant = RANGE_POLLUTANTS[pollutantKey];
+      const startVal = rangeStartInput.value;
+      const endVal = rangeEndInput.value;
+
+      if (!startVal || !endVal) {
+        rangeStatusEl.textContent = 'Please pick both a start and an end date.';
+        rangeStatusEl.classList.add('is-error');
+        return;
+      }
+      if (new Date(startVal) > new Date(endVal)) {
+        rangeStatusEl.textContent = 'Start date must be before the end date.';
+        rangeStatusEl.classList.add('is-error');
+        return;
+      }
+
+      rangeState.loading = true;
+      rangeLoadBtn.disabled = true;
+      rangeLoadBtn.textContent = 'Loading\u2026';
+      rangeStatusEl.classList.remove('is-error');
+      rangeStatusEl.textContent = 'Fetching ' + pollutant.label + ' for ' + station.name + '\u2026';
+
+      try {
+        const url = buildHistoricalUrl(station, startVal, endVal, pollutant.field);
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        const h = data.hourly || {};
+        const times = h.time || [];
+        const values = h[pollutant.field] || [];
+
+        const now = new Date();
+        const rows = [];
+        for (let i = 0; i < times.length; i++) {
+          const t = new Date(times[i]);
+          if (t > now) continue;
+          if (values[i] == null) continue;
+          rows.push({ time: t, value: Math.round(pollutant.convert(values[i]) * 100) / 100 });
+        }
+
+        rangeState.rows = rows;
+        rangeState.pollutantLabel = pollutant.label;
+        rangeState.stationName = station.name;
+        rangeState.startDate = startVal;
+        rangeState.endDate = endVal;
+        rangeState.loading = false;
+
+        const spanDays = (new Date(endVal) - new Date(startVal)) / 86400000;
+        const useDateLabels = spanDays > 3;
+
+        customRangeLineChart.data.labels = rows.map(r => useDateLabels ? r.time.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }) : fmtDateTime(r.time));
+        customRangeLineChart.data.datasets[0].data = rows.map(r => r.value);
+        customRangeLineChart.data.datasets[0].label = pollutant.label;
+        customRangeLineChart.options.scales.y.title.text = pollutant.label;
+        customRangeLineChart.update();
+
+        rangeStatusEl.textContent = rows.length
+          ? 'Showing ' + rows.length + ' hourly points of ' + pollutant.label + ' for ' + station.name + ' (' + startVal + ' to ' + endVal + ').'
+          : 'No data available for that range. Try a different window.';
+      } catch (err) {
+        console.log('Custom range fetch failed', err);
+        rangeState.loading = false;
+        rangeState.error = true;
+        rangeStatusEl.textContent = 'Could not load that date range. Please try again.';
+        rangeStatusEl.classList.add('is-error');
+      } finally {
+        rangeLoadBtn.disabled = false;
+        rangeLoadBtn.textContent = 'Load trend';
+      }
+    }
+
+    /* ------------------------------- Excel export ------------------------------- */
+    function downloadExcel() {
+      const station = STATIONS.find(s => s.id === currentStationId);
+      const data = state[currentStationId] || { recent: [] };
+
+      const wb = XLSX.utils.book_new();
+
+      const readingsRows = (data.recent || []).map(r => ({
+        'Time': fmtDateTime(r.time),
+        'Station': station.name,
+        'PM2.5 (µg/m³)': Math.round(r.pm25 * 10) / 10,
+        'PM10 (µg/m³)': Math.round(r.pm10 * 10) / 10,
+        'CO (mg/m³)': Math.round(r.co * 100) / 100,
+        'Ozone (µg/m³)': Math.round(r.o3 * 10) / 10,
+        'NO2 (µg/m³)': Math.round(r.no2 * 10) / 10,
+        'AQI': r.aqi,
+        'Category': categoryFor(r.aqi).name,
+      }));
+      const readingsSheet = XLSX.utils.json_to_sheet(
+        readingsRows.length ? readingsRows : [{ 'Note': 'No recent readings loaded yet' }]
+      );
+      XLSX.utils.book_append_sheet(wb, readingsSheet, 'Recent Readings');
+
+      const monthlyRows = monthlyState.rows.map(r => ({
+        'Month': r.month,
+        'Station': monthlyState.stationName || station.name,
+        'Average AQI': r.avgAqi,
+        'Category': categoryFor(r.avgAqi).name,
+      }));
+      const monthlySheet = XLSX.utils.json_to_sheet(
+        monthlyRows.length ? monthlyRows : [{ 'Note': 'Monthly history not loaded yet' }]
+      );
+      XLSX.utils.book_append_sheet(wb, monthlySheet, 'Monthly Average AQI');
+
+      const rangeRows = rangeState.rows.map(r => ({
+        'Time': fmtDateTime(r.time),
+        'Station': rangeState.stationName || station.name,
+        [rangeState.pollutantLabel || 'Value']: r.value,
+      }));
+      const rangeSheetName = 'Custom Range';
+      const rangeSheet = XLSX.utils.json_to_sheet(
+        rangeRows.length ? rangeRows : [{ 'Note': 'Pick a date range and click "Load trend" first' }]
+      );
+      XLSX.utils.book_append_sheet(wb, rangeSheet, rangeSheetName);
+
+      const dateStamp = isoDate(new Date());
+      const safeStation = station.name.replace(/[^a-z0-9]+/gi, '_');
+      XLSX.writeFile(wb, `AQI_Dashboard_${safeStation}_${dateStamp}.xlsx`);
+    }
+
+    /* --------------------------- Live update tick --------------------------- */
+    async function tick() {
+      refreshBtn.disabled = true;
+      const originalLabel = refreshBtn.textContent;
+      refreshBtn.textContent = 'Refreshing\u2026';
+      await loadAllStations();
+      render();
+      refreshBtn.disabled = false;
+      refreshBtn.textContent = originalLabel;
+    }
+
+    /* ----------------------- Geolocation Detection ----------------------- */
+    function detectLiveLocation() {
+      if (navigator.geolocation) {
+        const originalText = locateBtn.innerHTML;
+        locateBtn.innerHTML = "⌛ Locating...";
+        locateBtn.disabled = true;
+
+        navigator.geolocation.getCurrentPosition(
+          async (pos) => {
+            const lat = pos.coords.latitude;
+            const lon = pos.coords.longitude;
+            
+            let liveStation = STATIONS.find(s => s.id === 'live_location');
+            if (!liveStation) {
+              liveStation = { id: 'live_location', name: 'Detected Live Location', lat: lat, lon: lon };
+              STATIONS.push(liveStation);
+            } else {
+              liveStation.lat = lat;
+              liveStation.lon = lon;
+            }
+
+            if (!state[liveStation.id]) {
+              state[liveStation.id] = { hourly: [], recent: [], error: false };
+            }
+
+            currentStationId = liveStation.id;
+            rebuildStationDropdownOptions();
+            
+            await loadStation(liveStation);
+            render();
+            loadMonthlyAverages(liveStation);
+
+            locateBtn.innerHTML = originalText;
+            locateBtn.disabled = false;
+          },
+          () => {
+            alert("Could not detect location. Reverting to default configuration state.");
+            locateBtn.innerHTML = originalText;
+            locateBtn.disabled = false;
+          }
+        );
+      } else {
+        alert("Geolocation services are not supported by this browser interface.");
+      }
+    }
+
+    stationSelect.addEventListener('change', (e) => {
+      currentStationId = e.target.value;
+      render();
+      const station = STATIONS.find(s => s.id === currentStationId);
+      loadMonthlyAverages(station);
+    });
+    refreshBtn.addEventListener('click', tick);
+    locateBtn.addEventListener('click', detectLiveLocation);
+    rangeLoadBtn.addEventListener('click', loadCustomRange);
+    downloadExcelBtn.addEventListener('click', downloadExcel);
+
+    /* ------------------------------- Init ------------------------------- */
+    const todayD = new Date();
+    const monthAgoD = new Date();
+    monthAgoD.setDate(monthAgoD.getDate() - 30);
+    rangeEndInput.value = isoDate(todayD);
+    rangeStartInput.value = isoDate(monthAgoD);
+    rangeEndInput.max = isoDate(todayD);
+    rangeStartInput.max = isoDate(todayD);
+
+    render();
+    loadAllStations().then(render);
+    loadMonthlyAverages(STATIONS.find(s => s.id === currentStationId));
+    setInterval(tick, 60000);
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Benefits — IIIT Lucknow</title>
+  <link rel="stylesheet" href="firststyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* --- PROJECT OVERVIEW / BENEFITS SECTION --- */
+    .project-overview {
+      max-width: 1100px;
+      margin: 60px auto 80px;
+      padding: 40px 30px; 
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #a4acf3 0%, rgba(244, 248, 248, 0.6) 100%); 
+      border: 1px solid rgba(31, 178, 247, 0.8);
+      border-radius: 24px;
+      box-shadow: 0 4px 20px rgba(26, 37, 64, 0.02);
+    }
+
+    .po-intro {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .po-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #02575d;
+      margin-bottom: 16px;
+      background: rgba(2, 87, 93, 0.06);
+      padding: 6px 16px;
+      border-radius: 30px;
+    }
+
+    .po-eyebrow::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #01393d;
+      box-shadow: 0 0 0 4px rgba(2,87,93,0.2);
+    }
+
+    .po-intro h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #000000;
+      margin: 0 0 16px 0;
+      letter-spacing: -0.5px;
+    }
+
+    .po-intro p {
+      color: #5a6472;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .po-cards-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 760px) {
+      .po-cards-row { grid-template-columns: 1fr; }
+    }
+
+    .po-card {
+      background: #e5f6fc;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 10px 30px rgba(15, 24, 48, 0.04);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .po-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(2, 87, 93, 0.3);
+      box-shadow: 0 20px 40px rgba(2, 87, 93, 0.08);
+    }
+
+    .po-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(2, 87, 93, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .po-card:hover .po-card-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .po-card h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.25rem;
+      color: #1a2540;
+      margin: 0 0 12px 0;
+    }
+
+    .po-card p, .po-card ul {
+      color: #5a6472;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .po-card ul { padding-left: 20px; margin-top: 12px; }
+    .po-card li { margin-bottom: 8px; }
+
+    .po-card .po-note {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #718096;
+      font-style: italic;
+      border-left: 2px solid rgba(2, 87, 93, 0.3);
+      padding-left: 10px;
+    }
+
+    /* --- SITE FOOTER --- */
+    .site-footer {
+      background-color: #1a2540;
+      color: #ffffff;
+      padding: 45px 20px;
+      text-align: center;
+      margin-top: 60px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .footer-emails {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .email-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 220px;
+      max-width: 280px;
+    }
+
+    .email-label {
+      font-size: 0.75rem;
+      color: #a0aec0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .email-link {
+      color: #4ed8e2;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      word-break: break-all;
+      text-align: center;
+    }
+
+    .email-link:hover {
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .footer-divider {
+      border: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      max-width: 900px;
+      margin: 0 auto 25px auto;
+    }
+
+    .footer-copy {
+      font-size: 0.9rem;
+      margin: 5px 0;
+      color: #cbd5e0;
+    }
+
+    .footer-support a {
+      color: #4ed8e2;
+      text-decoration: none;
+    }
+
+    .footer-support a:hover {
+      text-decoration: underline;
+    }
+
+    body {
+      background-color: #ebfcf8; 
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Branding Top Bar -->
+  <div class="top-bar">
+    <div class="logo-block">
+      <div class="logo-box">
+        <img src="https://upload.wikimedia.org/wikipedia/en/2/20/Indian_Institute_of_Information_Technology%2C_Lucknow_Logo.png" alt="IIIT lucknow" width="64px" height="64px">
+      </div>
+      <div class="logo-label">
+        <span class="title">IIIT Lucknow</span>
+        <span class="sub">विद्या ददाति विनयं</span>
+        <span class="sub">विनयाद् याति पात्रताम्</span>
+      </div>
+    </div>
+
+    <div class="right-logo-block">
+      <div class="right-logo-label">
+        <span class="title">UPCST</span>
+        <span class="sub">Uttar Pradesh Council of</span>
+        <span class="sub">Science and Technology</span>
+      </div>
+      <div class="logo-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGLiqbdqVCvw6_CV_EtHs4w1Pc9j5mHxi9Qw&s" alt="UPCST logo" width="64px" height="64px">
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav class="bottom-bar">
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="Dashboard.html">Dashboard</a>
+    <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
+    <a href="Contact.html">Contact</a>
+    <a href="#" class="active">Benefits</a>
+     <a href="Related_publications.html">Related publications</a>
+    <a href="map.html">Map</a>
+
+    <div class="auth-buttons">
+      <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+      <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+    </div>
+  </nav>
+
+  <!-- Benefits Main Section -->
+  <section class="project-overview">
+    <div class="po-intro">
+      <span class="po-eyebrow">Project Impact</span>
+      <h2>Core Benefits & Strategic Value</h2>
+      <p>Discover how this digital monitoring platform bridges environmental engineering and community data access to provide tangible results across Uttar Pradesh.</p>
+    </div>
+
+    <!-- Row 1 -->
+    <div class="po-cards-row">
+      <div class="po-card">
+        <div class="po-card-icon">🫁</div>
+        <h3>Public Health Protection</h3>
+        <p>Empowering the local community with explicit safety benchmarks:</p>
+        <ul>
+          <li><strong>Color-Coded Tiers:</strong> Translates abstract pollutant numbers into clear, actionable CPCB health risk classifications.</li>
+          <li><strong>Minimized Exposure:</strong> Allows students, staff, and citizens to safely time outdoor exercises around ideal air windows.</li>
+          <li><strong>Vulnerable Group Alerts:</strong> Offers baseline visual insight warning high-risk respiratory patients before peak haze hours.</li>
+        </ul>
+        <span class="po-note">Fostering informed environmental lifestyle choices.</span>
+      </div>
+
+      <div class="po-card">
+        <div class="po-card-icon">📈</div>
+        <h3>Granular Pollutant Analysis</h3>
+        <p>Comprehensive tracing of fine, microscopic, and gaseous parameters:</p>
+        <ul>
+          <li><strong>Dual Particle Tracking:</strong> Monitors respirable PM2.5 and coarse PM10 inhalable particles concurrently.</li>
+          <li><strong>Combustion Indicators:</strong> Tracks industrial and traffic effluents including Carbon Monoxide (CO) and Nitrogen Dioxide (NO₂).</li>
+          <li><strong>Meteorological Interactivity:</strong> Maps temperature and humidity markers alongside active AQI values.</li>
+        </ul>
+        <span class="po-note">Extracting full value from Open-Meteo atmospheric models[cite: 2].</span>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="po-cards-row">
+      <div class="po-card">
+        <div class="po-card-icon">💻</div>
+        <h3>Scalable Digital Platform</h3>
+        <p>A smart web architecture minimizing maintenance barriers:</p>
+        <ul>
+          <li><strong>Hardware Independence:</strong> Relies on cloud APIs rather than expensive local sensor arrays.</li>
+          <li><strong>Zero Cost Expansion:</strong> Can instantly onboard additional city zones without installation logistics.</li>
+          <li><strong>Excel Exporting:</strong> Download full granular sets across selected historical tracking blocks with one click.</li>
+        </ul>
+        <span class="po-note">Designed for extreme cost-effectiveness and durability.</span>
+      </div>
+
+      <div class="po-card">
+        <div class="po-card-icon">🗺️</div>
+        <h3>State-Wide GIS Tracking</h3>
+        <p>Clear regional telemetry through customized interactive map models:</p>
+        <ul>
+          <li><strong>District Level Clusters:</strong> Dynamically visualizes data across all 75 Uttar Pradesh administrative locations.</li>
+          <li><strong>Location Auto-Detection:</strong> Supports native browser geolocation to quickly pin users to the closest monitoring spot.</li>
+          <li><strong>Smart Aggregation:</strong> Automatically bundles nearby stations while highlighting the worst localized reading inside.</li>
+        </ul>
+        <span class="po-note">Supported by UPCST to encourage open data outreach[cite: 2, 5].</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-emails">
+      <div class="email-item">
+        <span class="email-label">DR. SOUMENDU CHAKRABORTY</span>
+        <a href="mailto:soumendu@iiitl.ac.in" class="email-link">soumendu@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Dr. Mainak Adhikari</span>
+        <a href="mailto:mainak@iiitl.ac.in" class="email-link">mainak@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Dr. Bindu Singh</span>
+        <a href="mailto:bindu@iiitl.ac.in" class="email-link">bindu@iiitl.ac.in</a>
+      </div>
+      <div class="email-item">
+        <span class="email-label">Akansha Singh</span>
+        <a href="mailto:RCS24101@iiitl.ac.in" class="email-link">RCS24101@iiitl.ac.in</a>
+      </div>
+    </div>
+
+    <hr class="footer-divider">
+
+    <p class="footer-copy">© 2026 Indian Institute of Information Technology, Lucknow. All Rights Reserved.</p>
+    <p class="footer-support">Supported by <a href="https://upcst.gov.in" target="_blank">UP Council of Science and Technology (UPCST)</a></p>
+  </footer>
+
+</body>
+</html>
