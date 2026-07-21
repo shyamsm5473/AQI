@@ -4,9 +4,12 @@ Each view renders its Django template and passes an active_page context
 variable so the shared base.html navbar highlights the correct link.
 
 Authentication uses Django's built-in django.contrib.auth system:
-  - login_view   : GET renders form / POST authenticates and redirects
-  - signup_view  : GET renders form / POST creates User and auto-logs in
-  - logout_view  : POST clears the session
+  - login_view         : GET renders form / POST authenticates and redirects
+  - signup_view        : GET renders form / POST creates User and auto-logs in
+  - logout_view        : POST clears the session
+  - forgot_password_view : GET shows email form / POST sends OTP to registered email
+  - verify_otp_view    : GET shows OTP form / POST validates OTP and redirects to reset
+  - reset_password_view: GET shows new-password form / POST sets new password
 """
 import json
 from django.shortcuts import render, redirect
@@ -16,6 +19,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods
+from django.core.mail import send_mail
+from django.conf import settings
+from .models import PasswordResetOTP
 
 
 def home(request):
@@ -167,3 +173,136 @@ def contact_submit(request):
     print(f"\n[CONTACT FORM]\nFrom : {name} <{email}>\nMsg  : {message}\n")
 
     return JsonResponse({"success": True, "message": f"Thanks, {name}! We received your message."})
+
+
+# ── Password Reset (OTP via Email) ─────────────────────────────────────────────
+
+@csrf_protect
+def forgot_password_view(request):
+    """
+    GET  → show email input form.
+    POST → look up user by email, generate OTP, send it, redirect to verify page.
+    """
+    error = None
+    success = None
+
+    if request.method == 'POST':
+        email = request.POST.get('email', '').strip().lower()
+
+        if not email:
+            error = 'Please enter your registered email address.'
+        else:
+            try:
+                user = User.objects.get(email__iexact=email)
+                otp_obj = PasswordResetOTP.generate_for(user)
+
+                # Send OTP email
+                subject = 'IIIT Lucknow — Your Password Reset OTP'
+                body = (
+                    f"Hi {user.first_name or user.username},\n\n"
+                    f"Your one-time password (OTP) for resetting your IIIT Lucknow account password is:\n\n"
+                    f"        {otp_obj.otp}\n\n"
+                    f"This OTP is valid for 10 minutes. Do not share it with anyone.\n\n"
+                    f"If you did not request a password reset, please ignore this email.\n\n"
+                    f"— IIIT Lucknow Team"
+                )
+                try:
+                    send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [user.email])
+                    # Store user id in session so verify page knows who to reset
+                    request.session['otp_user_id'] = user.id
+                    return redirect('core:verify_otp')
+                except Exception as e:
+                    error = 'Could not send email. Please check your email configuration or try again later.'
+                    print(f"[EMAIL ERROR] {e}")
+
+            except User.DoesNotExist:
+                # Don't reveal whether email exists — show generic message
+                error = 'If this email is registered, an OTP has been sent to it.'
+
+    return render(request, 'core/forgot_password.html', {
+        'active_page': 'forgot_password',
+        'error': error,
+        'success': success,
+    })
+
+
+@csrf_protect
+def verify_otp_view(request):
+    """
+    GET  → show OTP entry form.
+    POST → validate OTP; on success redirect to reset-password page.
+    """
+    user_id = request.session.get('otp_user_id')
+    if not user_id:
+        return redirect('core:forgot_password')
+
+    error = None
+
+    if request.method == 'POST':
+        entered_otp = request.POST.get('otp', '').strip()
+
+        try:
+            user = User.objects.get(pk=user_id)
+            otp_obj = PasswordResetOTP.objects.filter(
+                user=user, otp=entered_otp, is_used=False
+            ).order_by('-created_at').first()
+
+            if otp_obj and otp_obj.is_valid():
+                otp_obj.is_used = True
+                otp_obj.save()
+                # Mark session as OTP-verified so reset page allows access
+                request.session['otp_verified_user_id'] = user.id
+                del request.session['otp_user_id']
+                return redirect('core:reset_password')
+            else:
+                error = 'Invalid or expired OTP. Please try again or request a new one.'
+
+        except User.DoesNotExist:
+            return redirect('core:forgot_password')
+
+    return render(request, 'core/verify_otp.html', {
+        'active_page': 'verify_otp',
+        'error': error,
+    })
+
+
+@csrf_protect
+def reset_password_view(request):
+    """
+    GET  → show new-password form.
+    POST → set new password, clear session, redirect to login.
+    """
+    user_id = request.session.get('otp_verified_user_id')
+    if not user_id:
+        return redirect('core:forgot_password')
+
+    error = None
+
+    if request.method == 'POST':
+        password1 = request.POST.get('password1', '')
+        password2 = request.POST.get('password2', '')
+
+        if not password1 or not password2:
+            error = 'Both password fields are required.'
+        elif password1 != password2:
+            error = 'Passwords do not match.'
+        elif len(password1) < 8:
+            error = 'Password must be at least 8 characters long.'
+        else:
+            try:
+                user = User.objects.get(pk=user_id)
+                user.set_password(password1)
+                user.save()
+                del request.session['otp_verified_user_id']
+                return render(request, 'core/reset_password.html', {
+                    'active_page': 'reset_password',
+                    'success': True,
+                })
+            except User.DoesNotExist:
+                return redirect('core:forgot_password')
+
+    return render(request, 'core/reset_password.html', {
+        'active_page': 'reset_password',
+        'error': error,
+        'success': False,
+    })

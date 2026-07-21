@@ -262,8 +262,30 @@
       </div>
 
       <div class="aqi-card aqi-card-full">
-        <h3>Consolidated AQI & Exposure Dataset Table</h3>
-        <p class="aqi-card-desc">Complete granular record of all 224 observations containing criteria pollutants, meteorological markers, and calculated rolling trends.</p>
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+          <div>
+            <h3 style="margin:0 0 4px 0;">Consolidated AQI &amp; Exposure Dataset Table</h3>
+            <p class="aqi-card-desc" style="margin:0;">Complete granular record of all 224 observations containing criteria pollutants, meteorological markers, and calculated rolling trends.</p>
+          </div>
+          <button id="downloadCsvBtn" onclick="downloadTableCSV()" style="
+            display:inline-flex; align-items:center; gap:8px;
+            background:linear-gradient(135deg,#1a2540,#2e6da4);
+            color:#fff; border:none; border-radius:8px;
+            padding:10px 20px; font-size:0.875rem; font-weight:600;
+            cursor:pointer; white-space:nowrap;
+            box-shadow:0 2px 8px rgba(26,37,64,0.25);
+            transition:transform 0.15s, box-shadow 0.15s;
+            font-family:'Inter',sans-serif;
+          "
+          onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 16px rgba(26,37,64,0.35)';"
+          onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 8px rgba(26,37,64,0.25)';">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+            </svg>
+            Download CSV
+          </button>
+        </div>
         <div style="overflow-x:auto; max-height:400px; border:1px solid #e1e0d9; border-radius:8px; margin-top:12px;">
           <table style="width:100%; border-collapse:collapse; font-size:0.85rem; text-align:left; font-family:'Inter', sans-serif;">
             <thead>
@@ -453,6 +475,22 @@
       });
       tbody.appendChild(tr);
     });
+
+    // --- CSV Download Function ---
+    function downloadTableCSV() {
+      const headers = ["Date","Time","Peak AQI","Baseline AQI","Avg Exposure","Trend Direction","CO (ppm)","CO2 (ppm)","O3 (ppm)","NO2 (ppm)","NO (ppm)","Temp (°C)","Humidity (%)"];
+      const rows = [headers, ...CSV_DATA];
+      const csvContent = rows.map(r => r.map(v => `"${v}"`).join(",")).join("\r\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "AQI_Exposure_Dataset.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
   </script>
 
 </body>

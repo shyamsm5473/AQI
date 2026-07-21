@@ -133,3 +133,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# ── Email (Gmail SMTP) ──────────────────────────────────────────────────────
+# Replace EMAIL_HOST_USER and EMAIL_HOST_PASSWORD with your Gmail + App Password.
+# Generate an App Password at: https://myaccount.google.com/apppasswords
+EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST          = 'smtp.gmail.com'
+EMAIL_PORT          = 587
+EMAIL_USE_TLS       = True
+EMAIL_HOST_USER     = 'your_gmail@gmail.com'        # ← replace
+EMAIL_HOST_PASSWORD = 'your_16_char_app_password'   # ← replace
+DEFAULT_FROM_EMAIL  = EMAIL_HOST_USER
