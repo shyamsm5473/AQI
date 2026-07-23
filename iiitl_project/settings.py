@@ -119,7 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Serve the existing flat files (firststyle.css, images) directly from
 # the project root so all <img src="..."> paths resolve correctly.
 STATICFILES_DIRS = [
