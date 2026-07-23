@@ -217,33 +217,190 @@
       display: block;
     }
 
-    /* --- ABOUT PROJECT BOX --- */
-    .po-about-box {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 20px;
-      padding: 36px;
+    /* --- ABOUT PROJECT BOX (CST UP FL Project) --- */
+    .ap-root {
+      --ap-bg: #F5F6F1;
+      --ap-paper: #FFFFFF;
+      --ap-ink: #16211D;
+      --ap-slate: #5C6B64;
+      --ap-teal: #1F7A72;
+      --ap-teal-dim: #E4EFEC;
+      --ap-amber: #D98A3D;
+      --ap-amber-dim: #FBEBD8;
+      --ap-line: #DDE1D8;
+      --ap-display: 'Space Grotesk', sans-serif;
+      --ap-mono: 'IBM Plex Mono', monospace;
+      background: var(--ap-bg);
+      border-radius: 24px;
       margin-top: 56px;
-      box-shadow: 0 10px 30px rgba(15, 24, 48, 0.04);
+      overflow: hidden;
     }
 
-    .po-about-box h3 {
-      font-family: 'Sora', sans-serif;
-      font-size: 1.4rem;
-      color: #1a2540;
-      margin: 0 0 14px 0;
+    /* hero */
+    .ap-hero {
+      position: relative;
+      padding: 72px 0 52px;
+      border-bottom: 1px solid var(--ap-line);
+      overflow: hidden;
+      background: var(--ap-paper);
+    }
+    .ap-wrap { max-width: 1000px; margin: 0 auto; padding: 0 36px; }
+    .ap-eyebrow {
+      font-family: var(--ap-mono);
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ap-teal);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .ap-eyebrow::before {
+      content: "";
+      width: 24px; height: 1px; background: var(--ap-teal);
+    }
+    .ap-title {
+      font-family: var(--ap-display);
+      font-weight: 600;
+      font-size: clamp(22px, 3.5vw, 38px);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--ap-ink);
+      margin: 0 0 20px;
+      max-width: 800px;
+    }
+    .ap-sub {
+      font-size: 15px;
+      color: var(--ap-slate);
+      max-width: 600px;
+      margin: 0 0 32px;
+      line-height: 1.6;
+    }
+    .ap-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      font-family: var(--ap-mono);
+      font-size: 12px;
+      color: var(--ap-slate);
+    }
+    .ap-meta-item { display: flex; flex-direction: column; gap: 3px; }
+    .ap-meta-label { text-transform: uppercase; letter-spacing: .08em; color: #8E9A93; }
+    .ap-meta-val { color: var(--ap-ink); font-size: 12.5px; }
+
+    /* diagram */
+    .ap-diagram-holder { margin-top: 48px; display: flex; justify-content: center; }
+    .ap-diagram-caption {
+      text-align: center;
+      font-family: var(--ap-mono);
+      font-size: 11px;
+      color: var(--ap-slate);
+      letter-spacing: .04em;
+      margin-top: 12px;
     }
 
-    .po-about-box p {
-      color: #5a6472;
-      font-size: 0.98rem;
-      line-height: 1.75;
-      margin: 0 0 12px 0;
+    /* sections */
+    .ap-section {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--ap-line);
+      background: var(--ap-paper);
+    }
+    .ap-section:nth-child(even) { background: var(--ap-bg); }
+    .ap-section-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 24px; }
+    .ap-sec-num {
+      font-family: var(--ap-mono);
+      font-size: 12px;
+      color: var(--ap-amber);
+      padding-top: 2px;
+    }
+    .ap-h2 {
+      font-family: var(--ap-display);
+      font-weight: 600;
+      font-size: 20px;
+      margin: 0;
+      letter-spacing: -0.01em;
+      color: var(--ap-ink);
+    }
+    .ap-lead { max-width: 740px; color: var(--ap-ink); font-size: 15px; line-height: 1.7; margin: 0 0 12px; }
+
+    /* lists */
+    .ap-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; max-width: 740px; }
+    .ap-list li {
+      position: relative;
+      padding-left: 24px;
+      color: var(--ap-ink);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .ap-list li::before {
+      content: "";
+      position: absolute; left: 0; top: 7px;
+      width: 8px; height: 8px;
+      background: var(--ap-teal);
+      border-radius: 1px;
+      transform: rotate(45deg);
+    }
+    .ap-list.amber li::before { background: var(--ap-amber); }
+
+    /* chips */
+    .ap-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ap-chip {
+      font-family: var(--ap-mono);
+      font-size: 12px;
+      padding: 7px 13px;
+      border: 1px solid var(--ap-line);
+      border-radius: 20px;
+      background: var(--ap-paper);
+      color: var(--ap-ink);
     }
 
-    .po-about-box p:last-child {
-      margin-bottom: 0;
+    /* app grid */
+    .ap-app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--ap-line);
+      border: 1px solid var(--ap-line);
+      max-width: 780px;
     }
+    .ap-app-cell {
+      background: var(--ap-paper);
+      padding: 16px 18px;
+      font-size: 14px;
+      color: var(--ap-ink);
+    }
+
+    /* team */
+    .ap-team-grid { display: grid; gap: 18px; }
+    .ap-team-card {
+      background: var(--ap-paper);
+      border: 1px solid var(--ap-line);
+      padding: 24px 26px;
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 22px;
+      border-radius: 4px;
+    }
+    @media (max-width: 640px) { .ap-team-card { grid-template-columns: 1fr; } }
+    .ap-role {
+      font-family: var(--ap-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--ap-teal);
+      margin-bottom: 7px;
+    }
+    .ap-role.pi { color: var(--ap-amber); }
+    .ap-name {
+      font-family: var(--ap-display);
+      font-weight: 600;
+      font-size: 17px;
+      margin: 0 0 4px;
+      color: var(--ap-ink);
+    }
+    .ap-affil { font-size: 13px; color: var(--ap-slate); margin: 0; line-height: 1.55; }
+    .ap-bio { font-size: 14px; color: var(--ap-ink); margin-top: 10px; line-height: 1.65; }
 
     .po-team-card:hover .po-team-avatar {
       transform: scale(1.05);
@@ -475,12 +632,194 @@
       </div>
     </div>
 
-    <div class="po-about-box">
-      <h3>About Project</h3>
-      <p>This platform was built to give students, staff, and residents of Lucknow a simple, real-time view of the air they breathe. It brings together live pollutant and weather data into one dashboard, so anyone can check current conditions across key locations in the city at a glance.</p>
-      <p>Beyond monitoring, the project aims to raise awareness about air quality trends over time, support informed day-to-day decisions (like outdoor activity planning), and serve as a foundation that can be extended to more locations and pollutant metrics in the future.</p>
-    </div>
   </section>
+
+  <!-- ===== CST UP PROJECT DETAIL ===== -->
+  <div class="ap-root">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- HERO -->
+    <header class="ap-hero">
+      <div class="ap-wrap">
+        <div class="ap-eyebrow">CST Uttar Pradesh Sponsored Project · IIIT Lucknow</div>
+        <h2 class="ap-title">Synthesis of Big Data using Federated Learning for Analyzing Climate and Pollution Parameters in Edge Networks for Urban Areas</h2>
+        <p class="ap-sub">A privacy-preserving edge intelligence framework: models travel between sensors and the cloud, so raw climate and pollution data never has to.</p>
+        <div class="ap-meta">
+          <div class="ap-meta-item">
+            <span class="ap-meta-label">Funding Agency</span>
+            <span class="ap-meta-val">Council of Science &amp; Technology (CST), Uttar Pradesh</span>
+          </div>
+          <div class="ap-meta-item">
+            <span class="ap-meta-label">Host Institute</span>
+            <span class="ap-meta-val">Dept. of Computer Science, IIIT Lucknow</span>
+          </div>
+          <div class="ap-meta-item">
+            <span class="ap-meta-label">Location</span>
+            <span class="ap-meta-val">Chak Ganjaria, C.G. City, Lucknow – 226002</span>
+          </div>
+        </div>
+        <div class="ap-diagram-holder">
+          <svg width="560" height="220" viewBox="0 0 640 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing edge sensor nodes sending only model updates to a central aggregator; raw data stays local">
+            <g stroke="#1F7A72" stroke-width="1.4" stroke-dasharray="4 4" fill="none">
+              <path d="M 320 115 L 100 40"/>
+              <path d="M 320 115 L 100 190"/>
+              <path d="M 320 115 L 320 30"/>
+              <path d="M 320 115 L 540 40"/>
+              <path d="M 320 115 L 540 190"/>
+            </g>
+            <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#5C6B64">
+              <g><circle cx="100" cy="40" r="22" fill="#FFFFFF" stroke="#DDE1D8"/><text x="100" y="44" text-anchor="middle" fill="#16211D" font-size="13">AQ</text><text x="100" y="70" text-anchor="middle">Air quality</text></g>
+              <g><circle cx="100" cy="190" r="22" fill="#FFFFFF" stroke="#DDE1D8"/><text x="100" y="194" text-anchor="middle" fill="#16211D" font-size="13">T</text><text x="100" y="220" text-anchor="middle">Temperature</text></g>
+              <g><circle cx="320" cy="30" r="22" fill="#FFFFFF" stroke="#DDE1D8"/><text x="320" y="34" text-anchor="middle" fill="#16211D" font-size="13">H</text><text x="320" y="14" text-anchor="middle">Humidity</text></g>
+              <g><circle cx="540" cy="40" r="22" fill="#FFFFFF" stroke="#DDE1D8"/><text x="540" y="44" text-anchor="middle" fill="#16211D" font-size="13">PM</text><text x="540" y="70" text-anchor="middle">Particulates</text></g>
+              <g><circle cx="540" cy="190" r="22" fill="#FFFFFF" stroke="#DDE1D8"/><text x="540" y="194" text-anchor="middle" fill="#16211D" font-size="13">TR</text><text x="540" y="220" text-anchor="middle">Traffic flow</text></g>
+            </g>
+            <circle cx="320" cy="115" r="34" fill="#1F7A72"/>
+            <text x="320" y="112" text-anchor="middle" fill="#F5F6F1" font-family="IBM Plex Mono, monospace" font-size="10">GLOBAL</text>
+            <text x="320" y="124" text-anchor="middle" fill="#F5F6F1" font-family="IBM Plex Mono, monospace" font-size="10">MODEL</text>
+            <g transform="translate(190,150)">
+              <text x="0" y="0" font-family="IBM Plex Mono, monospace" font-size="10" fill="#D98A3D">raw data ✕ stays local</text>
+            </g>
+          </svg>
+        </div>
+        <div class="ap-diagram-caption">EDGE DEVICES EXCHANGE MODEL UPDATES ONLY — SENSOR READINGS NEVER LEAVE THE DEVICE</div>
+      </div>
+    </header>
+
+    <!-- 01 SUMMARY -->
+    <section class="ap-section" id="ap-summary">
+      <div class="ap-wrap">
+        <div class="ap-section-head"><span class="ap-sec-num">01</span><h2 class="ap-h2">Project Summary</h2></div>
+        <p class="ap-lead">Urban environments generate enormous volumes of climate and air-pollution data through heterogeneous IoT sensors. Conventional cloud-based analytics require continuous transmission of raw sensor data to centralized servers, driving up communication overhead, latency, bandwidth use, and privacy risk.</p>
+        <p class="ap-lead">This project develops a privacy-preserving Federated Learning (FL) framework for synthesizing and analyzing climate and pollution big data. Rather than transferring raw data, machine learning models are trained collaboratively across geographically distributed edge devices, with data staying where it's collected.</p>
+        <p class="ap-lead">The framework brings together Federated Learning, Edge Computing, Big Data Analytics, Artificial Intelligence, and IoT into a scalable, real-time, communication-efficient environmental monitoring system for smart city applications — including novel federated optimization algorithms, intelligent data fusion, adaptive model aggregation, and edge-cloud orchestration.</p>
+      </div>
+    </section>
+
+    <!-- 02 OBJECTIVES -->
+    <section class="ap-section" id="ap-objectives">
+      <div class="ap-wrap">
+        <div class="ap-section-head"><span class="ap-sec-num">02</span><h2 class="ap-h2">Objectives</h2></div>
+        <ul class="ap-list">
+          <li>Develop privacy-preserving federated learning models for climate and pollution analytics.</li>
+          <li>Design communication-efficient model aggregation techniques for distributed edge networks.</li>
+          <li>Develop intelligent data fusion techniques for heterogeneous environmental datasets.</li>
+          <li>Build scalable edge-cloud architectures for real-time monitoring.</li>
+          <li>Optimize latency, communication cost, and energy consumption in edge intelligence.</li>
+          <li>Develop deployable prototypes for smart city environmental monitoring.</li>
+          <li>Enable accurate prediction of air quality and climate parameters using distributed AI.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 03 RESEARCH AREAS -->
+    <section class="ap-section" id="ap-areas">
+      <div class="ap-wrap">
+        <div class="ap-section-head"><span class="ap-sec-num">03</span><h2 class="ap-h2">Research Areas</h2></div>
+        <div class="ap-chips">
+          <span class="ap-chip">Federated Learning</span>
+          <span class="ap-chip">Edge Computing</span>
+          <span class="ap-chip">Distributed AI</span>
+          <span class="ap-chip">Internet of Things</span>
+          <span class="ap-chip">Big Data Analytics</span>
+          <span class="ap-chip">Climate Informatics</span>
+          <span class="ap-chip">Air Pollution Monitoring</span>
+          <span class="ap-chip">Machine Learning</span>
+          <span class="ap-chip">Smart Cities</span>
+          <span class="ap-chip">Distributed Systems</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 OUTCOMES -->
+    <section class="ap-section" id="ap-outcomes">
+      <div class="ap-wrap">
+        <div class="ap-section-head"><span class="ap-sec-num">04</span><h2 class="ap-h2">Expected Outcomes</h2></div>
+        <ul class="ap-list amber">
+          <li>Novel federated learning algorithms for distributed environmental intelligence.</li>
+          <li>Privacy-preserving big data analytics framework.</li>
+          <li>Intelligent edge-based climate and pollution prediction models.</li>
+          <li>Communication-efficient distributed machine learning techniques.</li>
+          <li>Prototype deployment for real-time environmental monitoring.</li>
+          <li>Publications in leading SCI/SCIE journals and international conferences.</li>
+          <li>Software frameworks and deployable research prototypes.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 05 APPLICATIONS -->
+    <section class="ap-section" id="ap-applications">
+      <div class="ap-wrap">
+        <div class="ap-section-head"><span class="ap-sec-num">05</span><h2 class="ap-h2">Potential Applications</h2></div>
+        <div class="ap-app-grid">
+          <div class="ap-app-cell">Smart Cities</div>
+          <div class="ap-app-cell">Air Quality Monitoring</div>
+          <div class="ap-app-cell">Climate Prediction</div>
+          <div class="ap-app-cell">Environmental Decision Support</div>
+          <div class="ap-app-cell">Intelligent IoT Infrastructure</div>
+          <div class="ap-app-cell">Disaster Preparedness</div>
+          <div class="ap-app-cell">Urban Planning</div>
+          <div class="ap-app-cell">Sustainable Development</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 TEAM -->
+    <section class="ap-section" id="ap-team">
+      <div class="ap-wrap">
+        <div class="ap-section-head"><span class="ap-sec-num">06</span><h2 class="ap-h2">Project Team</h2></div>
+        <div class="ap-team-grid">
+
+          <div class="ap-team-card">
+            <div>
+              <div class="ap-role pi">Principal Investigator</div>
+              <p class="ap-name">Dr. Bindu Singh</p>
+              <p class="ap-affil">Head, Incubation Center &amp;<br>Assistant Professor<br>Dept. of Computer Science<br>IIIT Lucknow</p>
+            </div>
+            <div class="ap-bio">An academic and researcher at IIIT Lucknow with expertise in Artificial Intelligence, Machine Learning, Data Analytics, and intelligent computing systems. Actively involved in research, innovation, technology incubation, and interdisciplinary AI applications.</div>
+          </div>
+
+          <div class="ap-team-card">
+            <div>
+              <div class="ap-role">Co-Principal Investigator</div>
+              <p class="ap-name">Dr. Mainak Adhikari</p>
+              <p class="ap-affil">Assistant Professor Grade-I<br>School of Data Science<br>IISER Thiruvananthapuram</p>
+            </div>
+            <div class="ap-bio">Prior to joining IISER in February 2024, served as Assistant Professor in the Dept. of Computer Science at IIIT Lucknow (2021–2024). Completed his Ph.D. at IIT (ISM) Dhanbad and postdoctoral research at the University of Tartu, Estonia, under the EC Horizon 2020 RADON project with Imperial College London. Leads the VGNet (Vikendrit Gyaan Network) Lab and has secured multiple sponsored research projects. Research interests span Distributed, Serverless, and Cloud/Fog/Edge Computing, Federated Learning, TinyML, Split Learning, Explainable AI, IoT, and AI-driven data analytics. Senior Member of IEEE and INAE, and recognized among Stanford University's World's Top 2% Scientists.</div>
+          </div>
+
+          <div class="ap-team-card">
+            <div>
+              <div class="ap-role">Co-Principal Investigator</div>
+              <p class="ap-name">Dr. Soumendu Chakraborty</p>
+              <p class="ap-affil">Assistant Professor<br>Dept. of Computer Science<br>IIIT Lucknow</p>
+            </div>
+            <div class="ap-bio">Joined IIIT Lucknow in January 2018. Received his Ph.D. in Information Technology from IIIT Allahabad with an outstanding academic record. Research interests include Machine Learning, Artificial Intelligence, Data Mining, Information Security, Pattern Recognition, and Intelligent Computing. Qualified GATE, received MHRD Junior and Senior Research Fellowships, and reviews for reputed international journals and conferences.</div>
+          </div>
+
+          <div class="ap-team-card">
+            <div>
+              <div class="ap-role">Research Associate</div>
+              <p class="ap-name">Ms. Akansha Singh</p>
+              <p class="ap-affil">Ph.D. Research Scholar<br>Dept. of Computer Science<br>IIIT Lucknow</p>
+            </div>
+            <div class="ap-bio">Enrolled in 2024 under the supervision of Dr. Soumendu Chakraborty. Research interests include Big Data Analytics, Machine Learning, and Cloud Computing. Contributes to the design and implementation of federated learning frameworks, distributed big data analytics, edge intelligence, experimental validation, prototype development, and dissemination of research.</div>
+          </div>
+
+          <div class="ap-team-card">
+            <div>
+              <div class="ap-role">Project Intern</div>
+              <p class="ap-name">Mr. Shyam Mishra</p>
+              <p class="ap-affil">B.Tech, Computer Science &amp; Engineering<br>MMMUT, Gorakhpur</p>
+            </div>
+            <div class="ap-bio">Academic interests lie in Artificial Intelligence and Machine Learning. Primarily contributes full-stack web development for the project, bridging core software architecture and front-end implementation.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div><!-- end ap-root -->
 
   <footer class="site-footer">
     <div class="footer-emails">

@@ -525,8 +525,8 @@
     <button id="cornerLoginBtn" class="corner-login-btn" onclick="toggleLoginBox()">🔒</button>
     <div id="loginBox" class="corner-login-box" style="display:none;">
       <h3>Admin Login</h3>
-      <div class="field"><label>ID</label><input type="email" id="loginEmail" placeholder="admin@iiitl.ac.in"></div>
-      <div class="field"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••••"></div>
+      <div class="field"><label>ID</label><input type="email" id="loginEmail"></div>
+      <div class="field"><label>Password</label><input type="password" id="loginPassword"></div>
       <button class="btn-primary" onclick="handleLoginSubmit()">Login</button>
       <button class="btn-secondary" onclick="toggleLoginBox()">Close</button>
       <div id="loginStatus" class="status-msg"></div>
@@ -567,7 +567,7 @@
 
   <!-- ---------- JAVASCRIPT STATE ENGINE LAYER ---------- -->
   <script>
-    const ADMIN_CREDENTIALS = { email: "admin@iiitl.ac.in", password: "Lucknow123" };
+    const ADMIN_CREDENTIALS = { email: "Akansha11@iiitl.ac.in", password: "Lucknow@002" };
 
     let localCacheStore = [
       {

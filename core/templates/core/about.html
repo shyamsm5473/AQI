@@ -36,10 +36,47 @@
   .po-team-role { display:inline-block; font-size:0.75rem; font-weight:700; color:#02575d; background:rgba(2,87,93,0.08); padding:4px 12px; border-radius:20px; margin-bottom:14px; text-transform:uppercase; letter-spacing:0.5px; }
   .po-team-card a { display:inline-block; font-size:0.85rem; color:#02575d; text-decoration:none; word-break:break-all; font-weight:500; transition:color 0.2s; }
   .po-team-card a:hover { color:#4ed8e2; text-decoration:underline; }
-  .po-about-box { background:#ffffff; border:1px solid #e2e8f0; border-radius:20px; padding:36px; margin-top:56px; box-shadow:0 10px 30px rgba(15,24,48,0.04); }
-  .po-about-box h3 { font-family:'Sora',sans-serif; font-size:1.4rem; color:#1a2540; margin:0 0 14px 0; }
-  .po-about-box p { color:#5a6472; font-size:0.98rem; line-height:1.75; margin:0 0 12px 0; }
-  .po-about-box p:last-child { margin-bottom:0; }
+  /* --- ABOUT PROJECT (CST UP FL Project) --- */
+  .ap-root {
+    --ap-bg:#F5F6F1; --ap-paper:#FFFFFF; --ap-ink:#16211D; --ap-slate:#5C6B64;
+    --ap-teal:#1F7A72; --ap-amber:#D98A3D; --ap-line:#DDE1D8;
+    --ap-display:'Space Grotesk',sans-serif; --ap-mono:'IBM Plex Mono',monospace;
+    background:var(--ap-bg); border-radius:24px; margin-top:56px; overflow:hidden;
+  }
+  .ap-hero { position:relative; padding:64px 0 48px; border-bottom:1px solid var(--ap-line); background:var(--ap-paper); }
+  .ap-wrap { max-width:980px; margin:0 auto; padding:0 32px; }
+  .ap-eyebrow { font-family:var(--ap-mono); font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ap-teal); display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+  .ap-eyebrow::before { content:""; width:22px; height:1px; background:var(--ap-teal); }
+  .ap-title { font-family:var(--ap-display); font-weight:600; font-size:clamp(20px,3.2vw,36px); line-height:1.2; letter-spacing:-0.01em; color:var(--ap-ink); margin:0 0 18px; max-width:800px; }
+  .ap-sub { font-size:15px; color:var(--ap-slate); max-width:600px; margin:0 0 28px; line-height:1.6; }
+  .ap-meta { display:flex; flex-wrap:wrap; gap:22px; font-family:var(--ap-mono); font-size:11.5px; color:var(--ap-slate); }
+  .ap-meta-item { display:flex; flex-direction:column; gap:3px; }
+  .ap-meta-label { text-transform:uppercase; letter-spacing:.08em; color:#8E9A93; }
+  .ap-meta-val { color:var(--ap-ink); font-size:12.5px; }
+  .ap-diagram-holder { margin-top:44px; display:flex; justify-content:center; }
+  .ap-diagram-caption { text-align:center; font-family:var(--ap-mono); font-size:11px; color:var(--ap-slate); letter-spacing:.04em; margin-top:10px; }
+  .ap-section { padding:44px 0; border-bottom:1px solid var(--ap-line); background:var(--ap-paper); }
+  .ap-section:nth-child(even) { background:var(--ap-bg); }
+  .ap-section-head { display:flex; align-items:baseline; gap:12px; margin-bottom:22px; }
+  .ap-sec-num { font-family:var(--ap-mono); font-size:12px; color:var(--ap-amber); padding-top:2px; }
+  .ap-h2 { font-family:var(--ap-display); font-weight:600; font-size:19px; margin:0; letter-spacing:-0.01em; color:var(--ap-ink); }
+  .ap-lead { max-width:720px; color:var(--ap-ink); font-size:14.5px; line-height:1.7; margin:0 0 12px; }
+  .ap-list { list-style:none; margin:0; padding:0; display:grid; gap:11px; max-width:720px; }
+  .ap-list li { position:relative; padding-left:22px; color:var(--ap-ink); font-size:14.5px; line-height:1.6; }
+  .ap-list li::before { content:""; position:absolute; left:0; top:7px; width:8px; height:8px; background:var(--ap-teal); border-radius:1px; transform:rotate(45deg); }
+  .ap-list.amber li::before { background:var(--ap-amber); }
+  .ap-chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .ap-chip { font-family:var(--ap-mono); font-size:11.5px; padding:6px 13px; border:1px solid var(--ap-line); border-radius:20px; background:var(--ap-paper); color:var(--ap-ink); }
+  .ap-app-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(175px,1fr)); gap:1px; background:var(--ap-line); border:1px solid var(--ap-line); max-width:760px; }
+  .ap-app-cell { background:var(--ap-paper); padding:15px 17px; font-size:13.5px; color:var(--ap-ink); }
+  .ap-team-grid { display:grid; gap:16px; }
+  .ap-team-card { background:var(--ap-paper); border:1px solid var(--ap-line); padding:22px 24px; display:grid; grid-template-columns:180px 1fr; gap:20px; border-radius:4px; }
+  @media(max-width:640px){ .ap-team-card{grid-template-columns:1fr;} }
+  .ap-role { font-family:var(--ap-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--ap-teal); margin-bottom:6px; }
+  .ap-role.pi { color:var(--ap-amber); }
+  .ap-name { font-family:var(--ap-display); font-weight:600; font-size:16px; margin:0 0 4px; color:var(--ap-ink); }
+  .ap-affil { font-size:12.5px; color:var(--ap-slate); margin:0; line-height:1.55; }
+  .ap-bio { font-size:13.5px; color:var(--ap-ink); margin-top:10px; line-height:1.65; }
 </style>
 {% endblock %}
 
@@ -109,158 +146,168 @@
     </div>
   </div>
 
-  <div class="po-about-box">
-    <h3>About Project</h3>
-   <p><strong>Council of Science & Technology (CST), Uttar Pradesh Sponsored Project</strong></p>
-        <h2>Synthesis of Big Data using Federated Learning for Analyzing Climate and Pollution Parameters in Edge Networks for Urban Areas</h2>
-    </header>
+<!-- ===== CST UP PROJECT DETAIL ===== -->
+<div class="ap-root">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <hr>
-<br>
+  <!-- HERO -->
+  <header class="ap-hero">
+    <div class="ap-wrap">
+      <div class="ap-eyebrow">CST Uttar Pradesh Sponsored Project &middot; IIIT Lucknow</div>
+      <h3 class="ap-title">Synthesis of Big Data using Federated Learning for Analyzing Climate and Pollution Parameters in Edge Networks for Urban Areas</h3>
+      <p class="ap-sub">A privacy-preserving edge intelligence framework: models travel between sensors and the cloud, so raw climate and pollution data never has to.</p>
+      <div class="ap-meta">
+        <div class="ap-meta-item">
+          <span class="ap-meta-label">Funding Agency</span>
+          <span class="ap-meta-val">Council of Science &amp; Technology (CST), Uttar Pradesh</span>
+        </div>
+        <div class="ap-meta-item">
+          <span class="ap-meta-label">Host Institute</span>
+          <span class="ap-meta-val">Dept. of Computer Science, IIIT Lucknow</span>
+        </div>
+        <div class="ap-meta-item">
+          <span class="ap-meta-label">Location</span>
+          <span class="ap-meta-val">Chak Ganjaria, C.G. City, Lucknow &ndash; 226002</span>
+        </div>
+      </div>
+     
+     
+    </div>
+  </header>
 
-    <section>
-        <h3>Funding Agency</h3>
-        <p>Council of Science & Technology (CST), Uttar Pradesh<br>
-        Vigyan Bhawan, 9 Nabiullah Road, Lucknow – 226018</p>
-    </section>
+  <!-- 01 SUMMARY -->
+  <section class="ap-section" id="ap-summary">
+    <div class="ap-wrap">
+      <div class="ap-section-head"><span class="ap-sec-num">01</span><h2 class="ap-h2">Project Summary</h2></div>
+      <p class="ap-lead">Urban environments generate enormous volumes of climate and air-pollution data through heterogeneous IoT sensors. Conventional cloud-based analytics require continuous transmission of raw sensor data to centralized servers, driving up communication overhead, latency, bandwidth use, and privacy risk.</p>
+      <p class="ap-lead">This project develops a privacy-preserving Federated Learning (FL) framework for synthesizing and analyzing climate and pollution big data. Rather than transferring raw data, machine learning models are trained collaboratively across geographically distributed edge devices, with data staying where it's collected.</p>
+      <p class="ap-lead">The framework brings together Federated Learning, Edge Computing, Big Data Analytics, Artificial Intelligence, and IoT into a scalable, real-time, communication-efficient environmental monitoring system for smart city applications &mdash; including novel federated optimization algorithms, intelligent data fusion, adaptive model aggregation, and edge-cloud orchestration.</p>
+    </div>
+  </section>
 
-    <section>
-        <h3>Host Institute</h3>
-        <p>Department of Computer Science<br>
-        Indian Institute of Information Technology (IIIT) Lucknow<br>
-        Chak Ganjaria, C.G. City, Lucknow – 226002</p>
-    </section>
+  <!-- 02 OBJECTIVES -->
+  <section class="ap-section" id="ap-objectives">
+    <div class="ap-wrap">
+      <div class="ap-section-head"><span class="ap-sec-num">02</span><h2 class="ap-h2">Objectives</h2></div>
+      <ul class="ap-list">
+        <li>Develop privacy-preserving federated learning models for climate and pollution analytics.</li>
+        <li>Design communication-efficient model aggregation techniques for distributed edge networks.</li>
+        <li>Develop intelligent data fusion techniques for heterogeneous environmental datasets.</li>
+        <li>Build scalable edge-cloud architectures for real-time monitoring.</li>
+        <li>Optimize latency, communication cost, and energy consumption in edge intelligence.</li>
+        <li>Develop deployable prototypes for smart city environmental monitoring.</li>
+        <li>Enable accurate prediction of air quality and climate parameters using distributed AI.</li>
+      </ul>
+    </div>
+  </section>
 
-    <hr>
-<br>
-    <section>
-        <h3>Project Summary</h3>
-        <p>Urban environments generate enormous volumes of climate and air pollution data through heterogeneous Internet of Things (IoT) sensors. Conventional cloud-based analytics require continuous transmission of raw sensor data to centralized servers, resulting in high communication overhead, increased latency, bandwidth consumption, and privacy concerns.</p>
-        <p>This project aims to develop a privacy-preserving Federated Learning (FL)-based edge intelligence framework for synthesizing and analyzing climate and pollution big data in urban environments. Instead of transferring raw data, intelligent machine learning models will be collaboratively trained across geographically distributed edge devices while preserving data privacy.</p>
-        <p>The proposed framework integrates Federated Learning, Edge Computing, Big Data Analytics, Artificial Intelligence, and Internet of Things (IoT) to enable scalable, real-time, and communication-efficient environmental monitoring systems capable of supporting smart city applications.</p>
-        <p>The project will investigate novel federated optimization algorithms, intelligent data fusion techniques, adaptive model aggregation strategies, and edge-cloud orchestration mechanisms for efficient environmental analytics.</p>
-    </section>
+  <!-- 03 RESEARCH AREAS -->
+  <section class="ap-section" id="ap-areas">
+    <div class="ap-wrap">
+      <div class="ap-section-head"><span class="ap-sec-num">03</span><h2 class="ap-h2">Research Areas</h2></div>
+      <div class="ap-chips">
+        <span class="ap-chip">Federated Learning</span>
+        <span class="ap-chip">Edge Computing</span>
+        <span class="ap-chip">Distributed AI</span>
+        <span class="ap-chip">Internet of Things</span>
+        <span class="ap-chip">Big Data Analytics</span>
+        <span class="ap-chip">Climate Informatics</span>
+        <span class="ap-chip">Air Pollution Monitoring</span>
+        <span class="ap-chip">Machine Learning</span>
+        <span class="ap-chip">Smart Cities</span>
+        <span class="ap-chip">Distributed Systems</span>
+      </div>
+    </div>
+  </section>
 
-    <hr>
-<br>
-    <section>
-        <h3>Objectives</h3>
-        <ul>
-            <li>Develop privacy-preserving Federated Learning models for climate and pollution data analytics.</li>
-            <li>Design communication-efficient model aggregation techniques for distributed edge networks.</li>
-            <li>Develop intelligent data fusion techniques for heterogeneous environmental datasets.</li>
-            <li>Build scalable edge-cloud architectures for real-time monitoring.</li>
-            <li>Optimize latency, communication cost, and energy consumption in edge intelligence.</li>
-            <li>Develop deployable prototypes for smart city environmental monitoring.</li>
-            <li>Enable accurate prediction of air quality and climate parameters using distributed AI.</li>
-        </ul>
-    </section>
+  <!-- 04 EXPECTED OUTCOMES -->
+  <section class="ap-section" id="ap-outcomes">
+    <div class="ap-wrap">
+      <div class="ap-section-head"><span class="ap-sec-num">04</span><h2 class="ap-h2">Expected Outcomes</h2></div>
+      <ul class="ap-list amber">
+        <li>Novel federated learning algorithms for distributed environmental intelligence.</li>
+        <li>Privacy-preserving big data analytics framework.</li>
+        <li>Intelligent edge-based climate and pollution prediction models.</li>
+        <li>Communication-efficient distributed machine learning techniques.</li>
+        <li>Prototype deployment for real-time environmental monitoring.</li>
+        <li>Publications in leading SCI/SCIE journals and international conferences.</li>
+        <li>Software frameworks and deployable research prototypes.</li>
+      </ul>
+    </div>
+  </section>
 
-    <hr>
-<br>
-    <section>
-        <h3>Research Areas</h3>
-        <ul>
-            <li>Federated Learning</li>
-            <li>Edge Computing</li>
-            <li>Distributed Artificial Intelligence</li>
-            <li>Internet of Things (IoT)</li>
-            <li>Big Data Analytics</li>
-            <li>Climate Informatics</li>
-            <li>Air Pollution Monitoring</li>
-            <li>Machine Learning</li>
-            <li>Smart Cities</li>
-            <li>Distributed Systems</li>
-        </ul>
-    </section>
+  <!-- 05 APPLICATIONS -->
+  <section class="ap-section" id="ap-applications">
+    <div class="ap-wrap">
+      <div class="ap-section-head"><span class="ap-sec-num">05</span><h2 class="ap-h2">Potential Applications</h2></div>
+      <div class="ap-app-grid">
+        <div class="ap-app-cell">Smart Cities</div>
+        <div class="ap-app-cell">Air Quality Monitoring</div>
+        <div class="ap-app-cell">Climate Prediction</div>
+        <div class="ap-app-cell">Environmental Decision Support</div>
+        <div class="ap-app-cell">Intelligent IoT Infrastructure</div>
+        <div class="ap-app-cell">Disaster Preparedness</div>
+        <div class="ap-app-cell">Urban Planning</div>
+        <div class="ap-app-cell">Sustainable Development</div>
+      </div>
+    </div>
+  </section>
 
-    <hr>
-<br>
-    <section>
-        <h3>Expected Outcomes</h3>
-        <ul>
-            <li>Novel federated learning algorithms for distributed environmental intelligence.</li>
-            <li>Privacy-preserving big data analytics framework.</li>
-            <li>Intelligent edge-based climate and pollution prediction models.</li>
-            <li>Communication-efficient distributed machine learning techniques.</li>
-            <li>Prototype deployment for real-time environmental monitoring.</li>
-            <li>Publications in leading SCI/SCIE journals and international conferences.</li>
-            <li>Software frameworks and deployable research prototypes.</li>
-        </ul>
-    </section>
+  <!-- 06 TEAM -->
+  <section class="ap-section" id="ap-team">
+    <div class="ap-wrap">
+      <div class="ap-section-head"><span class="ap-sec-num">06</span><h2 class="ap-h2">Project Team</h2></div>
+      <div class="ap-team-grid">
 
-    <hr>
-<br>
-    <section>
-        <h3>Potential Applications</h3>
-        <ul>
-            <li>Smart Cities</li>
-            <li>Air Quality Monitoring</li>
-            <li>Climate Prediction</li>
-            <li>Environmental Decision Support Systems</li>
-            <li>Intelligent IoT Infrastructure</li>
-            <li>Disaster Preparedness</li>
-            <li>Urban Planning</li>
-            <li>Sustainable Development</li>
-        </ul>
-    </section>
-
-    <hr>
-<br>
-    <section>
-        <h3> Project Team</h3>
-
-        <div>
-            <h3>Principal Investigator (PI)</h3>
-            <p><strong>Dr. Bindu Singh</strong></p>
-            <p>Head, Incubation Center & Assistant Professor<br>
-            Department of Computer Science<br>
-            Indian Institute of Information Technology Lucknow</p>
-            <p>Dr. Bindu Singh is an academic and researcher at IIIT Lucknow with expertise in Artificial Intelligence, Machine Learning, Data Analytics, and intelligent computing systems. She is actively involved in research, innovation, technology incubation, and interdisciplinary AI applications.</p>
+        <div class="ap-team-card">
+          <div>
+            <div class="ap-role pi">Principal Investigator</div>
+            <p class="ap-name">Dr. Bindu Singh</p>
+            <p class="ap-affil">Head, Incubation Center &amp;<br>Assistant Professor<br>Dept. of Computer Science<br>IIIT Lucknow</p>
+          </div>
+          <div class="ap-bio">An academic and researcher at IIIT Lucknow with expertise in Artificial Intelligence, Machine Learning, Data Analytics, and intelligent computing systems. Actively involved in research, innovation, technology incubation, and interdisciplinary AI applications.</div>
         </div>
 
-        <br>
-
-        <div>
-            <h4>Co-Principal Investigator (Co-PI)</h4>
-            <p><strong>Dr. Mainak Adhikari</strong></p>
-            <p>Assistant Professor Grade-I<br>
-            School of Data Science<br>
-            Indian Institute of Science Education and Research (IISER) Thiruvananthapuram</p>
-            <p>Dr. Mainak Adhikari is an Assistant Professor at the School of Data Science, IISER Thiruvananthapuram. Prior to joining IISER in February 2024, he served as an Assistant Professor in the Department of Computer Science at IIIT Lucknow (2021–2024). He completed his Ph.D. from IIT (ISM) Dhanbad and his postdoctoral research at the University of Tartu, Estonia, under the European Commission Horizon 2020 RADON project in collaboration with Imperial College London. He leads the VGNet (Vikendrit Gyaan Network) Lab and has secured multiple sponsored research projects. His research interests include Distributed Computing, Serverless Computing, Cloud/Fog/Edge Computing, Federated Learning, TinyML, Split Learning, Explainable AI, Internet of Things (IoT), and AI-driven data analytics. He is also a Senior Member of IEEE and INAE, and has been recognized among Stanford University's World's Top 2% Scientists.</p>
+        <div class="ap-team-card">
+          <div>
+            <div class="ap-role">Co-Principal Investigator</div>
+            <p class="ap-name">Dr. Mainak Adhikari</p>
+            <p class="ap-affil">Assistant Professor Grade-I<br>School of Data Science<br>IISER Thiruvananthapuram</p>
+          </div>
+          <div class="ap-bio">Prior to joining IISER in February 2024, served as Assistant Professor in the Dept. of Computer Science at IIIT Lucknow (2021&ndash;2024). Completed his Ph.D. at IIT (ISM) Dhanbad and postdoctoral research at the University of Tartu, Estonia, under the EC Horizon 2020 RADON project with Imperial College London. Leads the VGNet (Vikendrit Gyaan Network) Lab. Research interests span Distributed, Serverless, and Cloud/Fog/Edge Computing, Federated Learning, TinyML, Split Learning, Explainable AI, IoT, and AI-driven data analytics. Senior Member of IEEE and INAE, and recognized among Stanford University's World's Top 2% Scientists.</div>
         </div>
 
-        <br>
-
-        <div>
-            <h4>Co-Principal Investigator (Co-PI)</h4>
-            <p><strong>Dr. Soumendu Chakraborty</strong></p>
-            <p>Assistant Professor<br>
-            Department of Computer Science<br>
-            Indian Institute of Information Technology Lucknow</p>
-            <p>Dr. Soumendu Chakraborty joined IIIT Lucknow in January 2018. He received his Ph.D. in Information Technology from IIIT Allahabad with an outstanding academic record. His research interests include Machine Learning, Artificial Intelligence, Data Mining, Information Security, Pattern Recognition, and Intelligent Computing. He has qualified GATE, received MHRD Junior and Senior Research Fellowships, and actively contributes as a reviewer for reputed international journals and conferences. He has published extensively in the areas of AI and intelligent data analytics and is involved in several collaborative research initiatives at IIIT Lucknow.</p>
+        <div class="ap-team-card">
+          <div>
+            <div class="ap-role">Co-Principal Investigator</div>
+            <p class="ap-name">Dr. Soumendu Chakraborty</p>
+            <p class="ap-affil">Assistant Professor<br>Dept. of Computer Science<br>IIIT Lucknow</p>
+          </div>
+          <div class="ap-bio">Joined IIIT Lucknow in January 2018. Received his Ph.D. in Information Technology from IIIT Allahabad. Research interests include Machine Learning, Artificial Intelligence, Data Mining, Information Security, Pattern Recognition, and Intelligent Computing. Qualified GATE, received MHRD Junior and Senior Research Fellowships, and reviews for reputed international journals and conferences.</div>
         </div>
 
-        <br>
-
-        <div>
-            <h4> Research Associate (RA)</h3>
-            <p><strong>Ms. Akansha Singh</strong></p>
-            <p>Ph.D. Research Scholar<br>
-            Department of Computer Science<br>
-            Indian Institute of Information Technology (IIIT) Lucknow</p>
-            <p>Ms. Akansha Singh is a Ph.D. Research Scholar in the Department of Computer Science at IIIT Lucknow, enrolled in 2024 under the supervision of Dr. Soumendu Chakraborty. Her research interests include Big Data Analytics, Machine Learning, and Cloud Computing. As a Research Associate in this project, she will contribute to the design and implementation of federated learning frameworks, distributed big data analytics, edge intelligence, experimental validation, prototype development, and dissemination of research</p>
+        <div class="ap-team-card">
+          <div>
+            <div class="ap-role">Research Associate</div>
+            <p class="ap-name">Ms. Akansha Singh</p>
+            <p class="ap-affil">Ph.D. Research Scholar<br>Dept. of Computer Science<br>IIIT Lucknow</p>
+          </div>
+          <div class="ap-bio">Enrolled in 2024 under the supervision of Dr. Soumendu Chakraborty. Research interests include Big Data Analytics, Machine Learning, and Cloud Computing. Contributes to the design and implementation of federated learning frameworks, distributed big data analytics, edge intelligence, experimental validation, prototype development, and dissemination of research.</div>
         </div>
 
-        <br>
-
-        <div>
-            <h4>Project Intern</h4>
-            <p><strong>Mr. Shyam Mishra</strong></p>
-            <p>B.Tech student in the Department of Computer Science and Engineering at Madan Mohan Malaviya University of Technology (MMMUT), Gorakhpur.</p>
-            <p>His academic interests lie in the fields of Artificial Intelligence and Machine Learning,  . Serving as a Project Intern for this initiative, he will primarily contribute to full-stack web development, bridging the gap between core software architecture and front-end implementation.</p>
+        <div class="ap-team-card">
+          <div>
+            <div class="ap-role">Project Intern</div>
+            <p class="ap-name">Mr. Shyam Mishra</p>
+            <p class="ap-affil">B.Tech, Computer Science &amp; Engineering<br>MMMUT, Gorakhpur</p>
+          </div>
+          <div class="ap-bio">Academic interests lie in Artificial Intelligence and Machine Learning. Primarily contributes full-stack web development for the project, bridging core software architecture and front-end implementation.</div>
         </div>
-    </section>
-  </div>
+
+      </div>
+    </div>
+  </section>
+
+</div><!-- end ap-root -->
 </section>
 {% endblock %}
