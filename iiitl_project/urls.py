@@ -11,11 +11,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     # ── Google Search Console ownership verification ───────────────────────────
-    # Place google84ea73e41abe6313.html inside BASE_DIR/templates/
+    # File lives at: BASE_DIR/templates/google8e0c41ecaf1409a5.html
     path(
-        "google84ea73e41abe6313.html",
+        "google8e0c41ecaf1409a5.html",
         TemplateView.as_view(
-            template_name="google84ea73e41abe6313.html",
+            template_name="google8e0c41ecaf1409a5.html",
             content_type="text/html",
         ),
         name="google-search-console-verify",
