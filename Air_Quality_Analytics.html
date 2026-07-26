@@ -142,9 +142,129 @@
       grid-column: 1 / -1;
     }
 
+    @media (max-width: 900px) {
+      .aqi-dashboard {
+        padding: 0 14px;
+        margin: 28px auto;
+      }
+      .aqi-dashboard-header h2 {
+        font-size: 1.6rem;
+      }
+    }
+
     @media (max-width: 800px) {
       .aqi-grid {
         grid-template-columns: 1fr;
+      }
+      .aqi-dashboard { padding: 0 12px; }
+    }
+
+    @media (max-width: 768px) {
+      .aqi-dashboard {
+        padding: 0 10px;
+        margin: 20px auto;
+      }
+      .aqi-dashboard-header {
+        margin-bottom: 20px;
+      }
+      .aqi-dashboard-header h2 {
+        font-size: 1.4rem;
+        margin-bottom: 6px;
+      }
+      .aqi-dashboard-header p {
+        font-size: 0.9rem;
+      }
+      .aqi-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .aqi-card {
+        padding: 16px 14px 10px;
+        border-radius: 10px;
+      }
+      .aqi-card h3 {
+        font-size: 0.97rem;
+      }
+      .aqi-card .aqi-card-desc {
+        font-size: 0.82rem;
+        margin-bottom: 10px;
+      }
+      /* Chart heights smaller on mobile */
+      #pie, #sc {
+        height: 220px !important;
+      }
+      #tl {
+        height: 240px !important;
+      }
+      #spk {
+        height: 340px !important;
+      }
+      #expBar {
+        height: 220px !important;
+      }
+      /* Legend text wraps */
+      .aqi-card > div[style*="display:flex"] {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      /* Download button full width on mobile */
+      #downloadCsvBtn {
+        width: 100%;
+        justify-content: center;
+      }
+      /* Table header/download row stacks */
+      .aqi-card .aqi-card-full > div:first-child {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .site-footer {
+        padding: 28px 14px;
+        margin-top: 28px;
+      }
+      .footer-emails {
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .aqi-dashboard-header h2 { font-size: 1.2rem; }
+      .aqi-dashboard-header p { font-size: 0.85rem; }
+      .aqi-card {
+        padding: 12px 10px 8px;
+      }
+      .aqi-card h3 {
+        font-size: 0.92rem;
+      }
+      #pie, #sc {
+        height: 190px !important;
+      }
+      #tl {
+        height: 210px !important;
+      }
+      #spk {
+        height: 300px !important;
+      }
+      #expBar {
+        height: 190px !important;
+      }
+      /* Table: smaller font on very small screens */
+      #csvTableBody td,
+      table thead th {
+        font-size: 0.78rem !important;
+        padding: 7px 7px !important;
+      }
+      .footer-emails {
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+      .email-item {
+        min-width: unset;
+        width: 100%;
+        max-width: 300px;
+      }
+      .footer-copy, .footer-support {
+        font-size: 0.8rem;
       }
     }
   </style>
@@ -176,18 +296,22 @@
   </div>
 
   <nav class="bottom-bar">
-    <a href="home.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="Dashboard.html">Dashboard</a>
-    <a href="#" class="active">Air Quality Analytics</a>
-    <a href="Contact.html">Contact</a>
-    <a href="Benefits.html">Benefits</a>
-     <a href="Related_publications.html">Related publications</a>
-    <a href="map.html">Map</a>
-
-    <div class="auth-buttons">
-      <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
-      <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="Dashboard.html">Dashboard</a>
+      <a href="#" class="active">Air Quality Analytics</a>
+      <a href="Contact.html">Contact</a>
+      <a href="Benefits.html">Benefits</a>
+      <a href="Related_publications.html">Related publications</a>
+      <a href="map.html">Map</a>
+      <div class="auth-buttons">
+        <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+        <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+      </div>
     </div>
   </nav>
 
@@ -491,6 +615,28 @@
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }
+  </script>
+
+  <!-- Hamburger Navigation Toggle -->
+  <script>
+    (function() {
+      var btn = document.getElementById('navHamburger');
+      var links = document.getElementById('navLinks');
+      if (btn && links) {
+        btn.addEventListener('click', function() {
+          var isOpen = links.classList.toggle('open');
+          btn.classList.toggle('open', isOpen);
+          btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        links.querySelectorAll('a').forEach(function(a) {
+          a.addEventListener('click', function() {
+            links.classList.remove('open');
+            btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
   </script>
 
 </body>

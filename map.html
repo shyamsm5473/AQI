@@ -246,18 +246,22 @@
   </div>
 
   <nav class="bottom-bar">
-    <a href="home.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="Dashboard.html">Dashboard</a>
-    <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
-    <a href="Contact.html">Contact</a>
-    <a href="Benefits.html">Benefits</a>
-     <a href="Related_publications.html">Related publications</a>
-    <a href="map.html" class="active">Map</a>
-
-    <div class="auth-buttons">
-      <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
-      <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="Dashboard.html">Dashboard</a>
+      <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
+      <a href="Contact.html">Contact</a>
+      <a href="Benefits.html">Benefits</a>
+      <a href="Related_publications.html">Related publications</a>
+      <a href="map.html" class="active">Map</a>
+      <div class="auth-buttons">
+        <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+        <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+      </div>
     </div>
   </nav>
 
@@ -448,6 +452,26 @@
 
   map.addLayer(clusters);
 </script>
-
+  <!-- Hamburger Navigation Toggle -->
+  <script>
+    (function() {
+      var btn = document.getElementById('navHamburger');
+      var links = document.getElementById('navLinks');
+      if (btn && links) {
+        btn.addEventListener('click', function() {
+          var isOpen = links.classList.toggle('open');
+          btn.classList.toggle('open', isOpen);
+          btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        links.querySelectorAll('a').forEach(function(a) {
+          a.addEventListener('click', function() {
+            links.classList.remove('open');
+            btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

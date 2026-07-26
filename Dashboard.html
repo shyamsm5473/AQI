@@ -129,6 +129,26 @@
       .sidebar { position: static; }
     }
 
+    @media (max-width: 768px) {
+      .dashboard-layout {
+        width: 98%;
+        margin: 16px auto;
+        gap: 16px;
+      }
+      .aqi-hero-card { padding: 20px; }
+      .aqi-hero-card h1 { font-size: 20px; }
+      .station-select { min-width: unset; width: 100%; }
+      .control-bar { flex-direction: column; align-items: flex-start; }
+      .control-left { width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .dashboard-layout { width: 100%; margin: 8px auto; gap: 12px; }
+      .panel { padding: 16px; }
+      .panel h2 { font-size: 16px; }
+      .aqi-hero-card h1 { font-size: 17px; }
+    }
+
     .panel {
       background-color: var(--card-white);
       border-radius: 10px;
@@ -541,18 +561,22 @@
   </div>
 
   <nav class="bottom-bar">
-    <a href="home.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="#" class="active">Dashboard</a>
-    <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
-    <a href="Contact.html">Contact</a>
-    <a href="Benefits.html">Benefits</a>
-     <a href="Related_publications.html">Related publications</a>
-    <a href="map.html">Map</a>
-
-    <div class="auth-buttons">
-      <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
-      <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="#" class="active">Dashboard</a>
+      <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
+      <a href="Contact.html">Contact</a>
+      <a href="Benefits.html">Benefits</a>
+      <a href="Related_publications.html">Related publications</a>
+      <a href="map.html">Map</a>
+      <div class="auth-buttons">
+        <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+        <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+      </div>
     </div>
   </nav>
 
@@ -1382,6 +1406,28 @@
     loadMonthlyAverages(STATIONS.find(s => s.id === currentStationId));
     setInterval(tick, 60000);
   })();
+  </script>
+
+  <!-- Hamburger Navigation Toggle -->
+  <script>
+    (function() {
+      var btn = document.getElementById('navHamburger');
+      var links = document.getElementById('navLinks');
+      if (btn && links) {
+        btn.addEventListener('click', function() {
+          var isOpen = links.classList.toggle('open');
+          btn.classList.toggle('open', isOpen);
+          btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        links.querySelectorAll('a').forEach(function(a) {
+          a.addEventListener('click', function() {
+            links.classList.remove('open');
+            btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
   </script>
 </body>
 </html>

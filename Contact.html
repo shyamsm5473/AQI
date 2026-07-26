@@ -197,7 +197,17 @@
 
     @media (max-width: 800px) {
       .contact-box { grid-template-columns: 1fr; }
-      .contact-hero { padding: 56px 28px 70px; }
+      .contact-hero { padding: 56px 24px 70px; }
+      .contact-box-form { padding: 32px 24px; }
+      .contact-box-info { padding: 32px 24px; }
+      .contact-hero h1 { font-size: 1.8rem; }
+    }
+
+    @media (max-width: 480px) {
+      .contact-hero { padding: 44px 16px 56px; }
+      .contact-hero h1 { font-size: 1.5rem; }
+      .contact-wrapper { padding: 0 12px; margin-bottom: 40px; }
+      .quick-chip { padding: 8px 14px; font-size: 0.82rem; }
     }
 
     .contact-box-form {
@@ -509,18 +519,22 @@
   </div>
 
   <nav class="bottom-bar">
-    <a href="home.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="Dashboard.html">Dashboard</a>
-    <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
-    <a href="#" class="active">Contact</a>
-    <a href="Benefits.html">Benefits</a>
-     <a href="Related_publications.html">Related publications</a>
-    <a href="map.html">Map</a>
-
-    <div class="auth-buttons">
-      <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
-      <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="Dashboard.html">Dashboard</a>
+      <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
+      <a href="#" class="active">Contact</a>
+      <a href="Benefits.html">Benefits</a>
+      <a href="Related_publications.html">Related publications</a>
+      <a href="map.html">Map</a>
+      <div class="auth-buttons">
+        <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+        <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+      </div>
     </div>
   </nav>
 
@@ -675,6 +689,28 @@
       status.className = 'form-status success';
       this.reset();
     });
+  </script>
+
+  <!-- Hamburger Navigation Toggle -->
+  <script>
+    (function() {
+      var btn = document.getElementById('navHamburger');
+      var links = document.getElementById('navLinks');
+      if (btn && links) {
+        btn.addEventListener('click', function() {
+          var isOpen = links.classList.toggle('open');
+          btn.classList.toggle('open', isOpen);
+          btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        links.querySelectorAll('a').forEach(function(a) {
+          a.addEventListener('click', function() {
+            links.classList.remove('open');
+            btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
   </script>
 </body>
 </html>

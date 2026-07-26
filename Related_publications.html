@@ -55,17 +55,29 @@
 
     /* ---------- UPDATED NAVIGATION BAR ---------- */
     .bottom-bar {
-      background: #6272c3; /* Purple/Blue base */
-      padding: 0 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 1.2rem;          /* Wide item spacing matching the image */
-      min-height: 54px;
+      background: #6272c3;
       position: sticky;
       top: 0;
       z-index: 999;
       box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
+    /* Always-visible row: links + auth + hamburger */
+    .nav-top-row {
+      display: flex;
+      align-items: center;
+      padding: 0 2.5rem;
+      min-height: 54px;
+      gap: 0.25rem;
+    }
+
+    /* Desktop links wrapper */
+    .nav-links-desktop {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.1rem;
+      flex: 1;
     }
 
     .bottom-bar a {
@@ -73,12 +85,13 @@
       text-decoration: none;
       font-family: 'Inter', sans-serif;
       font-size: 14.5px;
-      font-weight: 500;     /* Clean, medium-weight typography */
+      font-weight: 500;
       padding: 15px 12px;
       transition: background 0.15s, border-color 0.15s;
-      letter-spacing: 0.1px;   
+      letter-spacing: 0.1px;
       display: inline-flex;
       align-items: center;
+      white-space: nowrap;
     }
 
     .bottom-bar a:hover {
@@ -87,10 +100,67 @@
     }
 
     .bottom-bar a.active {
-      background: rgba(255, 255, 255, 0.15); /* Tint block */
-      border-bottom: 3px solid #f0c040;      /* Yellow base underline accent */
+      background: rgba(255, 255, 255, 0.15);
+      border-bottom: 3px solid #f0c040;
       border-radius: 0;
       font-weight: 600;
+    }
+
+    /* Hamburger button — hidden on desktop */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px 8px;
+      flex-direction: column;
+      gap: 5px;
+      z-index: 1001;
+      margin-left: 8px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2.5px;
+      background: #ffffff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile dropdown panel — hidden by default */
+    .nav-mobile-panel {
+      display: none;
+      flex-direction: column;
+      background: #5060b0;
+      padding: 6px 0 12px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .nav-mobile-panel.open {
+      display: flex;
+    }
+    .nav-mobile-panel a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 12px 20px;
+      border-radius: 0;
+      transition: background 0.15s;
+    }
+    .nav-mobile-panel a:hover,
+    .nav-mobile-panel a.active {
+      background: rgba(255,255,255,0.15);
+    }
+    .auth-buttons-mobile {
+      display: flex;
+      gap: 10px;
+      padding: 10px 20px 4px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      margin-top: 4px;
     }
 
     .auth-buttons {
@@ -426,6 +496,209 @@
     .footer-support a:hover {
       text-decoration: underline;
     }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE MEDIA QUERIES
+       ══════════════════════════════════════ */
+
+    /* ── Tablet: ≤ 900px ── */
+    @media (max-width: 900px) {
+      .top-bar {
+        padding: 12px 1.5rem;
+      }
+      .pub-wrap {
+        margin: 40px 20px 60px;
+        padding: 30px 22px;
+      }
+      .add-form {
+        padding: 22px 20px;
+      }
+      .pub-header h2 {
+        font-size: 1.8rem;
+      }
+      .corner-login {
+        top: auto;
+        bottom: 24px;
+        right: 16px;
+      }
+    }
+
+    /* ── Mobile: ≤ 768px ── */
+    @media (max-width: 768px) {
+      /* ---- TOP BAR ---- */
+      .top-bar {
+        padding: 10px 1rem;
+        gap: 8px;
+      }
+      .logo-box {
+        width: 44px;
+        height: 44px;
+      }
+      .logo-box img {
+        width: 36px;
+        height: 36px;
+      }
+      .logo-label .title,
+      .right-logo-label .title {
+        font-size: 12px;
+      }
+      .logo-label .sub,
+      .right-logo-label .sub {
+        font-size: 9.5px;
+      }
+
+      /* ---- NAV BAR ---- */
+      .nav-top-row {
+        padding: 0 1rem;
+        min-height: 48px;
+      }
+      /* Hide desktop links, show hamburger */
+      .nav-links-desktop {
+        display: none;
+      }
+      .auth-buttons {
+        display: none;
+      }
+      .nav-hamburger {
+        display: flex;
+        margin-left: auto;
+      }
+
+      /* ---- CONTENT ---- */
+      .pub-wrap {
+        margin: 24px 12px 40px;
+        padding: 22px 16px;
+        border-radius: 16px;
+      }
+      .pub-header {
+        margin-bottom: 24px;
+      }
+      .pub-header h2 {
+        font-size: 1.5rem;
+        letter-spacing: -0.3px;
+      }
+      .pub-header p {
+        font-size: 0.92rem;
+      }
+      .pub-eyebrow {
+        font-size: 0.72rem;
+        padding: 5px 12px;
+      }
+      .add-form {
+        padding: 18px 14px;
+        border-radius: 14px;
+        margin-bottom: 28px;
+      }
+      .add-form h3 {
+        font-size: 1rem;
+      }
+      .pub-card {
+        padding: 16px 16px;
+        border-radius: 10px;
+      }
+      .pub-citation {
+        font-size: 0.93rem;
+      }
+      .pub-meta-row {
+        gap: 8px;
+        font-size: 0.8rem;
+      }
+      .corner-login {
+        top: auto;
+        bottom: 20px;
+        right: 12px;
+      }
+      .corner-login-box {
+        width: calc(100vw - 32px);
+        max-width: 300px;
+        right: 0;
+      }
+      .footer-emails {
+        gap: 20px;
+      }
+      .site-footer {
+        padding: 32px 16px;
+        margin-top: 40px;
+      }
+    }
+
+    /* ── Small Mobile: ≤ 480px ── */
+    @media (max-width: 480px) {
+      /* ---- TOP BAR ---- */
+      .top-bar {
+        padding: 8px 0.75rem;
+        justify-content: space-between;
+      }
+      /* Hide UPCST text label, keep only logo icon */
+      .right-logo-label {
+        display: none;
+      }
+      .logo-box {
+        width: 40px;
+        height: 40px;
+      }
+      .logo-box img {
+        width: 32px;
+        height: 32px;
+      }
+      .logo-label .title {
+        font-size: 11px;
+      }
+      .logo-label .sub {
+        font-size: 8.5px;
+      }
+      .logo-label, .right-logo-label {
+        gap: 1px;
+      }
+
+      /* ---- CONTENT ---- */
+      .pub-wrap {
+        margin: 16px 8px 32px;
+        padding: 16px 12px;
+        border-radius: 12px;
+      }
+      .pub-header h2 {
+        font-size: 1.3rem;
+      }
+      .pub-header p {
+        font-size: 0.87rem;
+      }
+      .btn-primary, .btn-secondary {
+        font-size: 0.88rem;
+        padding: 10px 14px;
+      }
+      .pub-card {
+        padding: 14px 12px;
+      }
+      .pub-citation {
+        font-size: 0.88rem;
+        line-height: 1.55;
+      }
+      .tag-publisher, .tag-impact {
+        font-size: 0.72rem;
+      }
+      .pub-doi {
+        font-size: 0.78rem;
+        word-break: break-all;
+      }
+      .footer-emails {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .email-item {
+        min-width: unset;
+        width: 100%;
+        max-width: 300px;
+      }
+      .footer-copy,
+      .footer-support {
+        font-size: 0.8rem;
+      }
+      .corner-login-box {
+        width: calc(100vw - 24px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -456,19 +729,41 @@
   </div>
 
   <!-- Navigation Menu Bar -->
-  <nav class="bottom-bar">
-    <a href="home.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="Dashboard.html">Dashboard</a>
-    <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
-    <a href="Contact.html">Contact</a>
-    <a href="Benefits.html">Benefits</a>
-    <a href="#" class="active">Related publications</a>
-    <a href="map.html">Map</a>
-
-    <div class="auth-buttons">
-      <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
-      <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+  <nav class="bottom-bar" id="mainNav">
+    <!-- Always-visible top row of the nav -->
+    <div class="nav-top-row">
+      <div class="nav-links-desktop" id="navLinksDesktop">
+        <a href="home.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="Dashboard.html">Dashboard</a>
+        <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
+        <a href="Contact.html">Contact</a>
+        <a href="Benefits.html">Benefits</a>
+        <a href="#" class="active">Related publications</a>
+        <a href="map.html">Map</a>
+      </div>
+      <div class="auth-buttons">
+        <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+        <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+      </div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- Mobile dropdown panel -->
+    <div class="nav-mobile-panel" id="navMobilePanel">
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="Dashboard.html">Dashboard</a>
+      <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
+      <a href="Contact.html">Contact</a>
+      <a href="Benefits.html">Benefits</a>
+      <a href="#" class="active">Related publications</a>
+      <a href="map.html">Map</a>
+      <div class="auth-buttons-mobile">
+        <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+        <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+      </div>
     </div>
   </nav>
 
@@ -699,6 +994,28 @@
     function escapeAttr(str) { return (str || "").replace(/"/g, "&quot;"); }
 
     refreshUIDOMTree();
+  </script>
+
+  <!-- Hamburger Navigation Toggle -->
+  <script>
+    (function() {
+      var btn = document.getElementById('navHamburger');
+      var panel = document.getElementById('navMobilePanel');
+      if (btn && panel) {
+        btn.addEventListener('click', function() {
+          var isOpen = panel.classList.toggle('open');
+          btn.classList.toggle('open', isOpen);
+          btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        panel.querySelectorAll('a').forEach(function(a) {
+          a.addEventListener('click', function() {
+            panel.classList.remove('open');
+            btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
   </script>
 </body>
 </html>

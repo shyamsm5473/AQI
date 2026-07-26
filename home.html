@@ -393,6 +393,72 @@
     .border-good { border-left-color: #4ade80 !important; }
     .border-moderate { border-left-color: #facc15 !important; }
     .border-unhealthy { border-left-color: #f87171 !important; }
+
+    /* ── HOME PAGE RESPONSIVE OVERRIDES ── */
+    @media (max-width: 900px) {
+      .aqi-display-grid { grid-template-columns: 1fr; }
+      .aqi-location-panel { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .pollutants-flex-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        height: auto;
+        padding: 60px 24px 50px;
+        min-height: 55vh;
+      }
+      .hero-content h1 { font-size: 2.2rem; }
+      .hero-content p { font-size: 1.1rem; }
+      .hero-content { max-width: 100%; }
+
+      .features {
+        flex-direction: column;
+        padding: 28px 20px;
+        gap: 0;
+      }
+      .feature {
+        width: 100%;
+        padding: 20px 0;
+        border-right: none !important;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+      }
+      .feature:last-child { border-bottom: none; }
+
+      .photo-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 16px;
+        gap: 16px;
+      }
+      .card {
+        width: 100%;
+        max-width: 380px;
+        height: 200px;
+      }
+
+      .aqi-wrapper { padding: 0 12px; margin: 24px auto; }
+      .aqi-location-panel { padding: 16px; }
+      .aqi-location-panel h2 { font-size: 1.3rem; }
+      .aqi-hero-card { padding: 20px; gap: 18px; }
+      .aqi-huge-number { font-size: 3.5rem; }
+      .aqi-status-pill { font-size: 1.1rem; padding: 5px 14px; }
+      .weather-embed-box { min-width: unset; width: 100%; }
+      .pollutant-data-node { flex-direction: row; }
+      .btn-dashboard-go { padding: 12px 24px; font-size: 1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 50px 16px 40px; min-height: 50vh; }
+      .hero-content h1 { font-size: 1.8rem; }
+      .hero-content p { font-size: 1rem; }
+      .aqi-location-panel { padding: 14px; }
+      .aqi-location-panel h2 { font-size: 1.1rem; }
+      .btn-locate { padding: 8px 14px; font-size: 0.9rem; }
+      .aqi-huge-number { font-size: 3rem; }
+      .pollutants-title-row { font-size: 1.3rem; }
+      .pollutant-node-info h4 { font-size: 0.95rem; }
+      .pollutant-node-value .num-val { font-size: 1.5rem; }
+    }
   </style>
 </head>
 
@@ -426,18 +492,22 @@
   </div>
 
   <nav class="bottom-bar">
-    <a href="#" class="active">Home</a>
-    <a href="about.html">About</a>
-    <a href="Dashboard.html">Dashboard</a>
-    <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
-    <a href="Contact.html">Contact</a>
-    <a href="Benefits.html">Benefits</a>
-     <a href="Related_publications.html">Related publications</a>
-     <a href="map.html">Map</a>
-
-    <div class="auth-buttons">
-      <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
-      <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="Dashboard.html">Dashboard</a>
+      <a href="Air_Quality_Analytics.html">Air Quality Analytics</a>
+      <a href="Contact.html">Contact</a>
+      <a href="Benefits.html">Benefits</a>
+      <a href="Related_publications.html">Related publications</a>
+      <a href="map.html">Map</a>
+      <div class="auth-buttons">
+        <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+        <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+      </div>
     </div>
   </nav>
 
@@ -797,6 +867,29 @@
         else { elem.classList.add("border-unhealthy"); }
       }
     });
+  </script>
+
+  <!-- Hamburger Navigation Toggle -->
+  <script>
+    (function() {
+      var btn = document.getElementById('navHamburger');
+      var links = document.getElementById('navLinks');
+      if (btn && links) {
+        btn.addEventListener('click', function() {
+          var isOpen = links.classList.toggle('open');
+          btn.classList.toggle('open', isOpen);
+          btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        // Close menu when a link is clicked
+        links.querySelectorAll('a').forEach(function(a) {
+          a.addEventListener('click', function() {
+            links.classList.remove('open');
+            btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
   </script>
 </body>
 
