@@ -11,21 +11,33 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ── django-environ setup ────────────────────────────────────────────────────
+# Reads variables from a .env file in the project root (BASE_DIR).
+# Create a .env file (never commit it) — see .env.example for required keys.
+env = environ.Env(
+    # DEBUG defaults to False for safety; explicitly set DEBUG=True in .env for dev
+    DEBUG=(bool, False),
+    ALLOWED_HOSTS=(list, []),
+)
+
+# Read the .env file if it exists (safe no-op if absent, e.g. in CI/CD with real env vars)
+environ.Env.read_env(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)242u289(qfbuj=(t1sx0wjz%ffu81c63cp-44ufe!qrhu+pll'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ["*"]   # Restrict appropriately in production
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -75,12 +87,12 @@ WSGI_APPLICATION = 'iiitl_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
+# Reads DATABASE_URL from env if set; falls back to local SQLite.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.db(
+        'DATABASE_URL',
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+    )
 }
 
 
@@ -135,12 +147,12 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # ── Email (Gmail SMTP) ──────────────────────────────────────────────────────
-# Replace EMAIL_HOST_USER and EMAIL_HOST_PASSWORD with your Gmail + App Password.
+# Set EMAIL_HOST_USER and EMAIL_HOST_PASSWORD in your .env file.
 # Generate an App Password at: https://myaccount.google.com/apppasswords
 EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST          = 'smtp.gmail.com'
 EMAIL_PORT          = 587
 EMAIL_USE_TLS       = True
-EMAIL_HOST_USER     = 'your_gmail@gmail.com'        # ← replace
-EMAIL_HOST_PASSWORD = 'your_16_char_app_password'   # ← replace
+EMAIL_HOST_USER     = env('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL  = EMAIL_HOST_USER
