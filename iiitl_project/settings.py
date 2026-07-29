@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -132,11 +133,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# Serve the existing flat files (firststyle.css, images) directly from
-# the project root so all <img src="..."> paths resolve correctly.
+# Extra directories for collectstatic to find files in (the project-level static/ folder).
 STATICFILES_DIRS = [
-    BASE_DIR,
+    BASE_DIR / 'static',
 ]
+
+# Where collectstatic gathers everything for production (served by WhiteNoise).
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
