@@ -17,27 +17,20 @@ import environ
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ── django-environ setup ────────────────────────────────────────────────────
-# Reads variables from a .env file in the project root (BASE_DIR).
-# Create a .env file (never commit it) — see .env.example for required keys.
 env = environ.Env(
-    # DEBUG defaults to False for safety; explicitly set DEBUG=True in .env for dev
+    # Set default values for optional variables
     DEBUG=(bool, False),
-    ALLOWED_HOSTS=(list, [], ['aqi-oc5q.onrender.com', 'localhost', '127.0.0.1']),
+    ALLOWED_HOSTS=(list, ['aqi-oc5q.onrender.com', 'localhost', '127.0.0.1']),
 )
 
-# Read the .env file if it exists (safe no-op if absent, e.g. in CI/CD with real env vars)
+# Read the .env file if it exists
 environ.Env.read_env(BASE_DIR / '.env')
-# Apply environment settings to Django variables
-DEBUG = env('DEBUG')
-SECRET_KEY = env('SECRET_KEY')
-ALLOWED_HOSTS = env('ALLOWED_HOSTS')
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-SECRET_KEY = env('SECRET_KEY', default='django-insecure-placeholder-key-for-build')
-# SECURITY WARNING: keep the secret key used in production secret!
 
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env('SECRET_KEY', default='django-insecure-placeholder-key-for-build')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
@@ -75,7 +68,6 @@ ROOT_URLCONF = 'iiitl_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # Allow templates inside each app's templates/ subdirectory:
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -93,7 +85,6 @@ WSGI_APPLICATION = 'iiitl_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-# Reads DATABASE_URL from env if set; falls back to local SQLite.
 DATABASES = {
     'default': env.db(
         'DATABASE_URL',
@@ -139,10 +130,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Serve the existing flat files (firststyle.css, images) directly from
-# the project root so all <img src="..."> paths resolve correctly.
+# Point to your custom static directory (e.g. root/static/)
 STATICFILES_DIRS = [
-    BASE_DIR,
+    BASE_DIR / 'static',
 ]
 
 # Default primary key field type
@@ -154,9 +144,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # ── Email (SMTP) ────────────────────────────────────────────────────────────
-# Configure all SMTP settings in your .env file.
-# Gmail:      smtp.gmail.com / 587 / True  (needs App Password)
-# Outlook/O365: smtp.office365.com / 587 / True
 EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST          = env('EMAIL_HOST', default='smtp.office365.com')
 EMAIL_PORT          = env.int('EMAIL_PORT', default=587)
