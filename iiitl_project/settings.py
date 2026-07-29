@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     # DEBUG defaults to False for safety; explicitly set DEBUG=True in .env for dev
     DEBUG=(bool, False),
-    ALLOWED_HOSTS=(list, []),
+    ALLOWED_HOSTS=(list, [], ['aqi-oc5q.onrender.com', 'localhost', '127.0.0.1']),
 )
 
 # Read the .env file if it exists (safe no-op if absent, e.g. in CI/CD with real env vars)
