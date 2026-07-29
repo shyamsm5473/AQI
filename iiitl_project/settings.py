@@ -27,7 +27,10 @@ env = environ.Env(
 
 # Read the .env file if it exists (safe no-op if absent, e.g. in CI/CD with real env vars)
 environ.Env.read_env(BASE_DIR / '.env')
-
+# Apply environment settings to Django variables
+DEBUG = env('DEBUG')
+SECRET_KEY = env('SECRET_KEY')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 # Quick-start development settings - unsuitable for production
