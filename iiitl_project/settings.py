@@ -31,6 +31,9 @@ environ.Env.read_env(BASE_DIR / '.env')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY', default='django-insecure-placeholder-key-for-build')
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
