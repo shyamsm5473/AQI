@@ -1,6 +1,0 @@
-django
-gunicorn
-whitenoise
-google-generativeai
-pymupdf
-django-environ

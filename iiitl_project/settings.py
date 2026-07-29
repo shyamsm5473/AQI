@@ -146,13 +146,14 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-# ── Email (Gmail SMTP) ──────────────────────────────────────────────────────
-# Set EMAIL_HOST_USER and EMAIL_HOST_PASSWORD in your .env file.
-# Generate an App Password at: https://myaccount.google.com/apppasswords
+# ── Email (SMTP) ────────────────────────────────────────────────────────────
+# Configure all SMTP settings in your .env file.
+# Gmail:      smtp.gmail.com / 587 / True  (needs App Password)
+# Outlook/O365: smtp.office365.com / 587 / True
 EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST          = 'smtp.gmail.com'
-EMAIL_PORT          = 587
-EMAIL_USE_TLS       = True
+EMAIL_HOST          = env('EMAIL_HOST', default='smtp.office365.com')
+EMAIL_PORT          = env.int('EMAIL_PORT', default=587)
+EMAIL_USE_TLS       = env.bool('EMAIL_USE_TLS', default=True)
 EMAIL_HOST_USER     = env('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL  = EMAIL_HOST_USER
