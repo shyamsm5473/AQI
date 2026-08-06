@@ -13,11 +13,16 @@ Architecture decisions:
     are explicitly guarded even if middleware ordering ever changes.
   - The page-render view (publications_page) uses @ensure_csrf_cookie
     so the browser always receives the csrftoken cookie on first load.
+  - Mutating endpoints (add/update/delete) require authentication via
+    @login_required.  Unauthenticated AJAX callers receive a 401 JSON
+    response instead of an HTML redirect.
 """
 
 import json
 
 from django.http            import JsonResponse
+from django.shortcuts       import render
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods
 
@@ -43,6 +48,27 @@ def _parse_json_body(request):
 
 
 # ──────────────────────────────────────────────────────────────────────────────
+# HELPER: JSON-friendly login-required check for AJAX endpoints
+# ──────────────────────────────────────────────────────────────────────────────
+
+def _require_auth(view_func):
+    """
+    Decorator that returns a 401 JSON response for unauthenticated requests
+    instead of redirecting to the login page (which would break AJAX callers).
+    """
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return JsonResponse(
+                {"success": False, "error": "Authentication required."},
+                status=401,
+            )
+        return view_func(request, *args, **kwargs)
+    wrapper.__name__ = view_func.__name__
+    wrapper.__doc__ = view_func.__doc__
+    return wrapper
+
+
+# ──────────────────────────────────────────────────────────────────────────────
 # VIEW 1 — Page Render
 # ──────────────────────────────────────────────────────────────────────────────
 
@@ -54,9 +80,14 @@ def publications_page(request):
     @ensure_csrf_cookie guarantees the browser receives the 'csrftoken'
     cookie on this GET response, so subsequent fetch() POST/PUT/DELETE
     calls can read and forward it in X-CSRFToken headers.
+
+    Passes `is_admin` context variable so the template JS can decide
+    whether to show admin controls (add form, edit/delete buttons)
+    based on Django's server-side authentication state.
     """
-    from django.shortcuts import render
-    return render(request, "related_publication/related_publications.html")
+    return render(request, "related_publication/related_publications.html", {
+        "is_admin": request.user.is_authenticated,
+    })
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -83,11 +114,12 @@ def api_get_publications(request):
 # VIEW 3 — POST create new publication  (/related_publication/api/publications/add/)
 # ──────────────────────────────────────────────────────────────────────────────
 
+@_require_auth
 @csrf_protect
 @require_http_methods(["POST"])
 def api_add_publication(request):
     """
-    WRITE / CREATE operation.
+    WRITE / CREATE operation.  Requires authentication.
 
     Expected JSON body:
         {
@@ -134,11 +166,12 @@ def api_add_publication(request):
 # VIEW 4 — POST/PUT update existing  (/related_publication/api/publications/update/)
 # ──────────────────────────────────────────────────────────────────────────────
 
+@_require_auth
 @csrf_protect
 @require_http_methods(["POST", "PUT"])
 def api_update_publication(request):
     """
-    MODIFY / UPDATE operation.
+    MODIFY / UPDATE operation.  Requires authentication.
 
     Expected JSON body must include the record primary key:
         {
@@ -192,11 +225,12 @@ def api_update_publication(request):
 # VIEW 5 — DELETE remove record  (/related_publication/api/publications/delete/)
 # ──────────────────────────────────────────────────────────────────────────────
 
+@_require_auth
 @csrf_protect
 @require_http_methods(["POST", "DELETE"])
 def api_delete_publication(request):
     """
-    REMOVAL / DELETE operation.
+    REMOVAL / DELETE operation.  Requires authentication.
 
     Expected JSON body:
         { "id": <integer, required> }
