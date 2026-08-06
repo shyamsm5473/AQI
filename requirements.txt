@@ -4,4 +4,3 @@ gunicorn
 whitenoise
 google-generativeai
 pymupdf
-psycopg2-binary

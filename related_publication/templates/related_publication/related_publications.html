@@ -669,15 +669,8 @@
       <a href="/map/">Map</a>
     </div>
     <div class="auth-buttons">
-      {% if user.is_authenticated %}
-        <form method="post" action="/logout/" style="margin:0;">
-          {% csrf_token %}
-          <button type="submit" class="btn-login">Logout ({{ user.username }})</button>
-        </form>
-      {% else %}
-        <button class="btn-login" onclick="window.location.href='/login/'">Login</button>
-        <button class="btn-signup" onclick="window.location.href='/signup/'">Sign Up</button>
-      {% endif %}
+      <button class="btn-login" onclick="window.location.href='/login/'">Login</button>
+      <button class="btn-signup" onclick="window.location.href='/signup/'">Sign Up</button>
     </div>
   </nav>
 
@@ -693,15 +686,8 @@
     <a href="/related_publication/" class="active" onclick="toggleMobileNav()">📚 Related Publications</a>
     <a href="/map/" onclick="toggleMobileNav()">🗺️ Map</a>
     <div class="mobile-auth-row">
-      {% if user.is_authenticated %}
-        <form method="post" action="/logout/" style="margin:0;">
-          {% csrf_token %}
-          <button type="submit" class="btn-login">Logout ({{ user.username }})</button>
-        </form>
-      {% else %}
-        <button class="btn-login" onclick="window.location.href='/login/'">Login</button>
-        <button class="btn-signup" onclick="window.location.href='/signup/'">Sign Up</button>
-      {% endif %}
+      <button class="btn-login" onclick="window.location.href='/login/'">Login</button>
+      <button class="btn-signup" onclick="window.location.href='/signup/'">Sign Up</button>
     </div>
   </div>
 
@@ -713,9 +699,8 @@
       <p>Manage list collections of verified journal reviews and computational conference output parameters.</p>
     </div>
 
-    <!-- Administrative Add Entry Card Form (visible only to authenticated users) -->
-    {% if is_admin %}
-    <div id="addForm" class="add-form">
+    <!-- Administrative Add Entry Card Form (admin-only, hidden by default) -->
+    <div id="addForm" class="add-form" style="display:none;">
       <h3>Add Faculty Publication Entry</h3>
       <div class="field">
         <label>Authors list *</label>
@@ -748,29 +733,27 @@
       <button id="addSubmitBtn" class="btn-primary" onclick="handleAddPublication()">Add Record Entry</button>
       <div id="addStatus" class="status-msg"></div>
     </div>
-    {% endif %}
 
     <!-- Publication list rendered by JS -->
     <div id="pubList" class="pub-list"></div>
   </div>
 
-  <!-- Floating Corner Widget — shows admin status or login link -->
+  <!-- Floating Admin Widget -->
   <div id="cornerLogin" class="corner-login">
-    {% if is_admin %}
-      <button class="corner-login-btn" onclick="toggleAdminBar()" title="Admin panel">🔓</button>
-      <div id="adminBar" class="corner-login-box" style="display:none;">
-        <h3>Admin Status</h3>
-        <div style="font-size:0.85rem; color:#5a6472; margin-bottom:14px; font-weight:600;">
-          Logged in as: {{ user.username }}
-        </div>
-        <form method="post" action="/logout/" style="margin:0;">
-          {% csrf_token %}
-          <button type="submit" class="btn-secondary" style="border-color:#c0392b; color:#c0392b;">Logout</button>
-        </form>
-      </div>
-    {% else %}
-      <button class="corner-login-btn" onclick="window.location.href='/login/'" title="Login to manage publications">🔒</button>
-    {% endif %}
+    <button id="cornerLoginBtn" class="corner-login-btn" onclick="toggleLoginBox()">🔒</button>
+    <div id="loginBox" class="corner-login-box" style="display:none;">
+      <h3>Admin Login</h3>
+      <div class="field"><label>ID</label><input type="email" id="loginEmail"></div>
+      <div class="field"><label>Password</label><input type="password" id="loginPassword"></div>
+      <button class="btn-primary" onclick="handleLoginSubmit()">Login</button>
+      <button class="btn-secondary" onclick="toggleLoginBox()">Close</button>
+      <div id="loginStatus" class="status-msg"></div>
+    </div>
+    <div id="adminBar" class="corner-login-box" style="display:none;">
+      <h3>Admin Status</h3>
+      <div id="adminEmailLabel" style="font-size:0.85rem; color:#5a6472; margin-bottom:14px; font-weight:600;"></div>
+      <button class="btn-secondary" style="border-color:#c0392b; color:#c0392b;" onclick="handleLogoutSubmit()">Logout</button>
+    </div>
   </div>
 
   <!-- Footer -->
@@ -812,12 +795,6 @@
     │  DELETE    →  POST /related_publication/api/publications/delete/ │
     └──────────────────────────────────────────────────────────────────┘
 
-  Authentication:
-    Admin controls (add form, edit/delete buttons) are rendered only when
-    the Django view passes is_admin=True (i.e. user is authenticated).
-    The API endpoints enforce @login_required on the server side, returning
-    401 for unauthenticated requests.
-
   CSRF handling:
     getCookie('csrftoken') reads the token Django sets on first page load
     (guaranteed by @ensure_csrf_cookie on the page view) and injects it
@@ -825,9 +802,9 @@
   ════════════════════════════════════════════════════════════════════ -->
   <script>
     // ────────────────────────────────────────────────────────────────
-    // ADMIN STATE — set by Django template tag (server-side auth)
+    // ADMIN CREDENTIALS  (client-side guard only — not a security layer)
     // ────────────────────────────────────────────────────────────────
-    const IS_ADMIN = {% if is_admin %}true{% else %}false{% endif %};
+    const ADMIN_CREDENTIALS = { email: "Akansha11@iiitl.ac.in", password: "Lucknow@002" };
 
     // ────────────────────────────────────────────────────────────────
     // API ROUTE CONSTANTS
@@ -900,9 +877,16 @@
     // ────────────────────────────────────────────────────────────────
     // DOM REFERENCES
     // ────────────────────────────────────────────────────────────────
+    let adminActiveToken = false;
+
+    const loginBox       = document.getElementById("loginBox");
+    const adminBar       = document.getElementById("adminBar");
+    const addForm        = document.getElementById("addForm");
+    const adminEmailLabel = document.getElementById("adminEmailLabel");
+    const loginStatus    = document.getElementById("loginStatus");
+    const addStatus      = document.getElementById("addStatus");
     const pubList        = document.getElementById("pubList");
     const addSubmitBtn   = document.getElementById("addSubmitBtn");
-    const addStatus      = document.getElementById("addStatus");
 
     // ────────────────────────────────────────────────────────────────
     // UTILITY: HTML escaping (prevents XSS when rendering DB content)
@@ -917,13 +901,36 @@
     }
 
     // ────────────────────────────────────────────────────────────────
-    // ADMIN PANEL TOGGLE (corner widget)
+    // ADMIN PANEL TOGGLE
     // ────────────────────────────────────────────────────────────────
-    window.toggleAdminBar = function () {
-      const adminBar = document.getElementById("adminBar");
-      if (adminBar) {
-        adminBar.style.display = (adminBar.style.display === "none") ? "block" : "none";
+    window.toggleLoginBox = function () {
+      loginBox.style.display = (loginBox.style.display === "none") ? "block" : "none";
+    };
+
+    window.handleLoginSubmit = function () {
+      const emailInput = document.getElementById("loginEmail").value.trim();
+      const passInput  = document.getElementById("loginPassword").value;
+
+      if (emailInput === ADMIN_CREDENTIALS.email && passInput === ADMIN_CREDENTIALS.password) {
+        adminActiveToken = true;
+        loginBox.style.display  = "none";
+        adminBar.style.display  = "block";
+        addForm.style.display   = "block";
+        adminEmailLabel.textContent = ADMIN_CREDENTIALS.email;
+        // Re-render with admin controls visible
+        refreshUIDOMTree();
+      } else {
+        loginStatus.textContent = "Incorrect parameters assertion failure.";
+        loginStatus.className   = "status-msg error";
       }
+    };
+
+    window.handleLogoutSubmit = function () {
+      adminActiveToken = false;
+      adminBar.style.display = "none";
+      addForm.style.display  = "none";
+      loginBox.style.display = "none";
+      refreshUIDOMTree();
     };
 
     // ────────────────────────────────────────────────────────────────
@@ -983,10 +990,10 @@
           : "";
 
         // ── Admin action buttons (Edit / Delete) — shown only if admin ─
-        const adminRowClass = IS_ADMIN ? "card-admin-row visible" : "card-admin-row";
+        const adminRowClass = adminActiveToken ? "card-admin-row visible" : "card-admin-row";
 
-        // ── Build card HTML ───────────────────────────────────────────
-        let cardHTML = `
+        // ── Inline edit form (pre-filled with current values) ─────────
+        card.innerHTML = `
           <div class="pub-citation">
             ${escapeHtml(p.authors)},
             ${titleHtml},
@@ -997,57 +1004,51 @@
             ${impactTag}
             ${doiLink}
           </div>
+
+          <div class="${adminRowClass}" id="admin-row-${p.id}">
+            <button class="btn-card-edit"
+              onclick="openInlineEdit(${p.id})">✏️ Edit</button>
+            <button class="btn-card-delete"
+              onclick="handleDeletePublication(${p.id})">🗑️ Delete</button>
+          </div>
+
+          <div class="inline-edit-form" id="edit-form-${p.id}">
+            <div class="field">
+              <label>Authors *</label>
+              <input type="text" id="edit-authors-${p.id}" value="${escapeAttr(p.authors)}">
+            </div>
+            <div class="field">
+              <label>Title *</label>
+              <input type="text" id="edit-title-${p.id}" value="${escapeAttr(p.title)}">
+            </div>
+            <div class="field">
+              <label>Journal *</label>
+              <input type="text" id="edit-journal-${p.id}" value="${escapeAttr(p.journal)}">
+            </div>
+            <div class="field">
+              <label>Year *</label>
+              <input type="text" id="edit-year-${p.id}" value="${escapeAttr(p.year)}">
+            </div>
+            <div class="field">
+              <label>Link (optional)</label>
+              <input type="text" id="edit-link-${p.id}" value="${escapeAttr(p.link)}">
+            </div>
+            <div class="field">
+              <label>Publisher (optional)</label>
+              <input type="text" id="edit-publisher-${p.id}" value="${escapeAttr(p.publisher)}">
+            </div>
+            <div class="field">
+              <label>Impact Factor (optional)</label>
+              <input type="text" id="edit-impact-${p.id}" value="${escapeAttr(p.impact)}">
+            </div>
+            <div class="edit-action-row">
+              <button class="btn-save-edit" onclick="saveInlineEdit(${p.id})">💾 Save Changes</button>
+              <button class="btn-cancel-edit" onclick="closeInlineEdit(${p.id})">Cancel</button>
+            </div>
+            <div id="edit-status-${p.id}" class="status-msg"></div>
+          </div>
         `;
 
-        // ── Admin controls: only rendered for authenticated users ─────
-        if (IS_ADMIN) {
-          cardHTML += `
-            <div class="${adminRowClass}" id="admin-row-${p.id}">
-              <button class="btn-card-edit"
-                onclick="openInlineEdit(${p.id})">✏️ Edit</button>
-              <button class="btn-card-delete"
-                onclick="handleDeletePublication(${p.id})">🗑️ Delete</button>
-            </div>
-
-            <div class="inline-edit-form" id="edit-form-${p.id}">
-              <div class="field">
-                <label>Authors *</label>
-                <input type="text" id="edit-authors-${p.id}" value="${escapeAttr(p.authors)}">
-              </div>
-              <div class="field">
-                <label>Title *</label>
-                <input type="text" id="edit-title-${p.id}" value="${escapeAttr(p.title)}">
-              </div>
-              <div class="field">
-                <label>Journal *</label>
-                <input type="text" id="edit-journal-${p.id}" value="${escapeAttr(p.journal)}">
-              </div>
-              <div class="field">
-                <label>Year *</label>
-                <input type="text" id="edit-year-${p.id}" value="${escapeAttr(p.year)}">
-              </div>
-              <div class="field">
-                <label>Link (optional)</label>
-                <input type="text" id="edit-link-${p.id}" value="${escapeAttr(p.link)}">
-              </div>
-              <div class="field">
-                <label>Publisher (optional)</label>
-                <input type="text" id="edit-publisher-${p.id}" value="${escapeAttr(p.publisher)}">
-              </div>
-              <div class="field">
-                <label>Impact Factor (optional)</label>
-                <input type="text" id="edit-impact-${p.id}" value="${escapeAttr(p.impact)}">
-              </div>
-              <div class="edit-action-row">
-                <button class="btn-save-edit" onclick="saveInlineEdit(${p.id})">💾 Save Changes</button>
-                <button class="btn-cancel-edit" onclick="closeInlineEdit(${p.id})">Cancel</button>
-              </div>
-              <div id="edit-status-${p.id}" class="status-msg"></div>
-            </div>
-          `;
-        }
-
-        card.innerHTML = cardHTML;
         pubList.appendChild(card);
       });
     }
@@ -1056,7 +1057,7 @@
     // WRITE — POST new publication to Django API
     // ────────────────────────────────────────────────────────────────
     window.handleAddPublication = async function () {
-      if (!IS_ADMIN) return;
+      if (!adminActiveToken) return;
 
       const authors   = document.getElementById("pubAuthors").value.trim();
       const title     = document.getElementById("pubTitle").value.trim();
@@ -1120,7 +1121,7 @@
     // UPDATE — POST edited fields to Django API
     // ────────────────────────────────────────────────────────────────
     window.saveInlineEdit = async function (id) {
-      if (!IS_ADMIN) return;
+      if (!adminActiveToken) return;
 
       const getValue = (field) => {
         const el = document.getElementById(`edit-${field}-${id}`);
@@ -1181,7 +1182,7 @@
     // DELETE — POST delete request to Django API
     // ────────────────────────────────────────────────────────────────
     window.handleDeletePublication = async function (id) {
-      if (!IS_ADMIN) return;
+      if (!adminActiveToken) return;
 
       const confirmed = confirm("Are you sure you want to permanently delete this publication record?");
       if (!confirmed) return;
