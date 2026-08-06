@@ -669,8 +669,16 @@
       <a href="/map/">Map</a>
     </div>
     <div class="auth-buttons">
-      <button class="btn-login" onclick="window.location.href='/login/'">Login</button>
-      <button class="btn-signup" onclick="window.location.href='/signup/'">Sign Up</button>
+      {% if user.is_authenticated %}
+        <span style="color: #a3c2f7; font-size: 13.5px; font-weight: 500; margin-right: 8px;">Welcome, {{ user.first_name|default:user.username }}</span>
+        <form method="POST" action="{% url 'core:logout' %}" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn-login" style="cursor: pointer;">Logout</button>
+        </form>
+      {% else %}
+        <button class="btn-login" onclick="window.location.href='/login/'">Login</button>
+        <button class="btn-signup" onclick="window.location.href='/signup/'">Sign Up</button>
+      {% endif %}
     </div>
   </nav>
 
@@ -686,8 +694,16 @@
     <a href="/related_publication/" class="active" onclick="toggleMobileNav()">📚 Related Publications</a>
     <a href="/map/" onclick="toggleMobileNav()">🗺️ Map</a>
     <div class="mobile-auth-row">
-      <button class="btn-login" onclick="window.location.href='/login/'">Login</button>
-      <button class="btn-signup" onclick="window.location.href='/signup/'">Sign Up</button>
+      {% if user.is_authenticated %}
+        <span style="color: #a3c2f7; font-size: 14px; font-weight: 500; text-align: center; margin-bottom: 8px;">Welcome, {{ user.first_name|default:user.username }}</span>
+        <form method="POST" action="{% url 'core:logout' %}" style="display: flex; flex-direction: column;">
+          {% csrf_token %}
+          <button type="submit" class="btn-login" style="cursor: pointer; width: 100%;">Logout</button>
+        </form>
+      {% else %}
+        <button class="btn-login" onclick="window.location.href='/login/'">Login</button>
+        <button class="btn-signup" onclick="window.location.href='/signup/'">Sign Up</button>
+      {% endif %}
     </div>
   </div>
 
@@ -699,8 +715,9 @@
       <p>Manage list collections of verified journal reviews and computational conference output parameters.</p>
     </div>
 
-    <!-- Administrative Add Entry Card Form (admin-only, hidden by default) -->
-    <div id="addForm" class="add-form" style="display:none;">
+    <!-- Administrative Add Entry Card Form (admin-only, rendered by Django) -->
+    {% if is_admin %}
+    <div id="addForm" class="add-form">
       <h3>Add Faculty Publication Entry</h3>
       <div class="field">
         <label>Authors list *</label>
@@ -733,30 +750,13 @@
       <button id="addSubmitBtn" class="btn-primary" onclick="handleAddPublication()">Add Record Entry</button>
       <div id="addStatus" class="status-msg"></div>
     </div>
+    {% endif %}
 
     <!-- Publication list rendered by JS -->
     <div id="pubList" class="pub-list"></div>
   </div>
 
-  <!-- Floating Admin Widget -->
-  <div id="cornerLogin" class="corner-login">
-    <button id="cornerLoginBtn" class="corner-login-btn" onclick="toggleLoginBox()">🔒</button>
-    <div id="loginBox" class="corner-login-box" style="display:none;">
-      <h3>Admin Login</h3>
-      <div class="field"><label>ID</label><input type="email" id="loginEmail"></div>
-      <div class="field"><label>Password</label><input type="password" id="loginPassword"></div>
-      <button class="btn-primary" onclick="handleLoginSubmit()">Login</button>
-      <button class="btn-secondary" onclick="toggleLoginBox()">Close</button>
-      <div id="loginStatus" class="status-msg"></div>
-    </div>
-    <div id="adminBar" class="corner-login-box" style="display:none;">
-      <h3>Admin Status</h3>
-      <div id="adminEmailLabel" style="font-size:0.85rem; color:#5a6472; margin-bottom:14px; font-weight:600;"></div>
-      <button class="btn-secondary" style="border-color:#c0392b; color:#c0392b;" onclick="handleLogoutSubmit()">Logout</button>
-    </div>
-  </div>
-
-  <!-- Footer -->
+    <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-emails">
       <div class="email-item">
@@ -801,11 +801,6 @@
     into the X-CSRFToken request header for all mutating fetch() calls.
   ════════════════════════════════════════════════════════════════════ -->
   <script>
-    // ────────────────────────────────────────────────────────────────
-    // ADMIN CREDENTIALS  (client-side guard only — not a security layer)
-    // ────────────────────────────────────────────────────────────────
-    const ADMIN_CREDENTIALS = { email: "Akansha11@iiitl.ac.in", password: "Lucknow@002" };
-
     // ────────────────────────────────────────────────────────────────
     // API ROUTE CONSTANTS
     // ────────────────────────────────────────────────────────────────
@@ -877,13 +872,9 @@
     // ────────────────────────────────────────────────────────────────
     // DOM REFERENCES
     // ────────────────────────────────────────────────────────────────
-    let adminActiveToken = false;
+    const adminActiveToken = {% if is_admin %}true{% else %}false{% endif %};
 
-    const loginBox       = document.getElementById("loginBox");
-    const adminBar       = document.getElementById("adminBar");
     const addForm        = document.getElementById("addForm");
-    const adminEmailLabel = document.getElementById("adminEmailLabel");
-    const loginStatus    = document.getElementById("loginStatus");
     const addStatus      = document.getElementById("addStatus");
     const pubList        = document.getElementById("pubList");
     const addSubmitBtn   = document.getElementById("addSubmitBtn");
@@ -899,39 +890,6 @@
     function escapeAttr(str) {
       return (str || "").replace(/"/g, "&quot;");
     }
-
-    // ────────────────────────────────────────────────────────────────
-    // ADMIN PANEL TOGGLE
-    // ────────────────────────────────────────────────────────────────
-    window.toggleLoginBox = function () {
-      loginBox.style.display = (loginBox.style.display === "none") ? "block" : "none";
-    };
-
-    window.handleLoginSubmit = function () {
-      const emailInput = document.getElementById("loginEmail").value.trim();
-      const passInput  = document.getElementById("loginPassword").value;
-
-      if (emailInput === ADMIN_CREDENTIALS.email && passInput === ADMIN_CREDENTIALS.password) {
-        adminActiveToken = true;
-        loginBox.style.display  = "none";
-        adminBar.style.display  = "block";
-        addForm.style.display   = "block";
-        adminEmailLabel.textContent = ADMIN_CREDENTIALS.email;
-        // Re-render with admin controls visible
-        refreshUIDOMTree();
-      } else {
-        loginStatus.textContent = "Incorrect parameters assertion failure.";
-        loginStatus.className   = "status-msg error";
-      }
-    };
-
-    window.handleLogoutSubmit = function () {
-      adminActiveToken = false;
-      adminBar.style.display = "none";
-      addForm.style.display  = "none";
-      loginBox.style.display = "none";
-      refreshUIDOMTree();
-    };
 
     // ────────────────────────────────────────────────────────────────
     // READ — Fetch all publications from Django API on page load

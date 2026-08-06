@@ -27,6 +27,13 @@ urlpatterns = [
         name="page"
     ),
 
+    # ── API: Auth Status ──────────────────────────────────────────────
+    path(
+        "api/auth-status/",
+        views.api_auth_status,
+        name="api_auth_status"
+    ),
+
     # ── API: Read (GET) — all publications ────────────────────────────
     path(
         "api/publications/",

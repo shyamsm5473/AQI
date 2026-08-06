@@ -42,6 +42,34 @@ def _parse_json_body(request):
         return None, JsonResponse({"success": False, "error": str(exc)}, status=400)
 
 
+def _check_admin_auth(request):
+    """
+    Check if the user is authenticated and has staff privileges.
+    Returns None if authorized, otherwise returns a JsonResponse with a 403 error.
+    """
+    if not (request.user.is_authenticated and request.user.is_staff):
+        return JsonResponse({"success": False, "error": "Authentication required. Staff privileges are necessary."}, status=403)
+    return None
+
+# ──────────────────────────────────────────────────────────────────────────────
+# VIEW 0 — Auth Status (/related_publication/api/auth-status/)
+# ──────────────────────────────────────────────────────────────────────────────
+
+@require_http_methods(["GET"])
+def api_auth_status(request):
+    """
+    Returns the current authentication status and username.
+    Used by the frontend to conditionally show/hide admin controls if the HTML
+    needs to dynamically check state (though we also pass it in the template).
+    """
+    is_admin = request.user.is_authenticated and request.user.is_staff
+    return JsonResponse({
+        "authenticated": is_admin,
+        "username": request.user.username if is_admin else None
+    }, status=200)
+
+
+
 # ──────────────────────────────────────────────────────────────────────────────
 # VIEW 1 — Page Render
 # ──────────────────────────────────────────────────────────────────────────────
@@ -56,7 +84,10 @@ def publications_page(request):
     calls can read and forward it in X-CSRFToken headers.
     """
     from django.shortcuts import render
-    return render(request, "related_publication/related_publications.html")
+    is_admin = request.user.is_authenticated and request.user.is_staff
+    return render(request, "related_publication/related_publications.html", {
+        "is_admin": is_admin
+    })
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -106,6 +137,10 @@ def api_add_publication(request):
     data, err = _parse_json_body(request)
     if err:
         return err
+
+    auth_err = _check_admin_auth(request)
+    if auth_err:
+        return auth_err
 
     # ── Mandatory field validation ─────────────────────────────────────
     required_fields = ("authors", "title", "journal", "year")
@@ -161,6 +196,10 @@ def api_update_publication(request):
     if err:
         return err
 
+    auth_err = _check_admin_auth(request)
+    if auth_err:
+        return auth_err
+
     record_id = data.get("id")
     if not record_id:
         return JsonResponse(
@@ -210,6 +249,10 @@ def api_delete_publication(request):
     data, err = _parse_json_body(request)
     if err:
         return err
+
+    auth_err = _check_admin_auth(request)
+    if auth_err:
+        return auth_err
 
     record_id = data.get("id")
     if not record_id:
