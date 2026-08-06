@@ -20,6 +20,7 @@ import json
 from django.http            import JsonResponse
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth import authenticate, login, logout
 
 from .models import Publication
 
@@ -68,8 +69,32 @@ def api_auth_status(request):
         "username": request.user.username if is_admin else None
     }, status=200)
 
+# ──────────────────────────────────────────────────────────────────────────────
+# VIEW 0.1 — Auth Actions (Login / Logout)
+# ──────────────────────────────────────────────────────────────────────────────
 
+@csrf_protect
+@require_http_methods(["POST"])
+def api_login(request):
+    data, err = _parse_json_body(request)
+    if err:
+        return err
 
+    email = data.get("email", "").strip()
+    password = data.get("password", "")
+
+    user = authenticate(request, username=email, password=password)
+    if user is not None and user.is_staff:
+        login(request, user)
+        return JsonResponse({"success": True})
+    else:
+        return JsonResponse({"success": False, "error": "Invalid credentials or unauthorized."}, status=401)
+
+@csrf_protect
+@require_http_methods(["POST"])
+def api_logout(request):
+    logout(request)
+    return JsonResponse({"success": True})
 # ──────────────────────────────────────────────────────────────────────────────
 # VIEW 1 — Page Render
 # ──────────────────────────────────────────────────────────────────────────────

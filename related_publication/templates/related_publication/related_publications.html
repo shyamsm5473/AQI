@@ -756,6 +756,24 @@
     <div id="pubList" class="pub-list"></div>
   </div>
 
+  <!-- Floating Admin Widget -->
+  <div id="cornerLogin" class="corner-login">
+    <button id="cornerLoginBtn" class="corner-login-btn" onclick="toggleLoginBox()">🔒</button>
+    <div id="loginBox" class="corner-login-box" style="display:none;">
+      <h3>Admin Login</h3>
+      <div class="field"><label>ID</label><input type="email" id="loginEmail"></div>
+      <div class="field"><label>Password</label><input type="password" id="loginPassword"></div>
+      <button class="btn-primary" onclick="handleLoginSubmit()">Login</button>
+      <button class="btn-secondary" onclick="toggleLoginBox()">Close</button>
+      <div id="loginStatus" class="status-msg"></div>
+    </div>
+    <div id="adminBar" class="corner-login-box" style="display:none;">
+      <h3>Admin Status</h3>
+      <div id="adminEmailLabel" style="font-size:0.85rem; color:#5a6472; margin-bottom:14px; font-weight:600;"></div>
+      <button class="btn-secondary" style="border-color:#c0392b; color:#c0392b;" onclick="handleLogoutSubmit()">Logout</button>
+    </div>
+  </div>
+
     <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-emails">
@@ -874,10 +892,56 @@
     // ────────────────────────────────────────────────────────────────
     const adminActiveToken = {% if is_admin %}true{% else %}false{% endif %};
 
+    const loginBox       = document.getElementById("loginBox");
+    const adminBar       = document.getElementById("adminBar");
+    const adminEmailLabel = document.getElementById("adminEmailLabel");
+    const loginStatus    = document.getElementById("loginStatus");
+
     const addForm        = document.getElementById("addForm");
     const addStatus      = document.getElementById("addStatus");
     const pubList        = document.getElementById("pubList");
     const addSubmitBtn   = document.getElementById("addSubmitBtn");
+
+    // ────────────────────────────────────────────────────────────────
+    // ADMIN PANEL TOGGLE
+    // ────────────────────────────────────────────────────────────────
+    if (adminActiveToken && adminBar) {
+        adminEmailLabel.textContent = "{{ user.username }}";
+    }
+
+    window.toggleLoginBox = function () {
+      if (adminActiveToken) {
+          adminBar.style.display = (adminBar.style.display === "none") ? "block" : "none";
+          loginBox.style.display = "none";
+      } else {
+          loginBox.style.display = (loginBox.style.display === "none") ? "block" : "none";
+          adminBar.style.display = "none";
+      }
+    };
+
+    window.handleLoginSubmit = async function () {
+      const emailInput = document.getElementById("loginEmail").value.trim();
+      const passInput  = document.getElementById("loginPassword").value;
+
+      try {
+        const result = await postJSON("/related_publication/api/login/", { email: emailInput, password: passInput });
+        if (result.success) {
+            window.location.reload();
+        }
+      } catch (e) {
+        loginStatus.textContent = "Incorrect parameters assertion failure.";
+        loginStatus.className   = "status-msg error";
+      }
+    };
+
+    window.handleLogoutSubmit = async function () {
+      try {
+        await postJSON("/related_publication/api/logout/", {});
+        window.location.reload();
+      } catch(e) {
+        window.location.reload();
+      }
+    };
 
     // ────────────────────────────────────────────────────────────────
     // UTILITY: HTML escaping (prevents XSS when rendering DB content)

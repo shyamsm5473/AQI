@@ -34,6 +34,18 @@ urlpatterns = [
         name="api_auth_status"
     ),
 
+    path(
+        "api/login/",
+        views.api_login,
+        name="api_login"
+    ),
+
+    path(
+        "api/logout/",
+        views.api_logout,
+        name="api_logout"
+    ),
+
     # ── API: Read (GET) — all publications ────────────────────────────
     path(
         "api/publications/",
