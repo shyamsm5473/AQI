@@ -178,82 +178,6 @@
       margin: 0 auto;
     }
 
-    .field { margin-bottom: 14px; }
-    .field label {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #02575d;
-      margin-bottom: 6px;
-    }
-    .field input, .field textarea {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid #cbd5e0;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      background: #fff;
-    }
-    .field textarea { resize: vertical; min-height: 60px; }
-
-    .btn-primary {
-      width: 100%;
-      padding: 11px 16px;
-      border: none;
-      border-radius: 30px;
-      background: #02575d;
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-    .btn-primary:hover { background: #01393d; }
-    .btn-primary:disabled {
-      background: #7ab8bc;
-      cursor: not-allowed;
-    }
-
-    .btn-secondary {
-      width: 100%;
-      padding: 9px 16px;
-      margin-top: 8px;
-      border: 1px solid #02575d;
-      border-radius: 30px;
-      background: transparent;
-      color: #02575d;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-
-    .status-msg {
-      text-align: center;
-      font-size: 0.85rem;
-      margin-top: 10px;
-      min-height: 18px;
-    }
-    .status-msg.error   { color: #c0392b; }
-    .status-msg.success { color: #02575d; }
-
-    .add-form {
-      max-width: 750px;
-      margin: 0 auto 40px auto;
-      background: #e5f6fc;
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      padding: 28px 32px;
-      box-shadow: 0 10px 30px rgba(15, 24, 48, 0.044);
-    }
-    .add-form h3 {
-      font-family: 'Sora', sans-serif;
-      font-size: 1.15rem;
-      color: #1a2540;
-      margin: 0 0 18px 0;
-    }
-
     /* ---------- PUBLICATIONS CARD LIST ---------- */
     .pub-list {
       display: flex;
@@ -266,7 +190,6 @@
       border-radius: 14px;
       padding: 22px 28px;
       box-shadow: 0 4px 12px rgba(15, 24, 48, 0.02);
-      position: relative;
       line-height: 1.6;
     }
     .pub-citation {
@@ -311,94 +234,7 @@
     }
     .pub-doi:hover { color: #02575d; text-decoration: underline; }
 
-    /* Admin action buttons row on each card */
-    .card-admin-row {
-      display: none;
-      gap: 8px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
-    .card-admin-row.visible { display: flex; }
-    .btn-card-edit, .btn-card-delete {
-      padding: 5px 14px;
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all 0.18s;
-    }
-    .btn-card-edit {
-      background: rgba(2, 87, 93, 0.1);
-      color: #02575d;
-      border: 1px solid #02575d;
-    }
-    .btn-card-edit:hover { background: #02575d; color: #fff; }
-    .btn-card-delete {
-      background: rgba(192, 57, 43, 0.08);
-      color: #c0392b;
-      border: 1px solid #c0392b;
-    }
-    .btn-card-delete:hover { background: #c0392b; color: #fff; }
-
-    /* Inline edit form inside card */
-    .inline-edit-form {
-      display: none;
-      margin-top: 14px;
-      background: #f7fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 16px 20px;
-    }
-    .inline-edit-form.visible { display: block; }
-    .inline-edit-form .field label { color: #4a5568; }
-    .edit-action-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 8px;
-    }
-    .btn-save-edit {
-      flex: 1;
-      padding: 8px;
-      background: #02575d;
-      color: #fff;
-      border: none;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-    .btn-save-edit:hover { background: #01393d; }
-    .btn-cancel-edit {
-      flex: 1;
-      padding: 8px;
-      background: transparent;
-      color: #5a6472;
-      border: 1px solid #cbd5e0;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
     .empty-note { text-align: center; color: #5a6472; font-size: 0.95rem; padding: 30px; }
-    .loading-note { text-align: center; color: #718096; font-size: 0.92rem; padding: 30px; }
-
-    /* ---------- FLOATING CORNER WIDGET ---------- */
-    .corner-login { position: fixed; top: 140px; right: 24px; z-index: 999; }
-    .corner-login-btn {
-      width: 48px; height: 48px;
-      border-radius: 50%; border: none;
-      background: #02575d; color: #fff;
-      font-size: 1.3rem; cursor: pointer;
-      box-shadow: 0 6px 18px rgba(2, 87, 93, 0.35);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .corner-login-box {
-      position: absolute; top: 58px; right: 0; width: 280px;
-      background: #e5f6fc; border: 1px solid #e2e8f0; border-radius: 16px;
-      padding: 20px 22px; box-shadow: 0 12px 30px rgba(15, 24, 48, 0.12);
-      box-sizing: border-box;
-    }
 
     /* ---------- SITE FOOTER ---------- */
     .site-footer {
@@ -450,7 +286,7 @@
     .footer-support a { color: #4ed8e2; text-decoration: none; font-weight: 500; }
     .footer-support a:hover { text-decoration: underline; }
 
-    /* ---------- HAMBURGER BUTTON (matches .nav-hamburger in firststyle.css) ---------- */
+    /* ---------- HAMBURGER BUTTON ---------- */
     .nav-hamburger {
       display: none;
       flex-direction: column;
@@ -475,7 +311,6 @@
     .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* Nav links wrapper (desktop) */
     .nav-links {
       display: flex;
       align-items: center;
@@ -549,16 +384,13 @@
        RESPONSIVE BREAKPOINTS
        ================================================================ */
 
-    /* ---- Tablet: ≤ 900px ---- */
     @media (max-width: 900px) {
       .bottom-bar a { font-size: 13px; padding: 15px 8px; }
       .bottom-bar { gap: 0.4rem; padding: 0 1rem; }
       .pub-wrap { margin: 36px 16px 60px; padding: 28px 20px; }
     }
 
-    /* ---- Mobile: ≤ 768px ---- */
     @media (max-width: 768px) {
-      /* Top bar: stack logos */
       .top-bar {
         padding: 10px 14px;
         flex-wrap: wrap;
@@ -568,7 +400,6 @@
       .logo-label .title, .right-logo-label .title { font-size: 13px; }
       .logo-label .sub, .right-logo-label .sub { font-size: 9.5px; }
 
-      /* Hide desktop nav links & auth; show hamburger */
       .nav-links { display: none; }
       .auth-buttons { display: none; }
       .nav-hamburger { display: flex; }
@@ -579,7 +410,6 @@
         gap: 0;
       }
 
-      /* Pub section */
       .pub-wrap {
         margin: 20px 10px 40px;
         padding: 22px 14px;
@@ -588,24 +418,14 @@
       .pub-header h2 { font-size: 1.55rem; }
       .pub-header p { font-size: 0.92rem; }
 
-      /* Add-form */
-      .add-form { padding: 20px 16px; border-radius: 14px; }
-
-      /* Pub card */
       .pub-card { padding: 16px 14px; border-radius: 12px; }
       .pub-citation { font-size: 0.92rem; }
       .pub-meta-row { gap: 8px; }
 
-      /* Corner widget repositioned */
-      .corner-login { top: auto; bottom: 20px; right: 16px; }
-      .corner-login-box { right: 0; width: 88vw; max-width: 300px; }
-
-      /* Footer */
       .footer-emails { gap: 22px; }
       .email-item { min-width: 140px; }
     }
 
-    /* ---- Small Mobile: ≤ 480px ---- */
     @media (max-width: 480px) {
       .top-bar { padding: 8px 10px; }
       .logo-label .title, .right-logo-label .title { font-size: 11.5px; }
@@ -614,10 +434,6 @@
 
       .pub-header h2 { font-size: 1.28rem; }
       .pub-eyebrow { font-size: 0.7rem; }
-
-      .inline-edit-form { padding: 12px 10px; }
-      .edit-action-row { flex-direction: column; }
-      .btn-save-edit, .btn-cancel-edit { flex: unset; width: 100%; }
 
       .footer-emails { flex-direction: column; align-items: center; gap: 18px; }
       .email-item { min-width: unset; width: 100%; }
@@ -653,11 +469,9 @@
 
   <!-- Navigation Menu Bar -->
   <nav class="bottom-bar">
-    <!-- Hamburger button (mobile only) -->
     <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileNav()" aria-label="Open navigation menu">
       <span></span><span></span><span></span>
     </button>
-    <!-- Desktop nav links -->
     <div class="nav-links">
       <a href="/">Home</a>
       <a href="/about/">About</a>
@@ -712,69 +526,40 @@
     <div class="pub-header">
       <div class="pub-eyebrow">Academic Records</div>
       <h2>Publications</h2>
-      <p>Manage list collections of verified journal reviews and computational conference output parameters.</p>
+      <p>A curated list of faculty research publications from journals and conferences.</p>
     </div>
 
-    <!-- Administrative Add Entry Card Form (admin-only, rendered by Django) -->
-    {% if is_admin %}
-    <div id="addForm" class="add-form">
-      <h3>Add Faculty Publication Entry</h3>
-      <div class="field">
-        <label>Authors list *</label>
-        <input type="text" id="pubAuthors" placeholder="e.g. Pulkit Dwivedi, Soumendu Chakraborty">
-      </div>
-      <div class="field">
-        <label>Paper Title *</label>
-        <input type="text" id="pubTitle" placeholder="e.g. FrTrGAN: Single image dehazing using the frequency component...">
-      </div>
-      <div class="field">
-        <label>Journal Name / Book Context *</label>
-        <input type="text" id="pubJournal" placeholder="e.g. Computer Vision and Image Understanding, Elsevier">
-      </div>
-      <div class="field">
-        <label>Publication Year *</label>
-        <input type="text" id="pubYear" placeholder="e.g. 2025">
-      </div>
-      <div class="field">
-        <label>DOI String / Link URL (optional)</label>
-        <input type="text" id="pubLink" placeholder="e.g. https://doi.org/10.1016/j.cviu.2025.104336">
-      </div>
-      <div class="field">
-        <label>Publisher Tag (e.g. IEEE, Elsevier, Springer)</label>
-        <input type="text" id="pubPublisher" placeholder="e.g. Elsevier">
-      </div>
-      <div class="field">
-        <label>Impact Factor Indicator Value (optional)</label>
-        <input type="text" id="pubImpact" placeholder="e.g. 4.7">
-      </div>
-      <button id="addSubmitBtn" class="btn-primary" onclick="handleAddPublication()">Add Record Entry</button>
-      <div id="addStatus" class="status-msg"></div>
-    </div>
-    {% endif %}
+    <!-- Hardcoded publication list -->
+    <div class="pub-list">
 
-    <!-- Publication list rendered by JS -->
-    <div id="pubList" class="pub-list"></div>
-  </div>
+      <div class="pub-card">
+        <div class="pub-citation">
+          Akansha Singh, Soumendu Chakraborty, Mainak Adhikari,
+          <a class="pub-title-link" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=i9LV81oAAAAJ&citation_for_view=i9LV81oAAAAJ:qjMakFHDy7sC" target="_blank">"Data Analysis with Model Explainability for Air Quality and Pollution Prediction of Urban Areas in Edge Networks"</a>,
+          <em>International Conference on Big Data Analytics, pp. 416-425</em>, 2024.
+        </div>
+        <div class="pub-meta-row">
+          <span class="tag-publisher">Springer Nature Switzerland</span>
+          <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=i9LV81oAAAAJ&citation_for_view=i9LV81oAAAAJ:qjMakFHDy7sC" class="pub-doi" target="_blank">View on Google Scholar</a>
+        </div>
+      </div>
 
-  <!-- Floating Admin Widget -->
-  <div id="cornerLogin" class="corner-login">
-    <button id="cornerLoginBtn" class="corner-login-btn" onclick="toggleLoginBox()">🔒</button>
-    <div id="loginBox" class="corner-login-box" style="display:none;">
-      <h3>Admin Login</h3>
-      <div class="field"><label>ID</label><input type="email" id="loginEmail"></div>
-      <div class="field"><label>Password</label><input type="password" id="loginPassword"></div>
-      <button class="btn-primary" onclick="handleLoginSubmit()">Login</button>
-      <button class="btn-secondary" onclick="toggleLoginBox()">Close</button>
-      <div id="loginStatus" class="status-msg"></div>
-    </div>
-    <div id="adminBar" class="corner-login-box" style="display:none;">
-      <h3>Admin Status</h3>
-      <div id="adminEmailLabel" style="font-size:0.85rem; color:#5a6472; margin-bottom:14px; font-weight:600;"></div>
-      <button class="btn-secondary" style="border-color:#c0392b; color:#c0392b;" onclick="handleLogoutSubmit()">Logout</button>
+      <div class="pub-card">
+        <div class="pub-citation">
+          Akansha Singh, Soumendu Chakraborty, Mainak Adhikari,
+          <a class="pub-title-link" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=i9LV81oAAAAJ&citation_for_view=i9LV81oAAAAJ:UeHWp8X0CEIC" target="_blank">"Optimized Multi-Scale Convolutional Neural Network-Wavelet Feature Fusion with Reinforcement-Based Explainable Selection"</a>,
+          <em>IEEE Transactions on Emerging Topics in Computing</em>, 2026.
+        </div>
+        <div class="pub-meta-row">
+          <span class="tag-publisher">IEEE</span>
+          <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=i9LV81oAAAAJ&citation_for_view=i9LV81oAAAAJ:UeHWp8X0CEIC" class="pub-doi" target="_blank">View on Google Scholar</a>
+        </div>
+      </div>
+
     </div>
   </div>
 
-    <!-- Footer -->
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-emails">
       <div class="email-item">
@@ -799,441 +584,9 @@
     <p class="footer-support">Supported by <a href="https://upcst.gov.in" target="_blank">UP Council of Science and Technology (UPCST)</a></p>
   </footer>
 
-  <!-- ════════════════════════════════════════════════════════════════════
-       JAVASCRIPT STATE ENGINE — Django Persistent Backend Edition
-       ════════════════════════════════════════════════════════════════════
-
-  Architecture:
-    ┌──────────────────────────────────────────────────────────────────┐
-    │  Frontend (this template)  ←→  Django JSON API                  │
-    │                                                                  │
-    │  ON LOAD   →  GET  /related_publication/api/publications/        │
-    │  ADD       →  POST /related_publication/api/publications/add/    │
-    │  EDIT SAVE →  POST /related_publication/api/publications/update/ │
-    │  DELETE    →  POST /related_publication/api/publications/delete/ │
-    └──────────────────────────────────────────────────────────────────┘
-
-  CSRF handling:
-    getCookie('csrftoken') reads the token Django sets on first page load
-    (guaranteed by @ensure_csrf_cookie on the page view) and injects it
-    into the X-CSRFToken request header for all mutating fetch() calls.
-  ════════════════════════════════════════════════════════════════════ -->
   <script>
     // ────────────────────────────────────────────────────────────────
-    // API ROUTE CONSTANTS
-    // ────────────────────────────────────────────────────────────────
-    const API = {
-      GET_ALL : "/related_publication/api/publications/",
-      ADD     : "/related_publication/api/publications/add/",
-      UPDATE  : "/related_publication/api/publications/update/",
-      DELETE  : "/related_publication/api/publications/delete/"
-    };
-
-    // ────────────────────────────────────────────────────────────────
-    // CSRF TOKEN UTILITY
-    // Reads the Django-issued csrftoken cookie value.
-    // Django sets this cookie because the page view uses @ensure_csrf_cookie.
-    // ────────────────────────────────────────────────────────────────
-    function getCsrfToken() {
-      const cookieString = document.cookie || "";
-      const cookies = cookieString.split(";");
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.startsWith("csrftoken=")) {
-          return decodeURIComponent(cookie.substring("csrftoken=".length));
-        }
-      }
-      return "";
-    }
-
-    // ────────────────────────────────────────────────────────────────
-    // FETCH HELPERS — thin wrappers with CSRF headers baked in
-    // ────────────────────────────────────────────────────────────────
-
-    /**
-     * postJSON(url, payload)
-     * Sends a POST request with JSON body and the Django CSRF token header.
-     * Returns the parsed JSON response object.
-     */
-    async function postJSON(url, payload) {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": getCsrfToken()
-        },
-        body: JSON.stringify(payload)
-      });
-      const json = await response.json();
-      if (!response.ok) {
-        throw new Error(json.error || `HTTP error ${response.status}`);
-      }
-      return json;
-    }
-
-    /**
-     * getJSON(url)
-     * Sends a GET request; CSRF header not required for safe methods.
-     */
-    async function getJSON(url) {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: { "Accept": "application/json" }
-      });
-      const json = await response.json();
-      if (!response.ok) {
-        throw new Error(json.error || `HTTP error ${response.status}`);
-      }
-      return json;
-    }
-
-    // ────────────────────────────────────────────────────────────────
-    // DOM REFERENCES
-    // ────────────────────────────────────────────────────────────────
-    const adminActiveToken = {% if is_admin %}true{% else %}false{% endif %};
-
-    const loginBox       = document.getElementById("loginBox");
-    const adminBar       = document.getElementById("adminBar");
-    const adminEmailLabel = document.getElementById("adminEmailLabel");
-    const loginStatus    = document.getElementById("loginStatus");
-
-    const addForm        = document.getElementById("addForm");
-    const addStatus      = document.getElementById("addStatus");
-    const pubList        = document.getElementById("pubList");
-    const addSubmitBtn   = document.getElementById("addSubmitBtn");
-
-    // ────────────────────────────────────────────────────────────────
-    // ADMIN PANEL TOGGLE
-    // ────────────────────────────────────────────────────────────────
-    if (adminActiveToken && adminBar) {
-        adminEmailLabel.textContent = "{{ user.username }}";
-    }
-
-    window.toggleLoginBox = function () {
-      if (adminActiveToken) {
-          adminBar.style.display = (adminBar.style.display === "none") ? "block" : "none";
-          loginBox.style.display = "none";
-      } else {
-          loginBox.style.display = (loginBox.style.display === "none") ? "block" : "none";
-          adminBar.style.display = "none";
-      }
-    };
-
-    window.handleLoginSubmit = async function () {
-      const emailInput = document.getElementById("loginEmail").value.trim();
-      const passInput  = document.getElementById("loginPassword").value;
-
-      try {
-        const result = await postJSON("/related_publication/api/login/", { email: emailInput, password: passInput });
-        if (result.success) {
-            window.location.reload();
-        }
-      } catch (e) {
-        loginStatus.textContent = "Incorrect parameters assertion failure.";
-        loginStatus.className   = "status-msg error";
-      }
-    };
-
-    window.handleLogoutSubmit = async function () {
-      try {
-        await postJSON("/related_publication/api/logout/", {});
-        window.location.reload();
-      } catch(e) {
-        window.location.reload();
-      }
-    };
-
-    // ────────────────────────────────────────────────────────────────
-    // UTILITY: HTML escaping (prevents XSS when rendering DB content)
-    // ────────────────────────────────────────────────────────────────
-    function escapeHtml(str) {
-      const d = document.createElement("div");
-      d.textContent = str || "";
-      return d.innerHTML;
-    }
-    function escapeAttr(str) {
-      return (str || "").replace(/"/g, "&quot;");
-    }
-
-    // ────────────────────────────────────────────────────────────────
-    // READ — Fetch all publications from Django API on page load
-    // ────────────────────────────────────────────────────────────────
-    async function loadPublicationsFromBackend() {
-      pubList.innerHTML = '<div class="loading-note">⏳ Loading publications from database…</div>';
-      try {
-        const result = await getJSON(API.GET_ALL);
-        if (result.success) {
-          renderPublications(result.data);
-        } else {
-          pubList.innerHTML = '<div class="empty-note">Failed to load publications. Please refresh.</div>';
-        }
-      } catch (err) {
-        console.error("loadPublicationsFromBackend error:", err);
-        pubList.innerHTML = `<div class="empty-note">⚠️ Network error: ${escapeHtml(err.message)}</div>`;
-      }
-    }
-
-    // ────────────────────────────────────────────────────────────────
-    // UI RENDER — Build DOM cards from a publications array
-    // ────────────────────────────────────────────────────────────────
-    function refreshUIDOMTree() {
-      // Re-fetch from backend every time the UI needs to refresh.
-      // This is intentional: the database is the single source of truth.
-      loadPublicationsFromBackend();
-    }
-
-    function renderPublications(publications) {
-      if (!publications || publications.length === 0) {
-        pubList.innerHTML = '<div class="empty-note">No public records found inside this engine tracker system.</div>';
-        return;
-      }
-
-      pubList.innerHTML = "";
-
-      publications.forEach((p) => {
-        const card = document.createElement("div");
-        card.className = "pub-card";
-        card.id = "card-" + p.id;
-
-        // ── Citation display row ─────────────────────────────────────
-        const titleHtml = p.link
-          ? `<a class="pub-title-link" href="${escapeAttr(p.link)}" target="_blank">"${escapeHtml(p.title)}"</a>`
-          : `<strong>"${escapeHtml(p.title)}"</strong>`;
-
-        // ── Meta tags row ────────────────────────────────────────────
-        const publisherTag = p.publisher
-          ? `<span class="tag-publisher">${escapeHtml(p.publisher)}</span>`
-          : "";
-        const impactTag = p.impact
-          ? `<span class="tag-impact">Impact Factor: ${escapeHtml(p.impact)}</span>`
-          : "";
-        const doiLink = p.link
-          ? `<a href="${escapeAttr(p.link)}" class="pub-doi" target="_blank">${escapeHtml(p.link.replace("https://", ""))}</a>`
-          : "";
-
-        // ── Admin action buttons (Edit / Delete) — shown only if admin ─
-        const adminRowClass = adminActiveToken ? "card-admin-row visible" : "card-admin-row";
-
-        // ── Inline edit form (pre-filled with current values) ─────────
-        card.innerHTML = `
-          <div class="pub-citation">
-            ${escapeHtml(p.authors)},
-            ${titleHtml},
-            <em>${escapeHtml(p.journal)}</em>, ${escapeHtml(p.year)}.
-          </div>
-          <div class="pub-meta-row">
-            ${publisherTag}
-            ${impactTag}
-            ${doiLink}
-          </div>
-
-          <div class="${adminRowClass}" id="admin-row-${p.id}">
-            <button class="btn-card-edit"
-              onclick="openInlineEdit(${p.id})">✏️ Edit</button>
-            <button class="btn-card-delete"
-              onclick="handleDeletePublication(${p.id})">🗑️ Delete</button>
-          </div>
-
-          <div class="inline-edit-form" id="edit-form-${p.id}">
-            <div class="field">
-              <label>Authors *</label>
-              <input type="text" id="edit-authors-${p.id}" value="${escapeAttr(p.authors)}">
-            </div>
-            <div class="field">
-              <label>Title *</label>
-              <input type="text" id="edit-title-${p.id}" value="${escapeAttr(p.title)}">
-            </div>
-            <div class="field">
-              <label>Journal *</label>
-              <input type="text" id="edit-journal-${p.id}" value="${escapeAttr(p.journal)}">
-            </div>
-            <div class="field">
-              <label>Year *</label>
-              <input type="text" id="edit-year-${p.id}" value="${escapeAttr(p.year)}">
-            </div>
-            <div class="field">
-              <label>Link (optional)</label>
-              <input type="text" id="edit-link-${p.id}" value="${escapeAttr(p.link)}">
-            </div>
-            <div class="field">
-              <label>Publisher (optional)</label>
-              <input type="text" id="edit-publisher-${p.id}" value="${escapeAttr(p.publisher)}">
-            </div>
-            <div class="field">
-              <label>Impact Factor (optional)</label>
-              <input type="text" id="edit-impact-${p.id}" value="${escapeAttr(p.impact)}">
-            </div>
-            <div class="edit-action-row">
-              <button class="btn-save-edit" onclick="saveInlineEdit(${p.id})">💾 Save Changes</button>
-              <button class="btn-cancel-edit" onclick="closeInlineEdit(${p.id})">Cancel</button>
-            </div>
-            <div id="edit-status-${p.id}" class="status-msg"></div>
-          </div>
-        `;
-
-        pubList.appendChild(card);
-      });
-    }
-
-    // ────────────────────────────────────────────────────────────────
-    // WRITE — POST new publication to Django API
-    // ────────────────────────────────────────────────────────────────
-    window.handleAddPublication = async function () {
-      if (!adminActiveToken) return;
-
-      const authors   = document.getElementById("pubAuthors").value.trim();
-      const title     = document.getElementById("pubTitle").value.trim();
-      const journal   = document.getElementById("pubJournal").value.trim();
-      const year      = document.getElementById("pubYear").value.trim();
-      const link      = document.getElementById("pubLink").value.trim();
-      const publisher = document.getElementById("pubPublisher").value.trim();
-      const impact    = document.getElementById("pubImpact").value.trim();
-
-      // Client-side validation (mirrors backend mandatory checks)
-      if (!authors || !title || !journal || !year) {
-        addStatus.textContent = "Please fill completely all mandatory parameters fields.";
-        addStatus.className   = "status-msg error";
-        return;
-      }
-
-      // Disable button during async operation
-      addSubmitBtn.disabled   = true;
-      addStatus.textContent   = "Submitting…";
-      addStatus.className     = "status-msg";
-
-      try {
-        const result = await postJSON(API.ADD, { authors, title, journal, year, link, publisher, impact });
-
-        if (result.success) {
-          // Clear all input fields
-          ["pubAuthors", "pubTitle", "pubJournal", "pubYear", "pubLink", "pubPublisher", "pubImpact"].forEach(id => {
-            document.getElementById(id).value = "";
-          });
-          addStatus.textContent = "✅ Record entry committed successfully!";
-          addStatus.className   = "status-msg success";
-          // Reload the list from database (source of truth)
-          refreshUIDOMTree();
-        } else {
-          addStatus.textContent = "❌ Error: " + (result.error || "Unknown server error.");
-          addStatus.className   = "status-msg error";
-        }
-      } catch (err) {
-        console.error("handleAddPublication error:", err);
-        addStatus.textContent = "❌ Network error: " + err.message;
-        addStatus.className   = "status-msg error";
-      } finally {
-        addSubmitBtn.disabled = false;
-      }
-    };
-
-    // ────────────────────────────────────────────────────────────────
-    // EDIT — Inline edit form open / close helpers
-    // ────────────────────────────────────────────────────────────────
-    window.openInlineEdit = function (id) {
-      const formEl = document.getElementById("edit-form-" + id);
-      if (formEl) formEl.classList.add("visible");
-    };
-
-    window.closeInlineEdit = function (id) {
-      const formEl = document.getElementById("edit-form-" + id);
-      if (formEl) formEl.classList.remove("visible");
-    };
-
-    // ────────────────────────────────────────────────────────────────
-    // UPDATE — POST edited fields to Django API
-    // ────────────────────────────────────────────────────────────────
-    window.saveInlineEdit = async function (id) {
-      if (!adminActiveToken) return;
-
-      const getValue = (field) => {
-        const el = document.getElementById(`edit-${field}-${id}`);
-        return el ? el.value.trim() : "";
-      };
-
-      const authors   = getValue("authors");
-      const title     = getValue("title");
-      const journal   = getValue("journal");
-      const year      = getValue("year");
-
-      if (!authors || !title || !journal || !year) {
-        const statusEl = document.getElementById("edit-status-" + id);
-        if (statusEl) {
-          statusEl.textContent = "Mandatory fields cannot be empty.";
-          statusEl.className   = "status-msg error";
-        }
-        return;
-      }
-
-      const payload = {
-        id,
-        authors,
-        title,
-        journal,
-        year,
-        link      : getValue("link"),
-        publisher : getValue("publisher"),
-        impact    : getValue("impact")
-      };
-
-      const statusEl = document.getElementById("edit-status-" + id);
-      if (statusEl) { statusEl.textContent = "Saving…"; statusEl.className = "status-msg"; }
-
-      try {
-        const result = await postJSON(API.UPDATE, payload);
-
-        if (result.success) {
-          closeInlineEdit(id);
-          // Re-fetch the full list to reflect the saved state
-          refreshUIDOMTree();
-        } else {
-          if (statusEl) {
-            statusEl.textContent = "❌ Error: " + (result.error || "Update failed.");
-            statusEl.className   = "status-msg error";
-          }
-        }
-      } catch (err) {
-        console.error("saveInlineEdit error:", err);
-        if (statusEl) {
-          statusEl.textContent = "❌ Network error: " + err.message;
-          statusEl.className   = "status-msg error";
-        }
-      }
-    };
-
-    // ────────────────────────────────────────────────────────────────
-    // DELETE — POST delete request to Django API
-    // ────────────────────────────────────────────────────────────────
-    window.handleDeletePublication = async function (id) {
-      if (!adminActiveToken) return;
-
-      const confirmed = confirm("Are you sure you want to permanently delete this publication record?");
-      if (!confirmed) return;
-
-      try {
-        const result = await postJSON(API.DELETE, { id });
-
-        if (result.success) {
-          // Remove the card from DOM immediately for snappy UX,
-          // then trigger a fresh fetch to sync any ordering changes.
-          const cardEl = document.getElementById("card-" + id);
-          if (cardEl) cardEl.remove();
-          refreshUIDOMTree();
-        } else {
-          alert("Delete failed: " + (result.error || "Unknown error."));
-        }
-      } catch (err) {
-        console.error("handleDeletePublication error:", err);
-        alert("Network error during delete: " + err.message);
-      }
-    };
-
-    // ────────────────────────────────────────────────────────────────
-    // INITIALISATION — Load from DB on first page render
-    // ────────────────────────────────────────────────────────────────
-    loadPublicationsFromBackend();
-
-    // ────────────────────────────────────────────────────────────────
-    // MOBILE NAVIGATION — Hamburger toggle
+    // MOBILE NAVIGATION — Hamburger toggle (only JS left on this page)
     // ────────────────────────────────────────────────────────────────
     window.toggleMobileNav = function () {
       const btn     = document.getElementById('navHamburger');
@@ -1254,7 +607,6 @@
       }
     };
 
-    // Close mobile nav on Escape key
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
         const panel = document.getElementById('mobileNavPanel');
