@@ -4,3 +4,5 @@ gunicorn
 whitenoise
 google-generativeai
 pymupdf
+PyMySQL
+python-decouple
